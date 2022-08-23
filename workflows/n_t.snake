@@ -31,7 +31,7 @@ import masks
 # A seed to replicate results
 # TODO mutation rates
 
-configfile: "workflows/config/snakemake/tiny_config.yaml"
+configfile: "workflows/config/snakemake/config.yaml"
 
 np.random.seed(config["seed"])
 output_dir = os.path.abspath(config["output_dir"])
@@ -179,7 +179,9 @@ rule run_stairwayplot:
         output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
         rules.sp_download.output,
     output: output_dir + "/inference/sp/{demog}/{dfes}/{annots}/{seeds}/{chrms}/stairwayplot_estimated_Ne.txt"
-    threads: 20
+    # threads: 20
+    # need to increase time and threads for this analysis specifically
+    resources: time=1500, threads=50
     run:
         inputs = expand(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
             seeds=seed_array,

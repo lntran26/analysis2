@@ -9,7 +9,7 @@ dependencies:
   - mpfr
   - pip
   - slim==3.7.1
-  - snakemake
+  - snakemake>=7.9.0
   - ldc
   - seaborn
   - pysam
