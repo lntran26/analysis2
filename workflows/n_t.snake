@@ -100,11 +100,11 @@ annotation_list = config["annotation_list"]
 # GENERAL RULES & GLOBALS
 # ###############################################################################
 
-module simulation_workflow:
-    snakefile:
-        "simulation.snake"
-    config: config
-use rule * from simulation_workflow as simulation_*
+# module simulation_workflow:
+#     snakefile:
+#         "simulation.snake"
+#     config: config
+# use rule * from simulation_workflow as simulation_*
 
 seed_array = np.random.random_integers(1,2**31,replicates)
 genetic_map_downloaded_flag= ".genetic_map_downloaded"
@@ -136,7 +136,7 @@ rule all:
         annots=annotation_list,
         seeds=seed_array,
         ),
-    rules.simulation_all.input,
+#     rules.simulation_all.input,
 
 
 rule download_genetic_map:
@@ -189,8 +189,8 @@ rule run_stairwayplot:
         output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
         rules.sp_download.output,
     output: output_dir + "/inference/sp/{demog}/{dfes}/{annots}/{seeds}/{chrms}/stairwayplot_estimated_Ne.txt"
-    threads: 20
-    resources: mem_mb=120000
+    threads: 50
+    resources: mem_mb=5000, time=600
     run:
         inputs = expand(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
         seeds=wildcards.seeds,
@@ -204,12 +204,20 @@ rule run_stairwayplot:
             workdir=output_dir + "/inference/" + wildcards.demog + "/" + wildcards.dfes + "/" +
                 wildcards.annots + "/" + wildcards.seeds + "/",
             stairway_dir=pathlib.Path.cwd() / "ext/stairwayplot")
-        mask_intervals = masks.get_combined_masks(
+        # handle no annotation case
+        if wildcards.annots == "none":
+            mask_intervals = masks.get_combined_masks(
+                                            species.id, 
+                                            mask_file, 
+                                            wildcards.chrms, 
+                                            )
+        else:
+            mask_intervals = masks.get_combined_masks(
                                             species.id, 
                                             mask_file, 
                                             wildcards.chrms, 
                                             chrom_annotation=wildcards.annots,
-                                        )
+                                            )
         runner.ts_to_stairway(inputs, num_bootstraps=200, mask_intervals=mask_intervals)
         runner.run_theta_estimation(max_workers=threads, show_progress=True)
         runner.run_summary(output, mutation_rate=mutation_rate, generation_time=generation_time_helper(wildcards,species))
@@ -273,13 +281,21 @@ rule clone_smcpp:
 rule ts_to_smc:
     input: output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees"
     output: output_dir + "/inference/smc/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees.smc.gz"
-    run: 
-        mask_intervals = masks.get_combined_masks(
-                                    species.id, 
-                                    mask_file, 
-                                    wildcards.chrms, 
-                                    chrom_annotation=wildcards.annots,
-                                )
+    run:
+        # handle no annotation case
+        if wildcards.annots == "none":
+            mask_intervals = masks.get_combined_masks(
+                                            species.id, 
+                                            mask_file, 
+                                            wildcards.chrms, 
+                                            )
+        else:
+            mask_intervals = masks.get_combined_masks(
+                                            species.id, 
+                                            mask_file, 
+                                            wildcards.chrms, 
+                                            chrom_annotation=wildcards.annots,
+                                            )
         smc.write_smcpp_file(input[0], mask_intervals=mask_intervals) # Including mask file when it works
 
 
@@ -358,12 +374,20 @@ rule ts_to_multihep:
     output: output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{samps}.{chrms}.trees.multihep.txt"
     run: 
         print(input[0], num_sampled_genomes_msmc, mask_file)
-        mask_intervals = masks.get_combined_masks(
-                            species.id, 
-                            mask_file, 
-                            wildcards.chrms, 
-                            chrom_annotation=wildcards.annots,
-                        )
+        # handle no annotation case
+        if wildcards.annots == "none":
+            mask_intervals = masks.get_combined_masks(
+                                            species.id, 
+                                            mask_file, 
+                                            wildcards.chrms, 
+                                            )
+        else:
+            mask_intervals = masks.get_combined_masks(
+                                            species.id, 
+                                            mask_file, 
+                                            wildcards.chrms, 
+                                            chrom_annotation=wildcards.annots,
+                                            )
         msmc.write_msmc_file(input[0], output[0], num_sampled_genomes_msmc, mask_intervals)
 
 
@@ -377,7 +401,7 @@ rule run_msmc:
         rules.download_msmc.output
     output: output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{samps}.{chrms}.trees.multihep.txt.final.txt"
     threads: 8 
-    run: 
+    run:
         inputs = expand(output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{samps}.{chrms}.trees.multihep.txt",
                         seeds=wildcards.seeds,
                         chrms=chrm_list,
@@ -480,12 +504,20 @@ rule gone_prep_inputs:
         if not genetic_map.is_cached():
             genetic_map.download()
         gm_chr = genetic_map.get_chromosome_map(wildcards.chrms)
-        mask_intervals = masks.get_combined_masks(
+        # handle no annotation case
+        if wildcards.annots == "none":
+            mask_intervals = masks.get_combined_masks(
+                                            species.id, 
+                                            mask_file, 
+                                            wildcards.chrms, 
+                                            )
+        else:
+            mask_intervals = masks.get_combined_masks(
                                             species.id, 
                                             mask_file, 
                                             wildcards.chrms, 
                                             chrom_annotation=wildcards.annots,
-                                        )
+                                            )
         gone.ts2plink(input[0], output[0], output[1], gm_chr, wildcards.chrms, mask_intervals=mask_intervals)
 
 

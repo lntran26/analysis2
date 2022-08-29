@@ -60,7 +60,8 @@ rule simulation:
     input:
     output:
         output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees"
-    resources: time=3000, mem_mb=10000
+    threads: 2
+    resources: time=300, mem_mb=5000
     run:
         if wildcards.demog == 'Constant': 
             model = stdpopsim.PiecewiseConstantSize(species.population_size)
