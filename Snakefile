@@ -11,7 +11,7 @@ Parameters are defined by the config.yaml file in
 workflows/config/snakemake/
 """
 
-configfile: "workflows/config/snakemake/tiny_config.yaml"
+configfile: "workflows/config/snakemake/config.yaml"
 
 
 module simulation_workflow:
@@ -38,7 +38,7 @@ output_dir = os.path.abspath(config["output_dir"])
 rule all:
     input:
         rules.simulation_all.input,
-        rules.dfe_all.input,
+        # rules.dfe_all.input,
         rules.n_t_all.input,
        # rules
     default_target: True
