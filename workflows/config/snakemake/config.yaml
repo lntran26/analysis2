@@ -19,8 +19,8 @@
 
 "genetic_map": "HapMapII_GRCh37"
 "chrm_list": "chr21"
-"dfe_list": ["Gamma_H17"]
-# "dfe_list": ["none"]
+# "dfe_list": ["Gamma_H17"]
+"dfe_list": ["none"]
 "output_dir": "results"
 "mask_file": "workflows/masks/HapmapII_GRCh37.mask.bed"
 
@@ -34,8 +34,8 @@
 "num_sampled_genomes_per_replicate": [2]
 "num_msmc_iterations": 3
 
-"annotation_list": ["ensembl_havana_104_exons"]
-# "annotation_list": ["none"]
+# "annotation_list": ["ensembl_havana_104_exons"]
+"annotation_list": ["none"]
 "gone_phase": 1 # 0 for pseudohaploid, 1 for unknown phase, 2 for phased
 "gone_max_snps": 50000 # default=50000
 "gone_num_gens": 2000 # default=2000
