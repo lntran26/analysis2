@@ -46,7 +46,7 @@ class StairwayPlotRunner(object):
             stairway_path, stairway_path / "swarmops.jar")
         self.java_exe = java_exe
 
-    def ts_to_stairway(self, ts_path, num_bootstraps=1, mask_intervals=None):
+    def ts_to_stairway(self, ts_path, num_bootstraps=1, mask_intervals=None, pop_id=None):
         """
         Converts the specified tskit tree sequence to text files used by
         stairway plot.
@@ -63,6 +63,10 @@ class StairwayPlotRunner(object):
                 total_length -= np.sum(mask_intervals[:, 1] - mask_intervals[:, 0])
             num_samples = ts.num_samples
             haps = ts.genotype_matrix()
+            if pop_id is not None: # subset population in multi-pop demography
+                pop_samples = ts.samples(population=pop_id)
+                num_samples = len(pop_samples)
+                haps = haps[:, pop_samples]
 
             # Mapping mutation type IDs to class of mutation (e.g., neutral, non-neutral)
             class_muts = {}
