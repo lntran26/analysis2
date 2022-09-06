@@ -17,8 +17,7 @@
         },
     ]
 
-"genetic_map": "HapMapII_GRCh37"
-# "chrm_list": "chr21,chr1"
+"genetic_map": "HapMapII_GRCh38"
 "chrm_list": "chr21"
 # "dfe_list": ["Gamma_H17"]
 "dfe_list": ["none"]

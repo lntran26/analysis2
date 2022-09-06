@@ -13,7 +13,6 @@
     }
 ]
 "genetic_map": "HapMapII_GRCh38"
-# try uniform genetic map for GONE?
 "chrm_list": "chr1"
 # "dfe_list": ["Gamma_H17"]
 "dfe_list": ["none"]

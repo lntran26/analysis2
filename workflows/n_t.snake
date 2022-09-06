@@ -100,6 +100,7 @@ annotation_list = config["annotation_list"]
 # GENERAL RULES & GLOBALS
 # ###############################################################################
 
+# need to comment this out to avoid duplication when simulation.snake is run
 # module simulation_workflow:
 #     snakefile:
 #         "simulation.snake"
