@@ -12,3 +12,4 @@ stairwayplot/*
 workflows/.snakemake/*
 outfiles/*
 *.slurm
+.params_edited
