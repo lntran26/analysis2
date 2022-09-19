@@ -93,6 +93,11 @@ def plot_all_ne_estimates(sp_infiles, msmc_infiles, gone_infiles, outfile,
         else:
             end_time = int(ddb.epochs[-2].end_time) + 10000
         steps = np.linspace(1, end_time, 1000)
+        
+    # process n_samp dict by getting only one pop in case of multipop demog
+    tup=list(n_samp.items())[pop_id]
+    n_samp={tup[0]:tup[1]}
+    
     coal_rate, P = ddb.coalescence_rate_trajectory(steps=steps,
                                                    lineages=n_samp,  # changed to lineages
                                                    double_step_validation=False)

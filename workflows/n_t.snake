@@ -82,7 +82,9 @@ if(config["chrm_list"] != "all"):
 # This grabs the default mr from the first chromosome,
 # Ultimitely This needs to be replaced with the weighted average
 # of all chromosomes: This should be done in stdpopsim. 
-mutation_rate = species.genome.mean_mutation_rate
+# mutation_rate = species.genome.mean_mutation_rate
+# change to using helper function below for different rates
+# depending on demography
 
 
 # The specific demographic model you would like to run
@@ -91,6 +93,7 @@ demo_model_ids = [x["id"] for x in demo_model_array]
 demo_sample_size_dict = {}
 for x in demo_model_array:
     demo_sample_size_dict[x["id"]] = x["num_samples_per_population"]
+    
 
 # Select DFE model from catalog  
 dfe_list = config["dfe_list"]   
@@ -164,6 +167,15 @@ def generation_time_helper(wildcards, species):
         generation_time = species.get_demographic_model(wildcards.demog).generation_time
     return generation_time
 
+def mutation_rate_helper(wildcards, species):
+    if wildcards.demog == 'Constant': 
+        mutation_rate = species.genome.mean_mutation_rate
+    else: 
+        model = species.get_demographic_model(wildcards.demog)
+        mutation_rate = model.mutation_rate
+    return mutation_rate
+
+
 # ###############################################################################
 # STAIRWAYPLOT
 # ###############################################################################
@@ -220,7 +232,7 @@ rule run_stairwayplot:
                                             )
         runner.ts_to_stairway(inputs, num_bootstraps=200, mask_intervals=mask_intervals, pop_id=population_id)
         runner.run_theta_estimation(max_workers=threads, show_progress=True)
-        runner.run_summary(output, mutation_rate=mutation_rate, generation_time=generation_time_helper(wildcards,species))
+        runner.run_summary(output, mutation_rate=mutation_rate_helper(wildcards, species), generation_time=generation_time_helper(wildcards,species))
 
 
 def ne_files_sp(wildcards):
@@ -422,7 +434,7 @@ rule convert_msmc:
     output: output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{samps}.{chrms}.trees.multihep.txt.final.txt.csv"
     run:
         msmc.convert_msmc_output(input[0] ,output[0],
-            mutation_rate=mutation_rate,
+            mutation_rate=mutation_rate_helper(wildcards, species),
             generation_time=generation_time_helper(wildcards,species)
         )
 
