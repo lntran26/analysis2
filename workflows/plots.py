@@ -2,6 +2,8 @@
 Code for generating plots.
 """
 import pandas as pd
+from pathlib import Path
+import glob
 import os
 import sys
 import matplotlib
@@ -9,243 +11,10 @@ import matplotlib.patches as mpatches
 from matplotlib import pyplot as plt
 import numpy as np
 import seaborn as sns
+
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
-
-sns.set_style("darkgrid")
-
-
-def plot_stairway_Ne_estimate(infile, outfile):
-    """
-    figure of N(t) for single run of stairwayplot
-    """
-    nt = pd.read_csv(infile, sep="\t", skiprows=5)
-    nt = nt[nt['year'] > 10]
-    f, ax = plt.subplots(figsize=(7, 7))
-    ax.set(xscale="log", yscale="log")
-    ax.plot(nt['year'], nt['Ne_median'], c="red")
-    ax.plot(nt['year'], nt['Ne_2.5%'], c='grey')
-    ax.plot(nt['year'], nt['Ne_97.5%'], c='grey')
-    f.savefig(outfile, bbox_inches='tight')
-
-
-def plot_compound_Ne_estimate(infiles, outfile):
-    """
-    figure of N(t) for multiple runs of stairwayplot
-    """
-    f, ax = plt.subplots(figsize=(7, 7))
-    ax.set(xscale="log", yscale="log")
-    for infile in infiles:
-        nt = pd.read_csv(infile, sep="\t", skiprows=5)
-        nt = nt[nt['year'] > 10]
-        ax.plot(nt['year'], nt['Ne_median'], c="red")
-    f.savefig(outfile, bbox_inches='tight')
-
-
-def plot_compound_smcpp(infiles, outfile, model, n_samp, generation_time, pop_id=0):
-    coal_rate, P, steps = popn_coal_rate(
-        model, pop_id, n_samp, generation_time)
-    f, ax = plt.subplots(figsize=(7, 7))
-    ax.set(xscale="log", yscale="log")
-    for infile in infiles:
-        nt = pd.read_csv(infile, usecols=[1, 2], skiprows=0)
-        ax.plot(nt['x'], nt['y'], c="red")
-    ax.plot(steps, 1/(2*coal_rate), c="black")
-    f.savefig(outfile, bbox_inches='tight')
-
-
-def plot_compound_msmc(infiles, outfile, model):
-    f, ax = plt.subplots(figsize=(7, 7))
-    ax.set(xscale="log", yscale="log")
-    dfs = []
-    for infile in infiles:
-        cat = os.path.basename(infile)[0]
-        nt = pd.read_csv(infile, usecols=[1, 2], skiprows=0)
-        nt['Sample'] = cat
-        dfs.append(nt)
-    df = pd.concat(dfs, ignore_index=True)
-    for label, grp in df.groupby('Sample'):
-        grp.plot(x='x', y='y', ax=ax, label=label)
-    f.savefig(outfile, bbox_inches='tight')
-
-
-def plot_compound_gone(infiles, outfile):
-    """
-    figure of N(t) for multiple runs of stairwayplot
-    """
-    f, ax = plt.subplots(figsize=(7, 7))
-    ax.set(xscale="log", yscale="log")
-    for infile in infiles:
-        nt = pd.read_csv(infile, sep="\t", skiprows=1)
-        nt = nt[nt['Generation'] > 10]
-        ax.plot(nt['Generation'], nt['Geometric_mean'], c="red")
-    f.savefig(outfile, bbox_inches='tight')
-
-
-def plot_all_ne_estimates(sp_infiles, msmc_infiles, gone_infiles, outfile,
-                          model, n_samp, generation_time, species,
-                          pop_id=0, steps=None):  # smcpp_infiles,
-    #ddb = model.get_demography_debugger()
-    ddb = model.model.debug()
-    if steps is None:
-        if(len(ddb.epochs) == 1):
-            end_time = 100000
-        else:
-            end_time = int(ddb.epochs[-2].end_time) + 10000
-        steps = np.linspace(1, end_time, 1000)
-    coal_rate, P = ddb.coalescence_rate_trajectory(steps=steps,
-                                                   lineages=n_samp,  # changed to lineages
-                                                   double_step_validation=False)
-    mm = [x for x in ddb.demography.events if "MassMigration" in str(type(x))]
-
-    census_size = ddb.population_size_trajectory(steps=steps)
-    for m in reversed(mm):
-        if m.proportion == 1.0:
-            n = (steps > m.time)
-            census_size[n, m.source] = census_size[n, m.dest]
-        else:
-            print(
-                "Error: census size estimate requires that MassMigration proportion == 1.0")
-            sys.exit(1)
-    steps = steps * generation_time
-    num_msmc = set([os.path.basename(infile).split(".")[0]
-                   for infile in msmc_infiles])
-    num_msmc = sorted([int(x) for x in num_msmc])
-    f, ax = plt.subplots(1, 2+len(num_msmc), sharex=True,
-                         sharey=True, figsize=(14, 7))
-
-    outLines = []
-    # plot stairwayplot results
-    for i, infile in enumerate(sp_infiles):
-        nt = pd.read_csv(infile, sep="\t", skiprows=5)
-        line2, = ax[0].plot(nt['year'], nt['Ne_median'], alpha=0.8)
-
-        for j in range(0, len(nt["year"]), 2):
-            outLines.append([nt["year"][j], nt["Ne_median"]
-                            [j], "sp", "r" + str(i + 1)])
-
-    ax[0].plot(steps, 1/(2*coal_rate), c="black")
-    ax[0].set_title("stairwayplot")
-    ax[0].set_xlabel("time (generations)")
-    ax[0].set_ylabel("Ne")
-    ax[0].set_xscale("log")
-    ax[0].set_yscale("log")
-
-    # plot msmc results
-    for i, sample_size in enumerate(num_msmc):
-        ct = 0
-        for infile in msmc_infiles:
-            fn = os.path.basename(infile)
-            samp = fn.split(".")[0]
-            if(int(samp) == sample_size):
-                nt = pd.read_csv(infile, usecols=[1, 2], skiprows=0)
-                line3, = ax[1+i].plot(nt['x'], nt['y'], alpha=0.8)
-                for j in range(len(nt["x"])):
-                    outLines.append([nt["x"][j], nt["y"][j], "msmc_" +
-                                     str(sample_size), "r" + str(ct + 1)])
-                ct += 1
-        ax[1+i].plot(steps, 1/(2*coal_rate), c="black")
-        ax[1+i].set_title(f"msmc, ({sample_size} samples)")
-        ax[1+i].set_xlabel("time (generations)")
-        ax[1+i].set_xscale("log")
-        ax[1+i].set_yscale("log")
-
-    # plot gone results
-    ii = 1+len(num_msmc)
-    for i, infile in enumerate(gone_infiles):
-        nt = pd.read_csv(infile, sep="\t", skiprows=1)
-        line2, = ax[ii].plot(nt['Generation'], nt['Geometric_mean'], alpha=0.8)
-        for j in range(0, len(nt["Generation"]), 2):
-            outLines.append(
-                [nt["Generation"][j], nt["Geometric_mean"][j], "gone"])
-    ax[ii].plot(steps, 1/(2*coal_rate), c="black")
-    ax[ii].set_title("GONE")
-    plt.suptitle(f"{species}, population id {pop_id}", fontsize=16)
-    ax[ii].set_xlabel("time (generations)")
-    ax[ii].set_xscale("log")
-    ax[ii].set_yscale("log")
-
-    red_patch = mpatches.Patch(
-        color='black', label='Coalescence rate derived Ne')
-    ax[0].legend(frameon=False, fontsize=10, handles=[red_patch])
-    ax[0].set_ylabel("population size")
-    f.savefig(outfile, bbox_inches='tight', alpha=0.8)
-
-    txtOUT = os.path.join(os.path.dirname(outfile), "_".join(
-        [species, model.id, "pop"+str(pop_id), "sizes"])+".txt")
-    with open(txtOUT, "w") as fOUT:
-        fOUT.write("\t".join([str(x)
-                   for x in ["x", "y", "method", "rep"]]) + "\n")
-        for i in range(len(steps)):
-            fOUT.write("\t".join([str(x) for x in [steps[i],
-                                                   1/(2*coal_rate[i]),
-                                                   "coal",
-                                                   "r1"]]) + "\n")
-            fOUT.write("\t".join([str(x) for x in [steps[i],
-                                                   census_size[i][pop_id],
-                                                   "census",
-                                                   "r1"]]) + "\n")
-        for i in range(len(outLines)):
-            fOUT.write("\t".join([str(x) for x in outLines[i]])+"\n")
-
-
-def plot_stairwayplot_coalrate(sp_infiles, outfile,
-                               model, n_samp, generation_time, species,
-                               pop_id=0, steps=None):  # JRA
-
-    #ddb = model.get_demography_debugger()
-    ddb = model.model.debug()
-    print("This is ddb")
-    print(ddb)
-    if steps is None:
-        end_time = ddb.epochs[-2].end_time + 10000
-        steps = np.linspace(1, end_time, end_time+1)
-    num_samples = [0 for _ in range(ddb.num_populations)]
-    num_samples[pop_id] = n_samp
-    print("These are the samples")
-    print(num_samples)
-    # Change here to extract the populations
-    num_samples = {'YRI': 20, 'CEU': 0, 'CHB': 0,
-                   'Neanderthal': 0, 'ArchaicAFR': 0}
-    pop_id = 'YRI'
-
-    coal_rate, P = ddb.coalescence_rate_trajectory(steps=steps,
-                                                   lineages=num_samples,  # changed from num_samples to lineages
-                                                   double_step_validation=False)
-    steps = steps * generation_time
-    f, ax = plt.subplots(1, 1, sharex=True, sharey=True, figsize=(7, 7))
-    ax.plot(steps, 1/(2*coal_rate), c="black")
-    for infile in sp_infiles:
-        nt = pd.read_csv(infile, sep="\t", skiprows=5)
-        line2, = ax.plot(nt['year'], nt['Ne_median'], alpha=0.8)
-    ax.plot(steps, 1/(2*coal_rate), c="black")
-    ax.set_title(f"stairwayplot")
-    plt.suptitle(f"{species}, population id {pop_id}", fontsize=16)
-    ax.set(xscale="log", yscale="log")
-    ax.set_xlabel("time (years ago)")
-    red_patch = mpatches.Patch(
-        color='black', label='Coalescence rate derived Ne')
-    ax.legend(frameon=False, fontsize=10, handles=[red_patch])
-    ax.set_ylabel("population size")
-    f.savefig(outfile, bbox_inches='tight', alpha=0.8)
-
-
-def popn_coal_rate(model, pop_id, n_samp, generation_time, steps=None):
-    """
-    returns tuple (coal_rate, P, steps) for pop_id
-    conditional on the model and configuration
-    """
-    ddb = model.get_demography_debugger()
-    if steps is None:
-        end_time = ddb.epochs[-2].end_time + 10000
-        steps = np.linspace(1, end_time, end_time+1)
-    num_samples = [0 for _ in range(ddb.num_populations)]
-    num_samples[pop_id] = n_samp
-    coal_rate, P = ddb.coalescence_rate_trajectory(steps=steps,
-                                                   lineages=num_samples,  # changed to lineages
-                                                   double_step_validation=False)
-    steps = steps * generation_time
-    return coal_rate, P, steps
+#sns.set_style("darkgrid")
 
 
 def plot_sfs(s, outfile):
@@ -278,6 +47,132 @@ def plot_sfs(s, outfile):
         plt.close()
 
 
+def gather_inference_results(output_dir, demog, dfe, annot, method):
+    infiles = glob.glob(f"{output_dir}/inference/{method}/{demog}/{dfe}/{annot}/**/*estimated_Ne.txt", recursive=True)
+    header = "method,population,DFE,annotations,year,Ne"
+    with open(f"{output_dir}/plots/{demog}/{method}_estimated_Ne_t.csv", 'w') as f:
+        for infile in infiles:
+            pop = Path(infile).name.split(".")[0]
+            # open df
+            if method == "stairwayplot":
+                nt = pd.read_csv(infile, sep="\t", skiprows=5)
+                nt = nt[nt['year'] > 10]
+                f.write(f"{header},Ne_2.5,Ne_97.5\n")
+                for row in nt.itertuples():
+                    f.write(f'{method},{pop},{dfe},{annot},{row.year},{row.Ne_median},{getattr(row, "Ne_2.5%")}, {getattr(row, "Ne_97.5%")}\n')
+            else:
+                # TODO: fix col names
+                if method == "msmc":
+                    nt = pd.read_csv(infile, sep="\t", usecols=[1, 2])
+                    time = "Generation"
+                    Ne = "Geometric_mean"
+                # TODO: fix col names
+                elif method == "smcpp":
+                    nt = pd.read_csv(infile, sep="\t", usecols=[1, 2])
+                    time = "Generation"
+                    Ne = "Geometric_mean"
+                elif method == "gone":
+                    nt = pd.read_csv(infile, sep="\t")
+                    nt = nt[nt['year'] > 10]
+                    time = "Generation"
+                    Ne = "Geometric_mean"
+                else:
+                    print("Error: Method not recognized")
+                    sys.exit(1)
+                f.write(header)
+                for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
+                    f.write(f'{method},{pop},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)}\n')
+
+
+def plot_compound_Ne_t(infile, outfile, method, ref_line="census"):
+    """
+    figure of N(t) for multiple methods
+    """
+    # load df
+    df = pd.read_csv(infile, sep=",", header=True)
+    df_ddb = pd.read_csv(Path(infile).parent / "coal_estimated_Ne_t.csv", sep=",", header=True)
+    df_ddb = df_ddb[df_ddb["method"] == ref_line]
+    # plot params
+    hue_order = df["populations"].unique()
+    g = sns.relplot(data=df, x="year", y="Ne", row="annotations", col="DFE", hue="population",
+                    hue_order=hue_order, label="population", kind="line", drawstyle='steps-pre',
+                    palette="colorblind", height=3, aspect=20/10, errorbar="ci", err_style="band",
+                    facet_kws=dict(sharex=True, sharey=True))
+    #g.map(sns.lineplot, df_ddb, color="black", style="population")
+    g.despine()
+    g.set(xscale="log", yscale="log")
+    g.set_title(method)
+    g.set_xlabel("time (years ago)")
+    g.set_ylabel("population size")
+    plt.savefig(outfile, bbox_inches='tight')
+
+
+def popn_coal_rate(model, pop_id, n_samp, generation_time, steps):
+    """
+    returns tuple (coal_rate, P, steps) for pop_id
+    conditional on the model and configuration
+
+    coal_rate, P, steps = popn_coal_rate(
+        model, pop_id, n_samp, generation_time)
+    """
+    #ddb = model.get_demography_debugger()
+    ddb = model.model.debug
+    if steps is None:
+        if(len(ddb.epochs) == 1):
+            end_time = 100000
+        else:
+            end_time = int(ddb.epochs[-2].end_time) + 10000
+        steps = np.linspace(1, end_time, 1000)
+    num_samples = [0 for _ in range(ddb.num_populations)]
+    num_samples[pop_id] = n_samp
+    coal_rate, P = ddb.coalescence_rate_trajectory(steps=steps,
+                                                   lineages=num_samples,  # changed to lineages
+                                                   double_step_validation=False)
+    steps = steps * generation_time
+    # some mig stuff
+    mm = [x for x in ddb.demography.events if "MassMigration" in str(type(x))]
+    census_size = ddb.population_size_trajectory(steps=steps)
+    for m in reversed(mm):
+        if m.proportion == 1.0:
+            n = (steps > m.time)
+            census_size[n, m.source] = census_size[n, m.dest]
+        else:
+            print(
+                "Error: census size estimate requires that MassMigration proportion == 1.0")
+            sys.exit(1)
+
+    return 1/(2*coal_rate), P, steps, census_size
+
+
+def gather_coal_rate(outfile, model, pops_dict, generation_time, steps):
+    header = "method,population,DFE,annotations,year,Ne"
+    with open(outfile, 'w') as coal:
+        coal.write(header)
+        for pop, n_samp in pops_dict.values():
+            coal_rate, P, steps, census_size = popn_coal_rate(model, pop, n_samp, generation_time, steps)
+            for i in range(len(steps)):
+                coal.write(f"coal,{pop},none,none,{steps[i]},{1/(2*coal_rate[i])}\n")
+                coal.write(f"census,{pop},none,none,{steps[i]},{census_size[i][pop]}\n")
+
+
+def plot_all_ne_estimates(Ne_t_infile, outfile, ref_line="census"):
+    df = pd.read_csv(Ne_t_infile, sep=",", header=True)
+    #df_ddb = pd.read_csv(infile + "coal_estimated_Ne_t.csv", sep=",", header=True)
+    #df_ddb = df_ddb[df_ddb["method"] == ref_line]
+    hue_order = df["populations"].unique()
+    g = sns.relplot(data=df, x="year", y="Ne", row="DFE", col="method", style="annotations",
+                    hue="population", hue_order=hue_order, label="population", kind="line",
+                    drawstyle='steps-pre', palette="colorblind", height=3, aspect=20/10,
+                    errorbar="ci", err_style="band", facet_kws=dict(sharex=True, sharey=True))
+    #g.map(sns.lineplot, df_ddb, color="black", style="population")
+    g.despine()
+    g.set(xscale="log", yscale="log")
+    g.set_xlabel("time (years ago)")
+    g.set_ylabel("population size")
+    plt.savefig(outfile, bbox_inches='tight')
+
+
+# NOTE: is this all DFE below here?
 def plot_all_dfe_results(input, output, mu, seq_len, nonneu_prop, pop_names=None):
     """
     Description:
@@ -370,11 +265,11 @@ def _read_bestfits(input_files, pop_num):
         then separates the single data frame into several data frames based on population ids.
 
     Arguments:
-        input_files list: A list containing input files. 
+        input_files list: A list containing input files.
         pop_num int: Number of populations.
 
     Returns:
-        bestfits list: A list containing data frames with bestfit parameters for different populations. 
+        bestfits list: A list containing data frames with bestfit parameters for different populations.
     """
     pop_ids = ['pop'+str(i) for i in np.arange(pop_num)]
     df_from_each_file = (pd.read_csv(f, sep="\t") for f in input_files)
@@ -391,9 +286,9 @@ def _plot_boxplots(plt, title, data, tval, xtick_label, ylabel, ylim=None, print
         Plots box plots for bestfit results from populations.
 
     Arguments:
-        plt matplotlib.pyplot: Interface to matplotlib. 
+        plt matplotlib.pyplot: Interface to matplotlib.
         title str: Title of the boxplot.
-        data list: Bestfit results to be plotted. 
+        data list: Bestfit results to be plotted.
         tval float: True value for the parameter.
         xtick_label list: X-axis tick labels.
         ylabel str: Y-axis label.

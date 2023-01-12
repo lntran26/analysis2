@@ -42,7 +42,6 @@ demo_model_ids = [x["id"] for x in demo_model_array]
 # Select DFE model from catalog  
 dfe_list = config["dfe_list"]
 annotation_list = config["annotation_list"]
-
 # ###############################################################################
 # GENERAL RULES & GLOBALS
 # ###############################################################################
@@ -58,6 +57,7 @@ rule all:
 
 rule simulation:
     input:
+        ...
     output:
         output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees"
     resources: time=3000, mem_mb=10000
@@ -65,12 +65,12 @@ rule simulation:
         if wildcards.demog == 'Constant': 
             model = stdpopsim.PiecewiseConstantSize(species.population_size)
             mutation_rate = 1.29e-08 # where is this from?
-            samples = model.get_samples(*demo_sample_size_dict[wildcards.demog])
+            #samples = model.get_samples(*demo_sample_size_dict[wildcards.demog])
         else: 
             model = species.get_demographic_model(wildcards.demog)
             mutation_rate = model.mutation_rate
-            samples = model.get_samples(*demo_sample_size_dict[wildcards.demog])  # YRI, CEU, CHB
-
+            #samples = model.get_samples(*demo_sample_size_dict[wildcards.demog])  # YRI, CEU, CHB
+	    samples = {f"{model.populations[i].name}": m for i, m in enumerate(demo_sample_size_dict[wildcards.demog])}
         genetic_map_id = config["genetic_map"]
         contig = species.get_contig(wildcards.chrms, genetic_map=genetic_map_id)
         if wildcards.dfes != "none":

@@ -46,7 +46,7 @@ class StairwayPlotRunner(object):
             stairway_path, stairway_path / "swarmops.jar")
         self.java_exe = java_exe
 
-    def ts_to_stairway(self, ts_path, num_bootstraps=1, mask_intervals=None):
+    def ts_to_stairway(self, ts_path, pop_name, num_bootstraps=1, mask_intervals=None):
         """
         Converts the specified tskit tree sequence to text files used by
         stairway plot.
@@ -56,6 +56,8 @@ class StairwayPlotRunner(object):
         num_samples = 0
         for i, ts_p in enumerate(ts_path):
             ts = tskit.load(ts_p)
+            pop_nodes = ts.samples(population=pop_name)
+            ts = ts.simplify(samples=pop_nodes)
             total_length += ts.sequence_length
             # masking?
             if mask_intervals is not None:
@@ -102,12 +104,12 @@ class StairwayPlotRunner(object):
             # plot unmasked neutral / non-neutral SFS
             sfs = allel.sfs(allel.HaplotypeArray(
                 haps_neu).count_alleles()[:, 1])[1:]
-            sfs_path = ts_p+".sfs.neutral.pdf"
+            sfs_path = f"{ts_p}.{pop_name}.sfs.neutral.pdf"
             plots.plot_sfs([sfs], sfs_path)
             if len(non_neu_positions) > 0:
                 sfs = allel.sfs(allel.HaplotypeArray(
                     haps_non_neu).count_alleles()[:, 1])[1:]
-                sfs_path = ts_p+".sfs.non_neutral.pdf"
+                sfs_path = f"{ts_p}.{pop_name}.sfs.non_neutral.pdf"
                 plots.plot_sfs([sfs], sfs_path)
 
             # Bootstrap allele counts (neutral)
