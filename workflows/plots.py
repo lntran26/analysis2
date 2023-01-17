@@ -15,7 +15,7 @@ import seaborn as sns
 # Force matplotlib to not use any Xwindows backend.
 matplotlib.use('Agg')
 #sns.set_style("darkgrid")
-
+COLOURS = sns.color_palette("colorblind")
 
 def plot_sfs(s, outfile):
     """
@@ -47,67 +47,55 @@ def plot_sfs(s, outfile):
         plt.close()
 
 
-def gather_inference_results(output_dir, demog, dfe, annot, method):
-    infiles = glob.glob(f"{output_dir}/inference/{method}/{demog}/{dfe}/{annot}/**/*estimated_Ne.txt", recursive=True)
-    header = "method,population,DFE,annotations,year,Ne"
-    with open(f"{output_dir}/plots/{demog}/{method}_estimated_Ne_t.csv", 'w') as f:
+def gather_inference_results(output_dir, demog, output, method, chrm_mask, annot_mask, pops_size_dict, slim_scaling_factor):
+    infiles = glob.glob(f"{output_dir}/inference/{method}/{demog}/**/{method}_estimated_Ne.txt", recursive=True)
+    header = "method,population,nsamp,DFE,annotations,year,Ne,seed,chrm_mask,annot_mask,slim_scaling_factor"
+    if method == "stairwayplot":
+        header += ",Ne_02_5,Ne_97_5"
+    elif method == "msmc":
+        header += ",n_genomes"
+    with open(output, 'w') as f:
+        f.write(f"{header}\n")
         for infile in infiles:
-            pop = Path(infile).name.split(".")[0]
-            # open df
+            infile_parts = Path(infile).parts
+            pop = infile_parts[-2]
+            size = pops_size_dict[pop]
+            seed = infile_parts[-3]
+            annot = infile_parts[-4]
+            dfe = infile_parts[-5]
+            "none" if chrm_mask is None else chrm_mask
+            "none" if annot_mask == "none" else annot
             if method == "stairwayplot":
                 nt = pd.read_csv(infile, sep="\t", skiprows=5)
                 nt = nt[nt['year'] > 10]
-                f.write(f"{header},Ne_2.5,Ne_97.5\n")
+                nt.columns = nt.columns.str.replace('[%,.]','')
                 for row in nt.itertuples():
-                    f.write(f'{method},{pop},{dfe},{annot},{row.year},{row.Ne_median},{getattr(row, "Ne_2.5%")}, {getattr(row, "Ne_97.5%")}\n')
-            else:
-                # TODO: fix col names
-                if method == "msmc":
-                    nt = pd.read_csv(infile, sep="\t", usecols=[1, 2])
-                    time = "Generation"
-                    Ne = "Geometric_mean"
-                # TODO: fix col names
-                elif method == "smcpp":
-                    nt = pd.read_csv(infile, sep="\t", usecols=[1, 2])
-                    time = "Generation"
-                    Ne = "Geometric_mean"
-                elif method == "gone":
-                    nt = pd.read_csv(infile, sep="\t")
-                    nt = nt[nt['year'] > 10]
-                    time = "Generation"
-                    Ne = "Geometric_mean"
-                else:
-                    print("Error: Method not recognized")
-                    sys.exit(1)
-                f.write(header)
+                    #size
+                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.year},{row.Ne_median},{seed},{chrm_mask},{annot_mask},{slim_scaling_factor},{getattr(row, "Ne_25")},{getattr(row, "Ne_975")}\n')
+            elif method == "msmc":
+                nt = pd.read_csv(infile, sep="\t")
+                for row in nt.itertuples():
+                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.year},{row.Ne},{seed},{chrm_mask},{annot_mask},{slim_scaling_factor},{row.n_samp}\n')
+            # TODO: fix col names
+            elif method == "smcpp":
+                nt = pd.read_csv(infile, sep="\t", usecols=[1, 2])
+                time = "x"
+                Ne = "y"
                 for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
-                    f.write(f'{method},{pop},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)}\n')
+                    f.write(f'{method},{pop},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)},{seed}\n')
+            elif method == "gone":
+                nt = pd.read_csv(infile, sep="\t")
+                nt = nt[nt['year'] > 10]
+                time = "Generation"
+                Ne = "Geometric_mean"
+                for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
+                    f.write(f'{method},{pop},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)},{seed}\n')
+            else:
+                print("Error: Method not recognized")
+                sys.exit(1)
 
 
-def plot_compound_Ne_t(infile, outfile, method, ref_line="census"):
-    """
-    figure of N(t) for multiple methods
-    """
-    # load df
-    df = pd.read_csv(infile, sep=",", header=True)
-    df_ddb = pd.read_csv(Path(infile).parent / "coal_estimated_Ne_t.csv", sep=",", header=True)
-    df_ddb = df_ddb[df_ddb["method"] == ref_line]
-    # plot params
-    hue_order = df["populations"].unique()
-    g = sns.relplot(data=df, x="year", y="Ne", row="annotations", col="DFE", hue="population",
-                    hue_order=hue_order, label="population", kind="line", drawstyle='steps-pre',
-                    palette="colorblind", height=3, aspect=20/10, errorbar="ci", err_style="band",
-                    facet_kws=dict(sharex=True, sharey=True))
-    #g.map(sns.lineplot, df_ddb, color="black", style="population")
-    g.despine()
-    g.set(xscale="log", yscale="log")
-    g.set_title(method)
-    g.set_xlabel("time (years ago)")
-    g.set_ylabel("population size")
-    plt.savefig(outfile, bbox_inches='tight')
-
-
-def popn_coal_rate(model, pop_id, n_samp, generation_time, steps):
+def popn_coal_rate(model, pop_id, pops_dict, generation_time, steps):
     """
     returns tuple (coal_rate, P, steps) for pop_id
     conditional on the model and configuration
@@ -115,18 +103,21 @@ def popn_coal_rate(model, pop_id, n_samp, generation_time, steps):
     coal_rate, P, steps = popn_coal_rate(
         model, pop_id, n_samp, generation_time)
     """
-    #ddb = model.get_demography_debugger()
-    ddb = model.model.debug
+    ddb = model.model.debug()
     if steps is None:
         if(len(ddb.epochs) == 1):
             end_time = 100000
         else:
             end_time = int(ddb.epochs[-2].end_time) + 10000
         steps = np.linspace(1, end_time, 1000)
-    num_samples = [0 for _ in range(ddb.num_populations)]
-    num_samples[pop_id] = n_samp
+    sample_dict = {}
+    for pop in pops_dict:
+        size = 0
+        if pop == pop_id:
+            size=pops_dict[pop]
+        sample_dict[pop] = size
     coal_rate, P = ddb.coalescence_rate_trajectory(steps=steps,
-                                                   lineages=num_samples,  # changed to lineages
+                                                   lineages=sample_dict, # changed to lineages
                                                    double_step_validation=False)
     steps = steps * generation_time
     # some mig stuff
@@ -140,35 +131,62 @@ def popn_coal_rate(model, pop_id, n_samp, generation_time, steps):
             print(
                 "Error: census size estimate requires that MassMigration proportion == 1.0")
             sys.exit(1)
-
-    return 1/(2*coal_rate), P, steps, census_size
+    return coal_rate, P, steps, census_size
 
 
 def gather_coal_rate(outfile, model, pops_dict, generation_time, steps):
     header = "method,population,DFE,annotations,year,Ne"
-    with open(outfile, 'w') as coal:
-        coal.write(header)
-        for pop, n_samp in pops_dict.values():
-            coal_rate, P, steps, census_size = popn_coal_rate(model, pop, n_samp, generation_time, steps)
+    with open(outfile[0], 'w') as coal:
+        coal.write(f"{header}\n")
+        for pop_id, pop in enumerate(pops_dict.keys()):
+            coal_rate, P, steps, census_size = popn_coal_rate(model, pop, pops_dict, generation_time, steps)
             for i in range(len(steps)):
                 coal.write(f"coal,{pop},none,none,{steps[i]},{1/(2*coal_rate[i])}\n")
-                coal.write(f"census,{pop},none,none,{steps[i]},{census_size[i][pop]}\n")
+                coal.write(f"census,{pop},none,none,{steps[i]},{census_size[i][pop_id]}\n")
+
+# TODO: add coal or census line to every sub plot, cycle through axes?
+def plot_compound_Ne_t(infile, outfile, method, ref_line="census"):
+    """
+    figure of N(t) for multiple methods
+    set msmc w/ style="n_samp"
+    """
+    # load df
+    df = pd.read_csv(infile, sep=",")
+    #df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
+    #df_ddb = df_ddb[df_ddb["method"] == ref_line]
+    #df = pd.concat([df, df_ddb])
+    # plot params
+    if method == "stairwayplot":
+        ... # plot some business w/ ci
+    elif method == "msmc":
+        ... # plot some business w/ n_samps ... units="n_samps"
+    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(df["population"].unique())}
+    g = sns.relplot(data=df, x="year", y="Ne", col="DFE", hue="population",
+                    kind="line", palette=pal_dict, style="annotations",
+                    height=3, aspect=20/10, errorbar="ci", err_style="band",
+                    facet_kws=dict(sharex=False, sharey=False), drawstyle='steps-pre')
+    g.despine()
+    #g.set(xscale="log", yscale="log")
+    g.set_xlabels("time (years ago)")
+    g.set_ylabels("population size")
+    plt.savefig(outfile, bbox_inches='tight')
 
 
 def plot_all_ne_estimates(Ne_t_infile, outfile, ref_line="census"):
-    df = pd.read_csv(Ne_t_infile, sep=",", header=True)
-    #df_ddb = pd.read_csv(infile + "coal_estimated_Ne_t.csv", sep=",", header=True)
+    df = pd.read_csv(Ne_t_infile, sep=",")
+    #df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
     #df_ddb = df_ddb[df_ddb["method"] == ref_line]
-    hue_order = df["populations"].unique()
-    g = sns.relplot(data=df, x="year", y="Ne", row="DFE", col="method", style="annotations",
-                    hue="population", hue_order=hue_order, label="population", kind="line",
-                    drawstyle='steps-pre', palette="colorblind", height=3, aspect=20/10,
+    #df = pd.concat([df, df_ddb])
+    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(df["method"].unique())}
+    g = sns.relplot(data=df, x="year", y="Ne", row="DFE", col="population", style="annotations",
+                    hue="method", kind="line",drawstyle='steps-pre',
+                    palette=pal_dict, height=3, aspect=20/10,
                     errorbar="ci", err_style="band", facet_kws=dict(sharex=True, sharey=True))
     #g.map(sns.lineplot, df_ddb, color="black", style="population")
     g.despine()
     g.set(xscale="log", yscale="log")
-    g.set_xlabel("time (years ago)")
-    g.set_ylabel("population size")
+    g.set_xlabels("time (years ago)")
+    g.set_ylabels("population size")
     plt.savefig(outfile, bbox_inches='tight')
 
 

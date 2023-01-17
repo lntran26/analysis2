@@ -46,12 +46,16 @@ def copy(gone_code,outpath,seed,threads):
     subprocess.run(cmd, shell=True, check=True)
 
         
-def ts2plink(ts, ped_file, map_file, gm_chr, chrID, mask_intervals=None):
+def ts2plink(ts, ped_file, map_file, pop_name, gm_chr, chrID, mask_intervals=None):
     """
     converts ts to plink format
     masks are the intervals to exclude
     """
     ts = tskit.load(ts)
+    pop_id = [p.id for p in ts.populations() if p.metadata.get("name") == pop_name]
+    pop_nodes = ts.samples(population=pop_id)
+    ts = ts.simplify(samples=pop_nodes)
+    
     inds = {}
     for sample in ts.samples():
         node = ts.node(sample)

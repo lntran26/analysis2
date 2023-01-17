@@ -1,30 +1,37 @@
 "seed": 12345
 "population_id": [0]
-"replicates": 1
+"replicates": 2
 
 "species": "HomSap"
-"demo_models": [
-    {"id":"OutOfAfrica_3G09", 
-    "num_samples_per_population": [10, 10, 10],
-    },
-]
+"demo_models":
+    [
+        {
+            "id": "OutOfAfrica_3G09",
+            "num_samples_per_population": [10, 10, 10],
+        },
+    ]
 "genetic_map": "HapMapII_GRCh37"
-"chrm_list": "chr21"
-"dfe_list": ["none"]
+"chrm_list": "chr21,chr10"
+"dfe_list": ["none", "Gamma_H17"]
+"annotation_list": ["none", "ensembl_havana_104_exons"]
 "output_dir": "results"
 "mask_file": "workflows/masks/HapmapII_GRCh37.mask.bed"
-
+"stairway_annot_mask" : ""  # set this to 'none' to skip annot masking
+"msmc_annot_mask" : ""  # set this to 'none' to skip annot masking
+"gone_annot_mask" : ""
 
 # slim settings
 "slim_scaling_factor": 15
 "slim_burn_in": 10
 
 # n(t) specific configs
-"num_sampled_genomes_msmc" : [2]
+"methods" : ["stairwayplot", "msmc", "gone"]
+
+"num_sampled_genomes_msmc" : [2, 4]
 "num_sampled_genomes_per_replicate": [2]
-"num_msmc_iterations" : 10
-"annotation_list": ["none"]
-"gone_phase" : 1 # 0 for pseudohaploid, 1 for unknown phase, 2 for phased
+"num_msmc_iterations" : 2
+
+"gone_phase" : 2 # 0 for pseudohaploid, 1 for unknown phase, 2 for phased
 "gone_max_snps" : 500 # default=50000
 "gone_threads" : 1
 "gone_num_gens" : 2000 # default=2000
