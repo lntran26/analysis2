@@ -46,7 +46,7 @@ class StairwayPlotRunner(object):
             stairway_path, stairway_path / "swarmops.jar")
         self.java_exe = java_exe
 
-    def ts_to_stairway(self, ts_path, pop_name, mask_intervals=None, num_bootstraps=1):
+    def ts_to_stairway(self, ts_path, pop_name, mask_intervals, num_bootstraps=1):
         """
         Converts the specified tskit tree sequence to text files used by
         stairway plot.
@@ -54,16 +54,15 @@ class StairwayPlotRunner(object):
         derived_counts_all = [[] for _ in range(num_bootstraps + 1)]
         total_length = 0
         num_samples = 0
-        if mask_intervals is not None:
-            if type(mask_intervals) is not list:
-                mask_intervals = [mask_intervals]
+        if type(mask_intervals) is not list:
+            mask_intervals = [mask_intervals]
         for i, ts_p in enumerate(ts_path):
             ts = tskit.load(ts_p)
             pop_id = [p.id for p in ts.populations() if p.metadata.get("name") == pop_name]
             pop_nodes = ts.samples(population=pop_id)
             ts = ts.simplify(samples=pop_nodes)
             total_length += ts.sequence_length
-            if mask_intervals is not None:
+            if mask_intervals[i] is not None:
                 ts = ts.delete_intervals(mask_intervals[i])
                 total_length -= np.sum(mask_intervals[i][:, 1] - mask_intervals[i][:, 0])
             num_samples = ts.num_samples

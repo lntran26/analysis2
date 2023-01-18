@@ -83,7 +83,10 @@ def get_combined_masks(species, mask_file, chromID, chrom_annotation=None):
     else:
         chromID = [chromID]
     if mask_file is None and chrom_annotation is None:
-        return None
+        if len(chromID) < 2:
+            return None
+        else:
+            return [None] * len(chromID)
     # get the mask for the specified chromosome
     if mask_file is not None:
         mask = get_mask_from_file(mask_file, chromID)

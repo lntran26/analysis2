@@ -24,9 +24,8 @@ import plots
 import masks
 
 # TODO: smcpp
-# TODO: gone
-# TODO: check that constant works
-# TODO: add census/coal lines to plots ... test plots in jupyter.nb w/ dataframes
+# TODO: check that demog = "Constant" works correctly
+# TODO: production plots
 # TODO: Add support for population_id list, right now it runs on all pops
 # TODO: add support for running some but not all inference methods
 # ###############################################################################
@@ -262,9 +261,8 @@ rule run_stairwayplot:
                 chrom_annotation=wildcards.annots,
             )
 
-        # TODO: change this back to 200
         runner.ts_to_stairway(
-            inputs, wildcards.pops, mask_intervals=mask_intervals, num_bootstraps=10)
+            inputs, wildcards.pops, mask_intervals=mask_intervals, num_bootstraps=200)
         runner.run_theta_estimation(max_workers=threads, show_progress=True)
         runner.run_summary(
             output,
@@ -274,7 +272,7 @@ rule run_stairwayplot:
 
 
 rule compound_stairwayplot:
-    input: 
+    input:
         pop_expand(output_dir, "stairwayplot", "estimated_Ne.txt")
     output:
         output_dir + "/plots/{demog}/stairwayplot/stairwayplot_estimated_Ne_t.csv",
@@ -391,14 +389,14 @@ rule convert_msmc:
 
 
 rule compound_msmc:
-    input: 
+    input:
         pop_expand(output_dir, "msmc", "estimated_Ne.txt")
     output:
         output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.csv"
     run:
         plots.gather_inference_results(output_dir, wildcards.demog, output[0], "msmc",
                                        mask_file, msmc_mask, demo_sample_size_dict[wildcards.demog],
-                                       slim_scaling_factor)       
+                                       slim_scaling_factor)
 
 
 rule plot_compound_msmc:
@@ -453,7 +451,7 @@ rule gone_copy:
         rules.gone_clone.output,
 
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/.scripts_copied"
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/.scripts_copied"
     message:
         "copying GONE scripts into individual working directories"
     threads: 1
@@ -465,31 +463,48 @@ rule gone_copy:
 
 rule gone_prep_inputs:
     input:
-        output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
+        expand(
+            [output_dir + "/simulated_data/{{demog}}/{dfes}/{annots}/{{seeds}}/sim_{{chrms}}.trees".format(
+                dfes=DFE, annots=ANNOT) for (DFE, ANNOT) in zip(dfe_list, annotation_list)],
+            demog=demo_model_ids,
+            seeds=seed_array,
+            chrms=chrm_list,
+        ),
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/gone.ped",
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/gone.map",
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.ped",
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.map",
     threads: 1
     run:
-        genetic_map = species.get_genetic_map(genetic_map_id)
-        if not genetic_map.is_cached():
-            genetic_map.download()
-        gm_chr = genetic_map.get_chromosome_map(wildcards.chrms)
+        gwildcards = glob_wildcards(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees")
+        inputs = expand(
+            output_dir
+            + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
+            demog=wildcards.demog,
+            dfes=wildcards.dfes,
+            annots=wildcards.annots,
+            seeds=wildcards.seeds,
+            chrms=chrm_list,
+        )
         # handle no annotation case
         if wildcards.annots == "none" or gone_mask == "none":
             mask_intervals = masks.get_combined_masks(
                                             species.id,
                                             mask_file,
-                                            wildcards.chrms,
+                                            gwildcards.chrms,
                                             )
         else:
             mask_intervals = masks.get_combined_masks(
                                             species.id,
                                             mask_file,
-                                            wildcards.chrms,
+                                            gwildcards.chrms,
                                             chrom_annotation=wildcards.annots,
                                             )
-        gone.ts2plink(input[0], output[0], output[1], wildcards.pops, gm_chr, wildcards.chrms, mask_intervals=mask_intervals)
+
+        genetic_map = species.get_genetic_map(genetic_map_id)
+        if not genetic_map.is_cached():
+            genetic_map.download()
+
+        gone.ts2plink(inputs, output[0], output[1], wildcards.pops, genetic_map, gwildcards.chrms, mask_intervals=mask_intervals)
 
 
 rule gone_run:
@@ -497,53 +512,36 @@ rule gone_run:
         rules.gone_copy.output,
         rules.gone_prep_inputs.output,
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/Output_Ne_gone",
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone_estimated_Ne.txt",
     threads: 8
     resources: time=180
     shell:
         """
         cwd=$PWD
-        cd {output_dir}/inference/gone/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.chrms}
+        cd {output_dir}/inference/gone/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}
         bash script_GONE.sh gone
         cd $cwd
         """
 
-def ne_files_gone(wildcards):
-    return expand(output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/Output_Ne_gone",
-                seeds=seed_array,
-                chrms=chrm_list,
-                dfes=wildcards.dfes,
-                demog=wildcards.demog,
-                annots=wildcards.annots,
-            )
-
 
 rule compound_gone:
     input:
-        ne_files_gone,
+        pop_expand(output_dir, "gone", "estimated_Ne.txt")
     output:
-        output_dir + "/plots/{demog}/{chrms}/{dfes}/{annots}/dfe.inference.benchmark.pdf/gone_estimated_Ne.png"
-    run: plots.plot_compound_gone(input, output[0])
-
-
-rule compound_msmc:
-    input: 
-        pop_expand(output_dir, "msmc", "estimated_Ne.txt")
-    output:
-        output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.csv"
+        output_dir + "/plots/{demog}/gone/gone_estimated_Ne_t.csv"
     run:
-        plots.gather_inference_results(output_dir, wildcards.demog, output[0], "msmc",
+        plots.gather_inference_results(output_dir, wildcards.demog, output[0], "gone",
                                        mask_file, msmc_mask, demo_sample_size_dict[wildcards.demog],
-                                       slim_scaling_factor)       
+                                       slim_scaling_factor)
 
 
-rule plot_compound_msmc:
+rule plot_compound_gone:
     input:
-        rules.compound_msmc.output
+        rules.compound_gone.output
     output:
-        output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.pdf"
+        output_dir + "/plots/{demog}/gone/gone_estimated_Ne_t.pdf"
     run:
-        plots.plot_compound_Ne_t(input[0], output[0], "msmc")
+        plots.plot_compound_Ne_t(input[0], output[0], "gone")
 
 # ###############################################################################
 #  Plotting results

@@ -67,7 +67,6 @@ def gather_inference_results(output_dir, demog, output, method, chrm_mask, annot
             "none" if annot_mask == "none" else annot
             if method == "stairwayplot":
                 nt = pd.read_csv(infile, sep="\t", skiprows=5)
-                nt = nt[nt['year'] > 10]
                 nt.columns = nt.columns.str.replace('[%,.]','')
                 for row in nt.itertuples():
                     #size
@@ -84,12 +83,11 @@ def gather_inference_results(output_dir, demog, output, method, chrm_mask, annot
                 for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
                     f.write(f'{method},{pop},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)},{seed}\n')
             elif method == "gone":
-                nt = pd.read_csv(infile, sep="\t")
-                nt = nt[nt['year'] > 10]
+                nt = pd.read_csv(infile, sep="\t", skiprows=1)
                 time = "Generation"
                 Ne = "Geometric_mean"
-                for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
-                    f.write(f'{method},{pop},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)},{seed}\n')
+                for row in nt.itertuples():
+                    f.write(f'{method},{pop},{dfe},{annot},{row.Generation},{row.Geometric_mean},{seed},{chrm_mask},{annot_mask},{slim_scaling_factor}\n')
             else:
                 print("Error: Method not recognized")
                 sys.exit(1)
