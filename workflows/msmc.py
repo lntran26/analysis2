@@ -71,7 +71,7 @@ def write_msmc_file(path, output, pop_name, mask_intervals=None):
     return None
 
 
-def run_msmc_estimate(input_files, output_file, msmc_exec_loc, total_samples, num_samples, iterations=1, ncores=1):
+def run_msmc_estimate(input_files, output_file, msmc_exec_loc, total_samples, num_genomes, iterations=1, ncores=1):
     """
     This is to run the msmc command and get estimates,
     It then will convert the scales times and pop sizes
@@ -81,8 +81,8 @@ def run_msmc_estimate(input_files, output_file, msmc_exec_loc, total_samples, nu
     input_file.final.txt
     """
     # TODO: change here, to num_samples and drop loop, if get wildcards.samps sorted in n_t.smk
-    for nsamps in num_samples:
-        subset = np.random.choice(range(total_samples), nsamps, replace=False)
+    for nsamps in num_genomes:
+        subset = np.random.choice(range(total_samples*2), nsamps, replace=False)
         haplotypes = ",".join(map(str, sorted(subset)))
         cmd = (f"{msmc_exec_loc} -r 0.25 -I {haplotypes} -i {iterations} -o {output_file}{nsamps}.trees.multihep.txt -t {ncores} {input_files}")
         subprocess.run(cmd, shell=True, check=True)

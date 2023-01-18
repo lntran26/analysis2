@@ -163,11 +163,11 @@ rule download_genetic_map:
 # UTILS HELPERS ETC
 ###############################################################################
 
-def generation_time_helper(wildcards, species):
-    if wildcards.demog == "Constant":
+def generation_time_helper(demog, species):
+    if demog == "Constant":
         generation_time = species.generation_time
     else:
-        generation_time = species.get_demographic_model(wildcards.demog).generation_time
+        generation_time = species.get_demographic_model(demog).generation_time
     return generation_time
 
 
@@ -181,7 +181,7 @@ rule write_bdd:
             max_time *= 2  # 4?
             steps = np.linspace(1, max_time, max_time + 1)
         model = species.get_demographic_model(wildcards.demog)
-        generation_time = generation_time_helper(wildcards, species)
+        generation_time = generation_time_helper(wildcards.demog, species)
         plots.gather_coal_rate(
             output,
             model,
@@ -267,7 +267,7 @@ rule run_stairwayplot:
         runner.run_summary(
             output,
             mutation_rate=mutation_rate,
-            generation_time=generation_time_helper(wildcards, species),
+            generation_time=generation_time_helper(wildcards.demog, species),
         )
 
 
@@ -277,9 +277,10 @@ rule compound_stairwayplot:
     output:
         output_dir + "/plots/{demog}/stairwayplot/stairwayplot_estimated_Ne_t.csv",
     run:
+        gen_time = generation_time_helper(wildcards.demog, species)
         plots.gather_inference_results(output_dir, wildcards.demog, output[0], "stairwayplot",
                                        mask_file, sp_mask, demo_sample_size_dict[wildcards.demog],
-                                       slim_scaling_factor)
+                                       slim_scaling_factor, gen_time)
 
 
 rule plot_compound_stairway:
@@ -384,7 +385,7 @@ rule convert_msmc:
     run:
         msmc.convert_msmc_output(input[0], output[0],
             mutation_rate=mutation_rate,
-            generation_time=generation_time_helper(wildcards, species)
+            generation_time=generation_time_helper(wildcards.demog, species)
         )
 
 
@@ -394,9 +395,10 @@ rule compound_msmc:
     output:
         output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.csv"
     run:
+        gen_time = generation_time_helper(wildcards.demog, species)
         plots.gather_inference_results(output_dir, wildcards.demog, output[0], "msmc",
                                        mask_file, msmc_mask, demo_sample_size_dict[wildcards.demog],
-                                       slim_scaling_factor)
+                                       slim_scaling_factor, gen_time)
 
 
 rule plot_compound_msmc:
@@ -530,9 +532,10 @@ rule compound_gone:
     output:
         output_dir + "/plots/{demog}/gone/gone_estimated_Ne_t.csv"
     run:
+        gen_time = generation_time_helper(wildcards.demog, species)
         plots.gather_inference_results(output_dir, wildcards.demog, output[0], "gone",
                                        mask_file, msmc_mask, demo_sample_size_dict[wildcards.demog],
-                                       slim_scaling_factor)
+                                       slim_scaling_factor, gen_time)
 
 
 rule plot_compound_gone:
@@ -552,7 +555,7 @@ rule gather_inference:
         rules.compound_stairwayplot.output,
         rules.compound_msmc.output,
         #rules.compound_smcpp.output,
-        #rules.compound_gone.output
+        rules.compound_gone.output
     output:
         output_dir + "/plots/{demog}/estimated_Ne_t_final.csv",
     run:

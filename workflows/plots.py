@@ -2,6 +2,7 @@
 Code for generating plots.
 """
 import pandas as pd
+from math import sqrt
 from pathlib import Path
 import glob
 import os
@@ -47,47 +48,64 @@ def plot_sfs(s, outfile):
         plt.close()
 
 
-def gather_inference_results(output_dir, demog, output, method, chrm_mask, annot_mask, pops_size_dict, slim_scaling_factor):
+def gather_inference_results(output_dir, demog, output, method, chrm_mask, 
+                             annot_mask, pops_size_dict, slim_scaling_factor, gen_time):
     infiles = glob.glob(f"{output_dir}/inference/{method}/{demog}/**/{method}_estimated_Ne.txt", recursive=True)
     header = "method,population,nsamp,DFE,annotations,year,Ne,seed,chrm_mask,annot_mask,slim_scaling_factor"
     if method == "stairwayplot":
         header += ",Ne_02_5,Ne_97_5"
     elif method == "msmc":
         header += ",n_genomes"
+    elif method == "gone":
+        header += ",G_value"
     with open(output, 'w') as f:
         f.write(f"{header}\n")
         for infile in infiles:
-            infile_parts = Path(infile).parts
+            infile_path = Path(infile)
+            infile_parts = infile_path.parts
             pop = infile_parts[-2]
             size = pops_size_dict[pop]
             seed = infile_parts[-3]
             annot = infile_parts[-4]
             dfe = infile_parts[-5]
-            "none" if chrm_mask is None else chrm_mask
-            "none" if annot_mask == "none" else annot
+            if chrm_mask is None:
+                chrm_mask_i = "none"
+            else:
+                chrm_mask_i = Path(chrm_mask).name
+            if annot_mask == 'none':
+                annot_mask_i = 'none'
+            else:
+                annot_mask_i = annot
             if method == "stairwayplot":
                 nt = pd.read_csv(infile, sep="\t", skiprows=5)
                 nt.columns = nt.columns.str.replace('[%,.]','')
                 for row in nt.itertuples():
-                    #size
-                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.year},{row.Ne_median},{seed},{chrm_mask},{annot_mask},{slim_scaling_factor},{getattr(row, "Ne_25")},{getattr(row, "Ne_975")}\n')
+                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.year},{row.Ne_median},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{getattr(row, "Ne_25")},{getattr(row, "Ne_975")}\n')
             elif method == "msmc":
                 nt = pd.read_csv(infile, sep="\t")
                 for row in nt.itertuples():
-                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.year},{row.Ne},{seed},{chrm_mask},{annot_mask},{slim_scaling_factor},{row.n_samp}\n')
+                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.year},{row.Ne},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{row.n_samp}\n')
             # TODO: fix col names
             elif method == "smcpp":
                 nt = pd.read_csv(infile, sep="\t", usecols=[1, 2])
                 time = "x"
                 Ne = "y"
                 for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
-                    f.write(f'{method},{pop},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)},{seed}\n')
+                    f.write(f'{method},{pop},{size},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor}\n')
             elif method == "gone":
+                q_file = infile_path.parent / "OUTPUT_gone"
+                ld_pairs = pd.read_csv(q_file, sep=" ", skiprows=43, names=["ld_pairs","avg_c", "avg_d2", "gens"])
                 nt = pd.read_csv(infile, sep="\t", skiprows=1)
-                time = "Generation"
-                Ne = "Geometric_mean"
+                nt = nt[nt["Generation"] <= 200]
                 for row in nt.itertuples():
-                    f.write(f'{method},{pop},{dfe},{annot},{row.Generation},{row.Geometric_mean},{seed},{chrm_mask},{annot_mask},{slim_scaling_factor}\n')
+                    generation = row.Generation
+                    Ne = row.Geometric_mean
+                    ld_bin = ld_pairs[ld_pairs["gens"] <= generation]
+                    while len(ld_bin.index) == 0:
+                        generation += 1
+                        ld_bin = ld_pairs[ld_pairs["gens"] <= generation]
+                    G_val = (size * sqrt(ld_bin.iloc[-1]["ld_pairs"])) / Ne
+                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.Generation * gen_time},{Ne},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{G_val}\n')
             else:
                 print("Error: Method not recognized")
                 sys.exit(1)
@@ -143,7 +161,7 @@ def gather_coal_rate(outfile, model, pops_dict, generation_time, steps):
                 coal.write(f"census,{pop},none,none,{steps[i]},{census_size[i][pop_id]}\n")
 
 # TODO: add coal or census line to every sub plot, cycle through axes?
-def plot_compound_Ne_t(infile, outfile, method, ref_line="census"):
+def plot_compound_Ne_t(infile, outfile, method, ref_line="census", log=True):
     """
     figure of N(t) for multiple methods
     set msmc w/ style="n_samp"
@@ -164,13 +182,14 @@ def plot_compound_Ne_t(infile, outfile, method, ref_line="census"):
                     height=3, aspect=20/10, errorbar="ci", err_style="band",
                     facet_kws=dict(sharex=False, sharey=False), drawstyle='steps-pre')
     g.despine()
-    #g.set(xscale="log", yscale="log")
+    if log:
+        g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
     g.set_ylabels("population size")
     plt.savefig(outfile, bbox_inches='tight')
 
 
-def plot_all_ne_estimates(Ne_t_infile, outfile, ref_line="census"):
+def plot_all_ne_estimates(Ne_t_infile, outfile, ref_line="census", log=True):
     df = pd.read_csv(Ne_t_infile, sep=",")
     #df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
     #df_ddb = df_ddb[df_ddb["method"] == ref_line]
@@ -182,7 +201,8 @@ def plot_all_ne_estimates(Ne_t_infile, outfile, ref_line="census"):
                     errorbar="ci", err_style="band", facet_kws=dict(sharex=True, sharey=True))
     #g.map(sns.lineplot, df_ddb, color="black", style="population")
     g.despine()
-    g.set(xscale="log", yscale="log")
+    if log:
+        g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
     g.set_ylabels("population size")
     plt.savefig(outfile, bbox_inches='tight')
