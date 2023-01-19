@@ -29,11 +29,11 @@
 "slim_burn_in": 10
 
 # n(t) specific configs
-"methods" : ["stairwayplot", "msmc", "gone", "smcpp"]
+"methods" : ["stairwayplot", "gone", "smcpp"]
 
 "num_sampled_genomes_msmc" : [2, 4]
 "num_sampled_genomes_per_replicate": [2]  # I dont use this, not sure what is purpose?
-"num_msmc_iterations" : 10
+"num_msmc_iterations" : 2
 
 "gone_phase" : 1  # 0 for pseudohaploid, 1 for phased, 2 for unknown phase
 "gone_max_snps" : 5000  # default=50000

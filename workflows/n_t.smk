@@ -639,6 +639,7 @@ rule compound_smcpp:
     output:
         output_dir + "/plots/{demog}/smcpp/smcpp_estimated_Ne_t.csv"
     run:
+        import ipdb;ipdb.set_trace()
         gen_time = generation_time_helper(wildcards.demog, species)
         plots.gather_inference_results(output_dir, wildcards.demog, output[0], "smcpp",
                                        mask_file, smcpp_mask, demo_sample_size_dict[wildcards.demog],

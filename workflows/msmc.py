@@ -85,8 +85,12 @@ def run_msmc_estimate(input_files, output_file, msmc_exec_loc, total_samples, nu
         subset = np.random.choice(range(total_samples*2), nsamps, replace=False)
         haplotypes = ",".join(map(str, sorted(subset)))
         cmd = (f"{msmc_exec_loc} -r 0.25 -I {haplotypes} -i {iterations} -o {output_file}{nsamps}.trees.multihep.txt -t {ncores} {input_files}")
-        subprocess.run(cmd, shell=True, check=True)
-
+        results = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+        msmc_run_count = 0
+        while results.returncode > 0:
+            results = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+            msmc_run_count += 1
+            print(f"\n\nmsmc reruns = {msmc_run_count}\n\n")
 
 def convert_msmc_output(results_file, outfile, mutation_rate, generation_time):
     """
