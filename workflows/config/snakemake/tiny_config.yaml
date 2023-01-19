@@ -12,7 +12,7 @@
     ]
 
 "genetic_map": "HapMapII_GRCh37"
-"chrm_list": "chr10"
+"chrm_list": "chr21"
 "dfe_list": ["none", "Gamma_H17"]
 "annotation_list": ["none", "ensembl_havana_104_exons"]
 "output_dir": "results"
