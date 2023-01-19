@@ -136,10 +136,6 @@ rule all:
             demog=demo_model_ids, method=methods),
         expand(output_dir + "/plots/{demog}/{method}/{method}_estimated_Ne_t.pdf",
             demog=demo_model_ids, method=methods),
-        #pop_expand(output_dir, "stairwayplot", "stairwayplot_estimated_Ne.txt"),
-        #pop_expand(output_dir, "msmc", "msmc_estimated_Ne.txt"),
-        #pop_expand(output_dir, "gone", "gone_estimated_Ne.txt"),
-        #pop_expand(output_dir, "smcpp", "smcpp_estimated_Ne.csv"),
         #rules.simulation_all.output,
 
 
