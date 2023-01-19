@@ -23,18 +23,24 @@ import gone
 import plots
 import masks
 
-# TODO: Add support for population_id, right now it runs on all pops
+# TODO: check that demog = "Constant" works correctly
+# TODO: production plots
+# TODO: Add support for population_id list, right now it runs on all pops
+# TODO: add support for running some but not all inference methods
+# NOTE: see other todo specific to rule below
 # ###############################################################################
 # GLOBALS
 # ###############################################################################
 
 configfile: "workflows/config/snakemake/tiny_config.yaml"
 
-np.random.seed(config["seed"])
-seed_array = np.random.random_integers(1,2**31,replicates)
-
 # The number of replicates of each analysis you would like to run
 replicates = config["replicates"]
+
+np.random.seed(config["seed"])
+seed_array = np.random.random_integers(1, 2**31, replicates)
+slim_scaling_factor=config["slim_scaling_factor"]
+
 # Where you would like all output files from analysis to live
 output_dir = os.path.abspath(config["output_dir"])
 # The analysis species
@@ -45,17 +51,20 @@ species = stdpopsim.get_species(config["species"])
 chrm_list = [chrom.id for chrom in species.genome.chromosomes]
 if "chrY" in chrm_list:  # this is human specific
     chrm_list.remove("chrY")
-if(config["chrm_list"] != "all"):
+if config["chrm_list"] != "all":
     chrm_list = [chr for chr in config["chrm_list"].split(",")]
 
 # The specific demographic model you would like to run
-demo_model_array =  config["demo_models"]
+demo_model_array = config["demo_models"]
 demo_model_ids = [x["id"] for x in demo_model_array]
 demo_sample_size_dict = {}
 for x in demo_model_array:
-    #demo_sample_size_dict[x["id"]] = x["num_samples_per_population"]
+    # demo_sample_size_dict[x["id"]] = x["num_samples_per_population"]
     model = species.get_demographic_model(x["id"])
-    demo_sample_size_dict[x["id"]] = {f"{model.populations[i].name}": m for i, m in enumerate(x["num_samples_per_population"])}
+    demo_sample_size_dict[x["id"]] = {
+        f"{model.populations[i].name}": m
+        for i, m in enumerate(x["num_samples_per_population"])
+    }
 
 # list of population names or specific id
 # NOTE: currently not implemented
@@ -68,7 +77,7 @@ annotation_list = config["annotation_list"]
 # The genetic map.if value None is given
 # default_recombination_rates are used with a flat map
 genetic_map_id = config["genetic_map"]
-genetic_map_downloaded_flag= ".genetic_map_downloaded"
+genetic_map_downloaded_flag = ".genetic_map_downloaded"
 
 # TODO: mutation rate
 # This grabs the default mut rate from the first chromosome,
@@ -82,16 +91,30 @@ try:
 except KeyError:
     mask_file = None
 
-methods_list = config["methods"]
+methods = config["methods"]
+def pop_expand(output_dir, method, filename="temp.txt"):
+    infiles = []
+    for demog in demo_model_ids:
+        for dfe, annot in zip(dfe_list, annotation_list):
+            for seeds in seed_array:
+                for chrms in chrm_list:
+                    for pops in demo_sample_size_dict[demog].keys():
+                        infiles.append(output_dir + f"/inference/{method}/{demog}/{dfe}/{annot}/{seeds}/{pops}/{filename}")
+    return infiles
 # ###############################################################################
 # GENERAL RULES
 # ###############################################################################
 
-module simulation_workflow:
-    snakefile:
-        "simulation.snake"
-    config: config
-use rule * from simulation_workflow as simulation_*
+
+#module simulation_workflow:
+#    snakefile:
+#        "simulation.snake"
+#    config:
+#        config
+
+
+#use rule * from simulation_workflow as simulation_*
+
 
 localrules:
     download_genetic_map,
@@ -101,19 +124,31 @@ localrules:
     gone_clone,
     gone_copy,
     gone_params,
-    all_plot
+    all_plot,
+
 
 rule all:
-   input:
-    expand(output_dir + "/plots/{demog}/{species}_estimated_Ne_t_final.csv",
-        demog=demo_model_ids, species=species),
-    expand(output_dir + "/plots/{demog}/{species}_estimated_Ne_t_final.pdf",
-        demo=demo_model_ids, species=species),
-    rules.simulation_all.output,
+    input:
+        expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.csv",demog=demo_model_ids),
+        expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.pdf",demog=demo_model_ids),
+        expand(output_dir + "/plots/{demog}/coal_estimated_Ne_t.csv", demog=demo_model_ids),
+        expand(output_dir + "/plots/{demog}/{method}/{method}_estimated_Ne_t.csv",
+            demog=demo_model_ids, method=methods),
+        expand(output_dir + "/plots/{demog}/{method}/{method}_estimated_Ne_t.pdf",
+            demog=demo_model_ids, method=methods),
+        #pop_expand(output_dir, "stairwayplot", "stairwayplot_estimated_Ne.txt"),
+        #pop_expand(output_dir, "msmc", "msmc_estimated_Ne.txt"),
+        #pop_expand(output_dir, "gone", "gone_estimated_Ne.txt"),
+        #pop_expand(output_dir, "smcpp", "smcpp_estimated_Ne.csv"),
+        #rules.simulation_all.output,
+
 
 rule download_genetic_map:
-    output: genetic_map_downloaded_flag
-    message: "Downloading default genetic map"
+    input:
+    output:
+        genetic_map_downloaded_flag,
+    message:
+        "Downloading default genetic map"
     run:
         # We need to have this here to avoid several threads trying to download the
         # the genetic map into the cache at the same time.
@@ -124,43 +159,49 @@ rule download_genetic_map:
             with open(output[0], "w") as f:
                 print("File to indicate genetic map has been downloaded", file=f)
 
+
 ################################################################################
 # UTILS HELPERS ETC
 ###############################################################################
 
-def generation_time_helper(wildcards, species):
-    if wildcards.demog == 'Constant':
+def generation_time_helper(demog, species):
+    if demog == "Constant":
         generation_time = species.generation_time
     else:
-        generation_time = species.get_demographic_model(wildcards.demog).generation_time
+        generation_time = species.get_demographic_model(demog).generation_time
     return generation_time
 
+
 rule write_bdd:
-    input:
-        ...
     output:
-        output_dir + "/plots/{demog}/coal_estimated_Ne_t.csv"
+        output_dir + "/plots/{demog}/coal_estimated_Ne_t.csv",
     run:
         steps = None
         if wildcards.demog == "Constant":
             max_time = species.GenericConstantSize().default_population_size
-            max_time *= 2 # 4?
-            steps = np.linspace(1, max_time, max_time+1)
-
+            max_time *= 2  # 4?
+            steps = np.linspace(1, max_time, max_time + 1)
         model = species.get_demographic_model(wildcards.demog)
         generation_time = generation_time_helper(wildcards.demog, species)
-        gather_coal_rate(output, model, demo_sample_size_dict[wildcards.demog], generation_time, steps)
+        plots.gather_coal_rate(
+            output,
+            model,
+            demo_sample_size_dict[wildcards.demog],
+            generation_time,
+            steps,
+        )
+
 
 # ###############################################################################
 # STAIRWAYPLOT
 # ###############################################################################
 stairwayplot_code = config["stairwayplot_code"]
-# if "none" will use standard mask, if "" then will default to annotations
-sp_mask = config["stairway_mask"]
+sp_mask = config["stairway_annot_mask"]
+
 
 rule sp_download:
     output:
-        directory("ext/stairwayplot")
+        directory("ext/stairwayplot"),
     message:
         "downloading stairwayplot"
     threads: 1
@@ -173,168 +214,99 @@ rule sp_download:
         cd ../
         """
 
+
 rule run_stairwayplot:
     input:
-        expand([output_dir + "/{{demog}}/{dfes}/{annots}/{{seeds}}/sim_{{chrms}}.trees".format(dfes=DFE, annots=ANNOT)
-                for (DFE, ANNOT) in zip(dfe_list, annotations_list)], demog=demog_model_ids, seeds=seed_array, chrms=chrm_list),
-        rules.sp_download.output,
+        expand(
+            [output_dir + "/simulated_data/{{demog}}/{dfes}/{annots}/{{seeds}}/sim_{{chrms}}.trees".format(
+                dfes=DFE, annots=ANNOT) for (DFE, ANNOT) in zip(dfe_list, annotation_list)],
+            demog=demo_model_ids,
+            seeds=seed_array,
+            chrms=chrm_list,
+        ),
+        rules.sp_download.output
+
     output:
-        # cant have {pops}/{pops} ... {pops}/{wildcards.pops}
-        expand(output_dir + "/inference/sp/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{pops}/stairwayplot_estimated_Ne.txt",
-            pops=list(demo_sample_size_dict[wildcards.demog].keys()))
+        output_dir + "/inference/stairwayplot/{demog}/{dfes}/{annots}/{seeds}/{pops}/stairwayplot_estimated_Ne.txt"
+
     threads: 20
-    resources: mem_mb=120000
+    resources:
+        mem_mb=120000,
     run:
-        inputs = expand(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
-                    demog=wildcards.demog,
-                    dfes=wildcards.dfes,
-                    annots=wildcards.annots,
-                    seeds=wildcards.seeds,
-                    chrms=chrm_list,
-            )
-	    # TODO: fix here to be able to run a list of selection items in one goal
+        gwildcards = glob_wildcards(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees")
+        inputs = expand(
+            output_dir
+            + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
+            demog=wildcards.demog,
+            dfes=wildcards.dfes,
+            annots=wildcards.annots,
+            seeds=wildcards.seeds,
+            chrms=chrm_list,
+        )
+
         runner = stairway.StairwayPlotRunner(
-            workdir=output_dir + f"/inference/sp/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/",
-            stairway_dir=pathlib.Path.cwd() / "ext/stairwayplot")
+            workdir=output_dir
+            + f"/inference/stairwayplot/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/",
+            stairway_dir=pathlib.Path.cwd() / "ext/stairwayplot",
+        )
 
         if wildcards.annots == "none" or sp_mask == "none":
             mask_intervals = masks.get_combined_masks(
-                                            species.id,
-                                            mask_file,
-                                            wildcards.chrms,
-                                            )
+                species.id,
+                mask_file,
+                gwildcards.chrms,
+            )
         else:
             mask_intervals = masks.get_combined_masks(
-                                            species.id,
-                                            mask_file,
-                                            wildcards.chrms,
-                                            chrom_annotation=wildcards.annots,
-                                            )
+                species.id,
+                mask_file,
+                gwildcards.chrms,
+                chrom_annotation=wildcards.annots,
+            )
 
-        runner.ts_to_stairway(inputs, wildcards.pops, num_bootstraps=200, mask_intervals=mask_intervals)
+        runner.ts_to_stairway(
+            inputs, wildcards.pops, mask_intervals=mask_intervals, num_bootstraps=200)
         runner.run_theta_estimation(max_workers=threads, show_progress=True)
-        runner.run_summary(output, mutation_rate=mutation_rate, generation_time=generation_time_helper(wildcards,species))
+        runner.run_summary(
+            output,
+            mutation_rate=mutation_rate,
+            generation_time=generation_time_helper(wildcards.demog, species),
+        )
+
 
 rule compound_stairwayplot:
     input:
-        rules.run_stairwayplot.output
+        pop_expand(output_dir, "stairwayplot", "stairwayplot_estimated_Ne.txt")
     output:
-        output_dir + "/plots/{demog}/sp/stairwayplot_estimated_Ne_t.csv"
+        output_dir + "/plots/{demog}/stairwayplot/stairwayplot_estimated_Ne_t.csv",
     run:
-        plots.gather_inference_results(output_dir, wildcards.demog, output, "stairwayplot")
+        gen_time = generation_time_helper(wildcards.demog, species)
+        plots.gather_inference_results(output_dir, wildcards.demog, output[0], "stairwayplot",
+                                       mask_file, sp_mask, demo_sample_size_dict[wildcards.demog],
+                                       slim_scaling_factor, gen_time)
 
 
 rule plot_compound_stairway:
     input:
-        rules.compound_stairwayplot.output
+        rules.compound_stairwayplot.output,
     output:
-        output_dir + "/plots/{demog}/sp/stairwayplot.pdf"
+        output_dir + "/plots/{demog}/stairwayplot/stairwayplot_estimated_Ne_t.pdf",
     run:
-        plots.plot_compound_Ne_t(input, output, "stairwayplot")
+        plots.plot_compound_Ne_t(input[0], output[0], "stairwayplot")
 
 
-# ###############################################################################
-# SMC++
-# ###############################################################################
-""""
-rule clone_smcpp:
-    output:
-        "ext/smcpp/pyproject.toml"
-    message: "Cloning SMC++"
-    threads: 1
-    shell:
-        """
-        cd ext/
-        git clone https://github.com/popgenmethods/smcpp.git
-        cat smc_setup_stdpopsim_patch > smcpp/setup.py
-        cat smc_pyproject_stdpopsim_patch > smcpp/pyproject.toml
-        cd smcpp/
-        pip install .
-        cd ..
-        """
-
-rule ts_to_smc:
-    input: output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees"
-    output: output_dir + "/inference/smc/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees.smc.gz"
-    run:
-        # handle no annotation case
-        if wildcards.annots == "none":
-            mask_intervals = masks.get_combined_masks(
-                                            species.id,
-                                            mask_file,
-                                            wildcards.chrms,
-                                            )
-        else:
-            mask_intervals = masks.get_combined_masks(
-                                            species.id,
-                                            mask_file,
-                                            wildcards.chrms,
-                                            chrom_annotation=wildcards.annots,
-                                            )
-        smc.write_smcpp_file(input[0], mask_intervals=mask_intervals) # Including mask file when it works
-
-
-rule run_smcpp:
-    input:
-        output_dir+ "/inference/smc/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees.smc.gz",
-        rules.clone_smcpp.output,
-    output:
-        output_dir + "/inference/smc/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees.smc.gz.final.json"
-    threads: 20
-    run:
-        # need to cd into subdir because smc++ crashes otherwise
-        cur = os.getcwd()
-        os.chdir(f"{output_dir}/inference/smc/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}")
-        inputs = expand("sim_{chrms}.trees.smc.gz", chrms=chrm_list)
-        inputs = " ".join(inputs)
-        base = f"trees.smc.gz"
-        # TODO get the rate here from stdpopsim
-        smc.run_smcpp_estimate(inputs, base, mutation_rate=mutation_rate, ncores=threads)
-        # need to cd out of subdir for snakemake sanity
-        os.chdir(cur)
-
-
-rule smcpp_plot:
-    input:
-        rules.run_smcpp.output
-    output:
-        output_dir + "/plots/{demog}/{chrms}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees.smc.gz.final.json.csv"
-    run:
-        # TODO get the genetion time from std source
-        smc.run_smcpp_plot(input[0], output[0], generation_time=generation_time_helper(wildcards,species))
-
-
-def ne_files_smcpp(wildcards):
-    return expand(output_dir + "/plots/{demog}/{chrms}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees.smc.gz.final.json.csv",
-                seeds=seed_array,
-                chrms=chrm_list,
-                dfes=wildcards.dfes,
-                demog=wildcards.demog,
-                annots=wildcards.annots,
-            )
-
-
-rule compound_smcpp:
-    input:
-        output_dir + "/plots/{demog}/{chrms}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees.smc.gz.final.json.csv"
-    output:
-        output_dir + "/plots/{demog}/{chrms}/{dfes}/{annots}/{seeds}/smcpp_estimated_Ne.png"
-    run:
-        model = species.get_demographic_model(wildcards.demog)
-        plots.plot_compound_smcpp(input, output[0], model, num_sampled_genomes_per_replicate,
-        generation_time_helper(wildcards,species),
-        )
-
-"""
 # ###############################################################################
 # MSMC2 https://github.com/stschiff/msmc2
 # ###############################################################################
+# TODO: ln 379, get wildcards.samps to work so that num_sampled_genomes_msmc are run in parallel
 # sample size
 num_sampled_genomes_msmc =  config["num_sampled_genomes_msmc"]
+num_sampled_genomes_per_replicate = config["num_sampled_genomes_per_replicate"]
 # The number of msmc Baumwelch iterations to run
 num_msmc_iterations = config["num_msmc_iterations"]
-num_sampled_genomes_per_replicate = config["num_sampled_genomes_per_replicate"]
 msmc_exec = config["msmc_exec"]
+msmc_mask = config["msmc_annot_mask"]
+
 
 rule download_msmc:
     output:
@@ -354,78 +326,101 @@ rule download_msmc:
 
 rule ts_to_multihep:
     input:
-        output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees"
+        expand(
+        [output_dir + "/simulated_data/{{demog}}/{dfes}/{annots}/{{seeds}}/sim_{{chrms}}.trees".format(
+            dfes=DFE, annots=ANNOT) for (DFE, ANNOT) in zip(dfe_list, annotation_list)],
+        demog=demo_model_ids,
+        seeds=seed_array,
+        chrms=chrm_list,
+        ),
     output:
-        expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{pops}/{{chrms}}.trees.multihep.txt",
-            pops=list(demo_sample_size_dict[wildcards.demog].keys()))
+        output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{pops}/{chrms}.trees.multihep.txt"
+
     run:
         print(input[0], num_sampled_genomes_msmc, mask_file)
-        mask_intervals = masks.get_combined_masks(
-                                        species.id,
-                                        mask_file,
-                                        wildcards.chrms,
-                                        )
-        msmc.write_msmc_file(input, output, wildcards.pops, mask_intervals)
+        if wildcards.annots == "none" or msmc_mask == "none":
+            mask_intervals = masks.get_combined_masks(
+                                            species.id,
+                                            mask_file,
+                                            wildcards.chrms,
+                                            )
+        else:
+            mask_intervals = masks.get_combined_masks(
+                                            species.id,
+                                            mask_file,
+                                            wildcards.chrms,
+                                            chrom_annotation=wildcards.annots,
+                                            )
+        msmc.write_msmc_file(input[0], output[0], wildcards.pops, mask_intervals)
+
 
 rule run_msmc:
     input:
-        rules.ts_to_multihep.output,
-        rules.download_msmc.output
+        #rules.ts_to_multihep.output,
+        rules.download_msmc.output,
+        inputs = expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{chrms}.trees.multihep.txt",
+                    chrms=chrm_list,
+                        )
     output:
         expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{samps}.trees.multihep.txt.final.txt",
             samps=num_sampled_genomes_msmc)
     threads: 8
     run:
         inputs = expand(output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{pops}/{chrms}.trees.multihep.txt",
-                        demog=wildcards.demog,
-                        dfes=wildcards.dfes,
-                        annots=wildcards.annots,
-                        seeds=wildcards.seeds,
-                        wildcards.pops,
-                        chrms=chrm_list,
+                    demog=wildcards.demog,
+                    dfes=wildcards.dfes,
+                    annots=wildcards.annots,
+                    seeds=wildcards.seeds,
+                    pops=wildcards.pops,
+                    chrms=chrm_list,
                         )
         total_samples = demo_sample_size_dict[wildcards.demog][wildcards.pops]
         input_file_string = " ".join(inputs)
-        output_file_string = output_dir + f"/inference/msmc/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/{wildcards.samps}.trees.multihep.txt"
-        msmc.run_msmc_estimate(input_file_string, output_file_string, msmc_exec, total_samples, wildcards.samps,
-            iterations=num_msmc_iterations, ncores=threads)
+        # TODO: get wildcards.samps to work so that num_sampled_genomes_msmc are run in parallel
+        output_file_string = output_dir + f"/inference/msmc/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/"#{wildcards.samps}.trees.multihep.txt"
+        msmc.run_msmc_estimate(input_file_string, output_file_string, msmc_exec, total_samples, num_sampled_genomes_msmc,
+            iterations=num_msmc_iterations, ncores=threads) #wildcards.samps instead of num_sampled_genomes_msmc
 
 
 rule convert_msmc:
     input:
         rules.run_msmc.output
     output:
-        output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{pops}/{samps}.msmc_estimated_Ne.txt"
+        output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{pops}/msmc_estimated_Ne.txt"
     run:
-        msmc.convert_msmc_output(input, output,
+        msmc.convert_msmc_output(input[0], output[0],
             mutation_rate=mutation_rate,
-            generation_time=generation_time_helper(wildcards,species)
+            generation_time=generation_time_helper(wildcards.demog, species)
         )
 
 
 rule compound_msmc:
     input:
-        rules.convert_msmc.output
+        pop_expand(output_dir, "msmc", "msmc_estimated_Ne.txt")
     output:
         output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.csv"
     run:
-        plots.gather_inference_results(output_dir, wildcards.demog, output, "msmc")
+        gen_time = generation_time_helper(wildcards.demog, species)
+        plots.gather_inference_results(output_dir, wildcards.demog, output[0], "msmc",
+                                       mask_file, msmc_mask, demo_sample_size_dict[wildcards.demog],
+                                       slim_scaling_factor, gen_time)
 
 
 rule plot_compound_msmc:
     input:
-        rules.compound_stairwayplot.output
+        rules.compound_msmc.output
     output:
-        output_dir + "/plots/{demog}/msmc/msmc.pdf"
+        output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.pdf"
     run:
-        plots.plot_compound_Ne_t(input, output, "msmc")
+        plots.plot_compound_Ne_t(input[0], output[0], "msmc")
 
 
 # ###############################################################################
 # GONe
 # ###############################################################################
-"""
 gone_code = config["gone_code"]
+gone_mask = config["gone_annot_mask"]
+
 
 rule gone_clone:
     output:
@@ -463,7 +458,7 @@ rule gone_copy:
         rules.gone_clone.output,
 
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/.scripts_copied"
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/.scripts_copied"
     message:
         "copying GONE scripts into individual working directories"
     threads: 1
@@ -475,18 +470,127 @@ rule gone_copy:
 
 rule gone_prep_inputs:
     input:
-        output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
+        expand(
+            [output_dir + "/simulated_data/{{demog}}/{dfes}/{annots}/{{seeds}}/sim_{{chrms}}.trees".format(
+                dfes=DFE, annots=ANNOT) for (DFE, ANNOT) in zip(dfe_list, annotation_list)],
+            demog=demo_model_ids,
+            seeds=seed_array,
+            chrms=chrm_list,
+        ),
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/gone.ped",
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/gone.map",
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.ped",
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.map",
     threads: 1
     run:
+        gwildcards = glob_wildcards(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees")
+        inputs = expand(
+            output_dir
+            + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
+            demog=wildcards.demog,
+            dfes=wildcards.dfes,
+            annots=wildcards.annots,
+            seeds=wildcards.seeds,
+            chrms=chrm_list,
+        )
+        # handle no annotation case
+        if wildcards.annots == "none" or gone_mask == "none":
+            mask_intervals = masks.get_combined_masks(
+                                            species.id,
+                                            mask_file,
+                                            gwildcards.chrms,
+                                            )
+        else:
+            mask_intervals = masks.get_combined_masks(
+                                            species.id,
+                                            mask_file,
+                                            gwildcards.chrms,
+                                            chrom_annotation=wildcards.annots,
+                                            )
+
         genetic_map = species.get_genetic_map(genetic_map_id)
         if not genetic_map.is_cached():
             genetic_map.download()
-        gm_chr = genetic_map.get_chromosome_map(wildcards.chrms)
+
+        gone.ts2plink(inputs, output[0], output[1], wildcards.pops, genetic_map, gwildcards.chrms, mask_intervals=mask_intervals)
+
+
+rule gone_run:
+    input:
+        rules.gone_copy.output,
+        rules.gone_prep_inputs.output,
+    output:
+        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone_estimated_Ne.txt",
+    threads: 8
+    resources: time=180
+    shell:
+        """
+        cwd=$PWD
+        cd {output_dir}/inference/gone/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}
+        bash script_GONE.sh gone
+        cd $cwd
+        """
+
+
+rule compound_gone:
+    input:
+        pop_expand(output_dir, "gone", "gone_estimated_Ne.txt")
+    output:
+        output_dir + "/plots/{demog}/gone/gone_estimated_Ne_t.csv"
+    run:
+        gen_time = generation_time_helper(wildcards.demog, species)
+        plots.gather_inference_results(output_dir, wildcards.demog, output[0], "gone",
+                                       mask_file, gone_mask, demo_sample_size_dict[wildcards.demog],
+                                       slim_scaling_factor, gen_time)
+
+
+rule plot_compound_gone:
+    input:
+        rules.compound_gone.output
+    output:
+        output_dir + "/plots/{demog}/gone/gone_estimated_Ne_t.pdf"
+    run:
+        plots.plot_compound_Ne_t(input[0], output[0], "gone")
+
+
+# ###############################################################################
+# SMC++
+# ###############################################################################
+# TODO: how to label/record when using > 2 haps in composite lkhood calc ...
+smcpp_mask = config["smcpp_annot_mask"]
+
+
+rule clone_smcpp:
+    output:
+        "ext/smcpp/pyproject.toml"
+    message: "Cloning SMC++"
+    threads: 1
+    shell:
+        """
+        cd ext/
+        git clone https://github.com/popgenmethods/smcpp.git
+        cat smc_setup_stdpopsim_patch > smcpp/setup.py
+        cat smc_pyproject_stdpopsim_patch > smcpp/pyproject.toml
+        cd smcpp/
+        pip install .
+        cd ..
+        """
+
+
+rule ts_to_smc:
+    input:
+        expand(
+        [output_dir + "/simulated_data/{{demog}}/{dfes}/{annots}/{{seeds}}/sim_{{chrms}}.trees".format(
+            dfes=DFE, annots=ANNOT) for (DFE, ANNOT) in zip(dfe_list, annotation_list)],
+        demog=demo_model_ids,
+        seeds=seed_array,
+        chrms=chrm_list,
+        ),
+        #rules.clone_smcpp.output
+    output:
+        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/sim_{chrms}.trees.smc.gz"
+    run:
         # handle no annotation case
-        if wildcards.annots == "none":
+        if wildcards.annots == "none" or smcpp_mask == "none":
             mask_intervals = masks.get_combined_masks(
                                             species.id,
                                             mask_file,
@@ -499,65 +603,99 @@ rule gone_prep_inputs:
                                             wildcards.chrms,
                                             chrom_annotation=wildcards.annots,
                                             )
-        gone.ts2plink(input[0], output[0], output[1], wildcards.pops, gm_chr, wildcards.chrms, mask_intervals=mask_intervals)
+        smc.write_smcpp_file(input[0], output[0], wildcards.pops, mask_intervals=mask_intervals)
 
 
-rule gone_run:
+rule run_smcpp:
     input:
-        rules.gone_copy.output,
-        rules.gone_prep_inputs.output,
+        expand(output_dir+ "/inference/smcpp/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/sim_{chrms}.trees.smc.gz",
+            chrms=chrm_list),
+        rules.clone_smcpp.output,
+        #rules.ts_to_smc.output
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/Output_Ne_gone",
-    threads: 8
-    resources: time=180
-    shell:
-        """
-        cwd=$PWD
-        cd {output_dir}/inference/gone/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.chrms}
-        bash script_GONE.sh gone
-        cd $cwd
-        """
-
-def ne_files_gone(wildcards):
-    return expand(output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{chrms}/Output_Ne_gone",
-                seeds=seed_array,
-                chrms=chrm_list,
-                dfes=wildcards.dfes,
-                demog=wildcards.demog,
-                annots=wildcards.annots,
-            )
+        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/model.final.json"
+    threads: 20
+    run:
+        # need to cd into subdir because smc++ crashes otherwise
+        cur = os.getcwd()
+        os.chdir(f"{output_dir}/inference/smcpp/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}")
+        base = f"trees.smc.gz"
+        mutation_rate = species.genome.mean_mutation_rate
+        smc.run_smcpp_estimate(base, mutation_rate=mutation_rate, ncores=threads)
+        # need to cd out of subdir for snakemake sanity
+        os.chdir(cur)
 
 
-rule compound_gone:
+rule smcpp_plot:
     input:
-        ne_files_gone,
+        rules.run_smcpp.output
     output:
-        output_dir + "/plots/{demog}/{chrms}/{dfes}/{annots}/dfe.inference.benchmark.pdf/gone_estimated_Ne.png"
-    run: plots.plot_compound_gone(input, output[0])
-"""
+        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/smcpp_estimated_Ne.csv"
+    run:
+        gen_time = generation_time_helper(wildcards.demog, species)
+        smc.run_smcpp_plot(input[0], output[0], generation_time=gen_time)
+
+
+rule compound_smcpp:
+    input:
+        #rules.smcpp_plot.output,
+        pop_expand(output_dir, "smcpp", "smcpp_estimated_Ne.csv")
+    output:
+        output_dir + "/plots/{demog}/smcpp/smcpp_estimated_Ne_t.csv"
+    run:
+        gen_time = generation_time_helper(wildcards.demog, species)
+        plots.gather_inference_results(output_dir, wildcards.demog, output[0], "smcpp",
+                                       mask_file, smcpp_mask, demo_sample_size_dict[wildcards.demog],
+                                       slim_scaling_factor, gen_time)
+
+
+rule plot_compound_smcpp:
+    input:
+        rules.compound_smcpp.output
+    output:
+        output_dir + "/plots/{demog}/smcpp/smcpp_estimated_Ne_t.pdf"
+    run:
+        plots.plot_compound_Ne_t(input[0], output[0], "smcpp")
+
+
 # ###############################################################################
 #  Plotting results
 # ###############################################################################
+
+
 rule gather_inference:
     input:
         rules.compound_stairwayplot.output,
         rules.compound_msmc.output,
-        #rules.compound_smcpp.output,
-        #rules.compound_gone.output
+        rules.compound_smcpp.output,
+        rules.compound_gone.output
     output:
-        output_dir + "/plots/{demog}/{species}_estimated_Ne_t_final.csv"
+        output_dir + "/plots/{demog}/estimated_Ne_t_final.csv",
     run:
-        if not os.path.isfile({output}):
-            with open(f"{output_dir}/plots/{wildcards.demog}/{wildcards.species}_estimated_Ne_t_final.csv", 'w') as f:
-                header = "method,population,DFE,annotations,year,Ne"
-                f.write(f"{header}\n")
+        shell("echo 'method,population,nsamp,DFE,annotations,year,Ne,seed,chrm_mask,annot_mask,slim_scaling_factor' > {output[0]}.temp")
         for infile in input:
-            shell("sed 1d {infile} >> {output}")
+            shell("sed 1d {infile} >> {output[0]}.temp")
+        shell("cut -d',' -f1-11 {output[0]}.temp > {output[0]}")
+        shell("rm -f {output[0]}.temp")
+
 
 rule all_plot:
     input:
-        rule.gather_inference.output
+        rules.gather_inference.output,
     output:
-        output_dir + "/plots/{demog}/{species}_estimated_Ne_t_final.pdf"
+        output_dir + "/plots/{demog}/estimated_Ne_t_final.pdf",
     run:
-        plot_all_ne_estimates(Ne_t_infile, output)
+        plots.plot_all_ne_estimates(input[0], output[0])
+
+
+rule clean_temp:
+    message:
+        "removing temp inference files"
+    run:
+        stairway_temp = pop_expand(output_dir, "stairwayplot", "sfs*")
+        stairway_temp = " ".join(stairway_temp)
+        shell("rm -rf {stairway_temp}")
+        gone_temp = pop_expand(output_dir, "gone", "PROGRAMMES") + pop_expand(output_dir, "gone", "TEMPORARY_FILES")
+        gone_temp = " ".join(gone_temp)
+        shell("rm -rf {gone_temp}")
+        
