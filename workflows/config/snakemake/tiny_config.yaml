@@ -29,7 +29,7 @@
 "slim_burn_in": 10
 
 # n(t) specific configs
-"methods" : ["stairwayplot", "msmc", "gone"]
+"methods" : ["stairwayplot", "msmc", "gone", "smcpp"]
 
 "num_sampled_genomes_msmc" : [2, 4]
 "num_sampled_genomes_per_replicate": [2]  # I dont use this, not sure what is purpose?

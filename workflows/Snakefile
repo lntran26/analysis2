@@ -23,11 +23,11 @@ import gone
 import plots
 import masks
 
-# TODO: smcpp
 # TODO: check that demog = "Constant" works correctly
 # TODO: production plots
 # TODO: Add support for population_id list, right now it runs on all pops
 # TODO: add support for running some but not all inference methods
+# NOTE: see other todo specific to rule below
 # ###############################################################################
 # GLOBALS
 # ###############################################################################
@@ -99,7 +99,7 @@ def pop_expand(output_dir, method, filename="temp.txt"):
             for seeds in seed_array:
                 for chrms in chrm_list:
                     for pops in demo_sample_size_dict[demog].keys():
-                        infiles.append(output_dir + f"/inference/{method}/{demog}/{dfe}/{annot}/{seeds}/{pops}/{method}_{filename}")
+                        infiles.append(output_dir + f"/inference/{method}/{demog}/{dfe}/{annot}/{seeds}/{pops}/{filename}")
     return infiles
 # ###############################################################################
 # GENERAL RULES
@@ -136,9 +136,10 @@ rule all:
             demog=demo_model_ids, method=methods),
         expand(output_dir + "/plots/{demog}/{method}/{method}_estimated_Ne_t.pdf",
             demog=demo_model_ids, method=methods),
-        pop_expand(output_dir, "stairwayplot", "estimated_Ne.txt"),
-        pop_expand(output_dir, "msmc", "estimated_Ne.txt"),
-        pop_expand(output_dir, "gone", "estimated_Ne.txt"),
+        #pop_expand(output_dir, "stairwayplot", "stairwayplot_estimated_Ne.txt"),
+        #pop_expand(output_dir, "msmc", "msmc_estimated_Ne.txt"),
+        #pop_expand(output_dir, "gone", "gone_estimated_Ne.txt"),
+        #pop_expand(output_dir, "smcpp", "smcpp_estimated_Ne.csv"),
         #rules.simulation_all.output,
 
 
@@ -190,11 +191,13 @@ rule write_bdd:
             steps,
         )
 
+
 # ###############################################################################
 # STAIRWAYPLOT
 # ###############################################################################
 stairwayplot_code = config["stairwayplot_code"]
 sp_mask = config["stairway_annot_mask"]
+
 
 rule sp_download:
     output:
@@ -273,7 +276,7 @@ rule run_stairwayplot:
 
 rule compound_stairwayplot:
     input:
-        pop_expand(output_dir, "stairwayplot", "estimated_Ne.txt")
+        pop_expand(output_dir, "stairwayplot", "stairwayplot_estimated_Ne.txt")
     output:
         output_dir + "/plots/{demog}/stairwayplot/stairwayplot_estimated_Ne_t.csv",
     run:
@@ -295,13 +298,15 @@ rule plot_compound_stairway:
 # ###############################################################################
 # MSMC2 https://github.com/stschiff/msmc2
 # ###############################################################################
+# TODO: ln 379, get wildcards.samps to work so that num_sampled_genomes_msmc are run in parallel
 # sample size
 num_sampled_genomes_msmc =  config["num_sampled_genomes_msmc"]
+num_sampled_genomes_per_replicate = config["num_sampled_genomes_per_replicate"]
 # The number of msmc Baumwelch iterations to run
 num_msmc_iterations = config["num_msmc_iterations"]
-num_sampled_genomes_per_replicate = config["num_sampled_genomes_per_replicate"]
 msmc_exec = config["msmc_exec"]
 msmc_mask = config["msmc_annot_mask"]
+
 
 rule download_msmc:
     output:
@@ -391,7 +396,7 @@ rule convert_msmc:
 
 rule compound_msmc:
     input:
-        pop_expand(output_dir, "msmc", "estimated_Ne.txt")
+        pop_expand(output_dir, "msmc", "msmc_estimated_Ne.txt")
     output:
         output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.csv"
     run:
@@ -413,9 +418,9 @@ rule plot_compound_msmc:
 # ###############################################################################
 # GONe
 # ###############################################################################
-
 gone_code = config["gone_code"]
 gone_mask = config["gone_annot_mask"]
+
 
 rule gone_clone:
     output:
@@ -528,13 +533,13 @@ rule gone_run:
 
 rule compound_gone:
     input:
-        pop_expand(output_dir, "gone", "estimated_Ne.txt")
+        pop_expand(output_dir, "gone", "gone_estimated_Ne.txt")
     output:
         output_dir + "/plots/{demog}/gone/gone_estimated_Ne_t.csv"
     run:
         gen_time = generation_time_helper(wildcards.demog, species)
         plots.gather_inference_results(output_dir, wildcards.demog, output[0], "gone",
-                                       mask_file, msmc_mask, demo_sample_size_dict[wildcards.demog],
+                                       mask_file, gone_mask, demo_sample_size_dict[wildcards.demog],
                                        slim_scaling_factor, gen_time)
 
 
@@ -546,15 +551,123 @@ rule plot_compound_gone:
     run:
         plots.plot_compound_Ne_t(input[0], output[0], "gone")
 
+
+# ###############################################################################
+# SMC++
+# ###############################################################################
+# TODO: how to label/record when using > 2 haps in composite lkhood calc ...
+smcpp_mask = config["smcpp_annot_mask"]
+
+
+rule clone_smcpp:
+    output:
+        "ext/smcpp/pyproject.toml"
+    message: "Cloning SMC++"
+    threads: 1
+    shell:
+        """
+        cd ext/
+        git clone https://github.com/popgenmethods/smcpp.git
+        cat smc_setup_stdpopsim_patch > smcpp/setup.py
+        cat smc_pyproject_stdpopsim_patch > smcpp/pyproject.toml
+        cd smcpp/
+        pip install .
+        cd ..
+        """
+
+
+rule ts_to_smc:
+    input:
+        expand(
+        [output_dir + "/simulated_data/{{demog}}/{dfes}/{annots}/{{seeds}}/sim_{{chrms}}.trees".format(
+            dfes=DFE, annots=ANNOT) for (DFE, ANNOT) in zip(dfe_list, annotation_list)],
+        demog=demo_model_ids,
+        seeds=seed_array,
+        chrms=chrm_list,
+        ),
+        #rules.clone_smcpp.output
+    output:
+        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/sim_{chrms}.trees.smc.gz"
+    run:
+        # handle no annotation case
+        if wildcards.annots == "none" or smcpp_mask == "none":
+            mask_intervals = masks.get_combined_masks(
+                                            species.id,
+                                            mask_file,
+                                            wildcards.chrms,
+                                            )
+        else:
+            mask_intervals = masks.get_combined_masks(
+                                            species.id,
+                                            mask_file,
+                                            wildcards.chrms,
+                                            chrom_annotation=wildcards.annots,
+                                            )
+        smc.write_smcpp_file(input[0], output[0], wildcards.pops, mask_intervals=mask_intervals)
+
+
+rule run_smcpp:
+    input:
+        expand(output_dir+ "/inference/smcpp/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/sim_{chrms}.trees.smc.gz",
+            chrms=chrm_list),
+        rules.clone_smcpp.output,
+        #rules.ts_to_smc.output
+    output:
+        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/model.final.json"
+    threads: 20
+    run:
+        # need to cd into subdir because smc++ crashes otherwise
+        cur = os.getcwd()
+        os.chdir(f"{output_dir}/inference/smcpp/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}")
+        base = f"trees.smc.gz"
+        mutation_rate = species.genome.mean_mutation_rate
+        smc.run_smcpp_estimate(base, mutation_rate=mutation_rate, ncores=threads)
+        # need to cd out of subdir for snakemake sanity
+        os.chdir(cur)
+
+
+rule smcpp_plot:
+    input:
+        rules.run_smcpp.output
+    output:
+        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/smcpp_estimated_Ne.csv"
+    run:
+        gen_time = generation_time_helper(wildcards.demog, species)
+        smc.run_smcpp_plot(input[0], output[0], generation_time=gen_time)
+
+
+rule compound_smcpp:
+    input:
+        #rules.smcpp_plot.output,
+        pop_expand(output_dir, "smcpp", "smcpp_estimated_Ne.csv")
+    output:
+        output_dir + "/plots/{demog}/smcpp/smcpp_estimated_Ne_t.csv"
+    run:
+        gen_time = generation_time_helper(wildcards.demog, species)
+        plots.gather_inference_results(output_dir, wildcards.demog, output[0], "smcpp",
+                                       mask_file, smcpp_mask, demo_sample_size_dict[wildcards.demog],
+                                       slim_scaling_factor, gen_time)
+
+
+rule plot_compound_smcpp:
+    input:
+        rules.compound_smcpp.output
+    output:
+        output_dir + "/plots/{demog}/smcpp/smcpp_estimated_Ne_t.pdf"
+    run:
+        plots.plot_compound_Ne_t(input[0], output[0], "smcpp")
+
+
 # ###############################################################################
 #  Plotting results
 # ###############################################################################
+
 
 rule gather_inference:
     input:
         rules.compound_stairwayplot.output,
         rules.compound_msmc.output,
-        #rules.compound_smcpp.output,
+        rules.compound_smcpp.output,
         rules.compound_gone.output
     output:
         output_dir + "/plots/{demog}/estimated_Ne_t_final.csv",
@@ -573,3 +686,16 @@ rule all_plot:
         output_dir + "/plots/{demog}/estimated_Ne_t_final.pdf",
     run:
         plots.plot_all_ne_estimates(input[0], output[0])
+
+
+rule clean_temp:
+    message:
+        "removing temp inference files"
+    run:
+        stairway_temp = pop_expand(output_dir, "stairwayplot", "sfs*")
+        stairway_temp = " ".join(stairway_temp)
+        shell("rm -rf {stairway_temp}")
+        gone_temp = pop_expand(output_dir, "gone", "PROGRAMMES") + pop_expand(output_dir, "gone", "TEMPORARY_FILES")
+        gone_temp = " ".join(gone_temp)
+        shell("rm -rf {gone_temp}")
+        

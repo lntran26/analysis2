@@ -58,6 +58,8 @@ def gather_inference_results(output_dir, demog, output, method, chrm_mask,
         header += ",n_genomes"
     elif method == "gone":
         header += ",G_value"
+    elif method == "smcpp":
+        header += ",n_genomes"
     with open(output, 'w') as f:
         f.write(f"{header}\n")
         for infile in infiles:
@@ -85,13 +87,10 @@ def gather_inference_results(output_dir, demog, output, method, chrm_mask,
                 nt = pd.read_csv(infile, sep="\t")
                 for row in nt.itertuples():
                     f.write(f'{method},{pop},{size},{dfe},{annot},{row.year},{row.Ne},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{row.n_samp}\n')
-            # TODO: fix col names
             elif method == "smcpp":
-                nt = pd.read_csv(infile, sep="\t", usecols=[1, 2])
-                time = "x"
-                Ne = "y"
+                nt = pd.read_csv(infile, sep=",")
                 for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
-                    f.write(f'{method},{pop},{size},{dfe},{annot},{getattr(row, time)},{getattr(row, Ne)},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor}\n')
+                    f.write(f'{method},{pop},{size},{dfe},{annot},{row.x},{row.y},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{2}\n')
             elif method == "gone":
                 q_file = infile_path.parent / "OUTPUT_gone"
                 ld_pairs = pd.read_csv(q_file, sep=" ", skiprows=43, names=["ld_pairs","avg_c", "avg_d2", "gens"])
