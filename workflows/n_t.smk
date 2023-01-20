@@ -581,8 +581,8 @@ rule ts_to_smc:
 
 rule run_smcpp:
     input:
-        #expand(output_dir+ "/inference/smcpp/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/sim_{chrms}.trees.smc.gz",
-        #    chrms=chrm_list),
+        expand(output_dir+ "/inference/smcpp/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/sim_{chrms}.trees.smc.gz",
+            chrms=chrm_list),
         rules.clone_smcpp.output,
         #rules.ts_to_smc.output
     output:
