@@ -170,7 +170,7 @@ def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population",
     """
     # load df
     df = pd.read_csv(infile, sep=",")
-    df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
+    df_ddb = pd.read_csv(Path(infile).parent / "coal_estimated_Ne_t.csv", sep=",")
     df_ddb = df_ddb[df_ddb["method"] == ref_line]
     # plot params
     pop_order = df[colorby].unique()
@@ -197,7 +197,7 @@ def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population",
 
 def plot_all_ne_estimates(infile, outfile, ref_line="census", colorby="method", styleby="annotations", log=True):
     df = pd.read_csv(infile, sep=",")
-    df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
+    df_ddb = pd.read_csv(Path(infile).parent / "coal_estimated_Ne_t.csv", sep=",")
     df_ddb = df_ddb[df_ddb["method"] == ref_line]
     pop_order = df[colorby].unique()
     pal_dict = {pop:COLOURS[i] for i, pop in enumerate(pop_order)} 
