@@ -192,7 +192,7 @@ def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population",
         g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
     g.set_ylabels("population size")
-    plt.savefig(f"{outfile}.pdf", bbox_inches='tight')
+    plt.savefig(f"{outfile}", bbox_inches='tight')
 
 
 def plot_all_ne_estimates(infile, outfile, ref_line="census", colorby="method", styleby="annotations", log=True):
@@ -219,7 +219,7 @@ def plot_all_ne_estimates(infile, outfile, ref_line="census", colorby="method", 
         g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
     g.set_ylabels("population size")
-    plt.savefig(f"{outfile}.pdf", bbox_inches='tight')
+    plt.savefig(f"{outfile}", bbox_inches='tight')
 
 
 # NOTE: is this all DFE below here?
