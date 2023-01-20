@@ -63,10 +63,7 @@ for x in demo_model_array:
         model = stdpopsim.PiecewiseConstantSize(species.population_size)
     else:
         model = species.get_demographic_model(x["id"])
-    demo_sample_size_dict[x["id"]] = {
-        f"{model.populations[i].name}": m
-        for i, m in enumerate(x["num_samples_per_population"])
-    }
+    demo_sample_size_dict[x["id"]] = {f"{model.populations[i].name}": m for i, m in enumerate(x["num_samples_per_population"])}
 
 # list of population names or specific id
 # NOTE: currently not implemented
@@ -176,10 +173,14 @@ rule write_bdd:
     run:
         steps = None
         if wildcards.demog == "Constant":
-            max_time = species.GenericConstantSize().default_population_size
+            max_time = species.population_size
+            # NOTE: this keep throwing an error and I cant find it in the docs
+            #max_time = species.GenericConstantSize().default_population_size
             max_time *= 2  # 4?
             steps = np.linspace(1, max_time, max_time + 1)
-        model = species.get_demographic_model(wildcards.demog)
+            model = stdpopsim.PiecewiseConstantSize(species.population_size)
+        else:
+            model = species.get_demographic_model(wildcards.demog)
         generation_time = generation_time_helper(wildcards.demog, species)
         plots.gather_coal_rate(
             output,
