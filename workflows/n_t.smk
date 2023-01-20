@@ -256,7 +256,7 @@ rule run_stairwayplot:
             )
 
         runner.ts_to_stairway(
-            inputs, wildcards.pops, mask_intervals=mask_intervals, num_bootstraps=20)
+            inputs, wildcards.pops, mask_intervals=mask_intervals, num_bootstraps=200)
         runner.run_theta_estimation(max_workers=threads, show_progress=True)
         runner.run_summary(
             output,
