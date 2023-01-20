@@ -54,7 +54,6 @@ def ts2plink(ts_path, ped_file, map_file, pop_name, genetic_map, chromID, mask_i
     """
     if type(mask_intervals) is not list:
         mask_intervals = [mask_intervals]
-    chromID = list(dict.fromkeys(chromID))
     gm_chr = [genetic_map.get_chromosome_map(chrms) for chrms in chromID]
     snp_counter = 1
     genomat_list = []

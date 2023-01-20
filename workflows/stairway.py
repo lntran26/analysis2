@@ -65,6 +65,7 @@ class StairwayPlotRunner(object):
             if mask_intervals[i] is not None:
                 ts = ts.delete_intervals(mask_intervals[i])
                 total_length -= np.sum(mask_intervals[i][:, 1] - mask_intervals[i][:, 0])
+
             num_samples = ts.num_samples
             haps = ts.genotype_matrix()
 

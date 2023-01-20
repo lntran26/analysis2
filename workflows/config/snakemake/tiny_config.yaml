@@ -5,10 +5,6 @@
 "species": "HomSap"
 "demo_models":
     [
-        { 
-            "id": "Constant", 
-            "num_samples_per_population": [20],
-        },
         {
             "id": "OutOfAfrica_3G09",
             "num_samples_per_population": [20, 20, 20],
@@ -16,9 +12,9 @@
     ]
 
 "genetic_map": "HapMapII_GRCh37"
-"chrm_list": "chr10,chr21"
-"dfe_list": ["none", "Gamma_H17", "Gamma_K17"]
-"annotation_list": ["none", "ensembl_havana_104_exons", "ensembl_havana_104_CDS"]
+"chrm_list": "chr3,chr10,chr21"
+"dfe_list": ["none"] #, "Gamma_H17", "Gamma_H17"]
+"annotation_list": ["none"] #, "ensembl_havana_104_exons", "ensembl_havana_104_CDS"]
 "output_dir": "results"
 
 "mask_file": "workflows/masks/HapmapII_GRCh37.mask.bed"
