@@ -17,8 +17,8 @@
 
 "genetic_map": "HapMapII_GRCh37"
 "chrm_list": "chr10,chr21"
-"dfe_list": ["none", "Gamma_H17", "Gamma_H17"]
-"annotation_list": ["none", "ensembl_havana_104_exons", "all_sites"]
+"dfe_list": ["none", "Gamma_H17", "Gamma_K17"]
+"annotation_list": ["none", "ensembl_havana_104_exons", "ensembl_havana_104_CDS"]
 "output_dir": "results"
 
 "mask_file": "workflows/masks/HapmapII_GRCh37.mask.bed"

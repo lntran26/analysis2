@@ -184,6 +184,7 @@ def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population",
         df_ddb_pop = df_ddb.query(f"population == '{pop_ax}'")
         ax.plot(df_ddb_pop["year"], df_ddb_pop["Ne"], color="black")
     g.despine()
+    g.set_xlim(max(df_ddb["year"]))
     if log:
         g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
@@ -210,6 +211,7 @@ def plot_all_ne_estimates(infile, outfile, ref_line="census", colorby="method", 
         df_ddb_pop = df_ddb.query(f"population == '{pop_ax}'")
         ax.plot(df_ddb_pop["year"], df_ddb_pop["Ne"], color="black")
     g.despine()
+    g.set_xlim(max(df_ddb["year"]))
     if log:
         g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
