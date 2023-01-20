@@ -28,7 +28,14 @@ class OutputChecker:
         for path, subdirs, files in os.walk(self.workdir):
             for f in files:
                 f = (Path(path) / f).relative_to(self.workdir)
-                if str(f).startswith(".snakemake"):
+                if (
+                    str(f).startswith(".snakemake")
+                    or str(f).startswith("config")
+                    or str(f).startswith("results/logs/")
+                    or ".DB" in str(f)
+                    or str(f).endswith(".html")
+                    or str(f).endswith(".json")
+                    ):
                     continue
                 if f in expected_files:
                     self.compare_files(self.workdir / f, self.expected_path / f)

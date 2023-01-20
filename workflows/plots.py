@@ -159,52 +159,62 @@ def gather_coal_rate(outfile, model, pops_dict, generation_time, steps):
                 coal.write(f"coal,{pop},none,none,{steps[i]},{1/(2*coal_rate[i])}\n")
                 coal.write(f"census,{pop},none,none,{steps[i]},{census_size[i][pop_id]}\n")
 
-# TODO: add coal or census line to every sub plot, cycle through axes?
-def plot_compound_Ne_t(infile, outfile, method, ref_line="census", log=True):
+
+def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population", styleby="annotations", log=True):
     """
     figure of N(t) for multiple methods
     set msmc w/ style="n_samp"
     """
     # load df
     df = pd.read_csv(infile, sep=",")
-    #df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
-    #df_ddb = df_ddb[df_ddb["method"] == ref_line]
-    #df = pd.concat([df, df_ddb])
+    df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
+    df_ddb = df_ddb[df_ddb["method"] == ref_line]
     # plot params
-    if method == "stairwayplot":
-        ... # plot some business w/ ci
-    elif method == "msmc":
-        ... # plot some business w/ n_samps ... units="n_samps"
-    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(df["population"].unique())}
-    g = sns.relplot(data=df, x="year", y="Ne", col="DFE", hue="population",
-                    kind="line", palette=pal_dict, style="annotations",
-                    height=3, aspect=20/10, errorbar="ci", err_style="band",
+    pop_order = df[colorby].unique()
+    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(pop_order)}
+    annot_order = df[styleby].unique()
+    g = sns.relplot(data=df, x="year", y="Ne", col="population", row="DFE",
+                    hue="population", hue_order=pop_order, style="annotations", style_order=annot_order,
+                    units="seed", kind="line", palette=pal_dict, 
+                    height=3, aspect=2, estimator=None, errorbar="se", err_style="band",
                     facet_kws=dict(sharex=False, sharey=False), drawstyle='steps-pre')
+    # add ref_line to all plots x pop name
+    for ax in g.axes.flat:
+        pop_ax = ax.title.get_text().split()[-1]
+        df_ddb_pop = df_ddb.query(f"population == '{pop_ax}'")
+        ax.plot(df_ddb_pop["year"], df_ddb_pop["Ne"], color="black")
     g.despine()
     if log:
         g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
     g.set_ylabels("population size")
-    plt.savefig(outfile, bbox_inches='tight')
+    plt.savefig(f"{outfile}.pdf", bbox_inches='tight')
 
 
-def plot_all_ne_estimates(Ne_t_infile, outfile, ref_line="census", log=True):
-    df = pd.read_csv(Ne_t_infile, sep=",")
-    #df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
-    #df_ddb = df_ddb[df_ddb["method"] == ref_line]
-    #df = pd.concat([df, df_ddb])
-    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(df["method"].unique())}
-    g = sns.relplot(data=df, x="year", y="Ne", row="DFE", col="population", style="annotations",
-                    hue="method", kind="line",drawstyle='steps-pre',
-                    palette=pal_dict, height=3, aspect=20/10,
-                    errorbar="ci", err_style="band", facet_kws=dict(sharex=True, sharey=True))
-    #g.map(sns.lineplot, df_ddb, color="black", style="population")
+def plot_all_ne_estimates(infile, outfile, ref_line="census", colorby="method", styleby="annotations", log=True):
+    df = pd.read_csv(infile, sep=",")
+    df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
+    df_ddb = df_ddb[df_ddb["method"] == ref_line]
+    pop_order = df[colorby].unique()
+    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(pop_order)} 
+    pal_dict[ref_line] = "black"   
+    annot_order = df[styleby].unique()
+    g = sns.relplot(data=df, x="year", y="Ne", row="DFE", col="population", 
+                    hue=colorby, hue_order=pop_order, style=styleby, style_order=annot_order,
+                    kind="line", drawstyle='steps-pre',
+                    palette=pal_dict, errorbar="se", err_style="band", 
+                    height=3, aspect=2, facet_kws=dict(sharex=True, sharey=True))
+    # add ref_line to all plots x pop name
+    for ax in g.axes.flat:
+        pop_ax = ax.title.get_text().split()[-1]
+        df_ddb_pop = df_ddb.query(f"population == '{pop_ax}'")
+        ax.plot(df_ddb_pop["year"], df_ddb_pop["Ne"], color="black")
     g.despine()
     if log:
         g.set(xscale="log", yscale="log")
     g.set_xlabels("time (years ago)")
     g.set_ylabels("population size")
-    plt.savefig(outfile, bbox_inches='tight')
+    plt.savefig(f"{outfile}.pdf", bbox_inches='tight')
 
 
 # NOTE: is this all DFE below here?

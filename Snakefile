@@ -17,7 +17,7 @@ configfile: "workflows/config/snakemake/tiny_config.yaml"
 
 module simulation_workflow:
     snakefile:
-        "workflows/simulation.snake"
+        "workflows/simulation.smk"
     config:
         config
 
@@ -37,7 +37,7 @@ use rule * from dfe_workflow as dfe_*
 
 module n_t_workflow:
     snakefile:
-        "workflows/n_t.snake"
+        "workflows/n_t.smk"
     config:
         config
 

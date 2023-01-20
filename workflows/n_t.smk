@@ -23,9 +23,7 @@ import gone
 import plots
 import masks
 
-# TODO: check that demog = "Constant" works correctly
-# TODO: production plots
-# TODO: Add support for population_id list, right now it runs on all pops
+ TODO: Add support for population_id list, right now it runs on all pops
 # TODO: add support for running some but not all inference methods
 # NOTE: see other todo specific to rule below
 # ###############################################################################
