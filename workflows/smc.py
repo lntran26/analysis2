@@ -26,16 +26,13 @@ def intervals2BedFile(mask_intervals, inter_mask_path, chr_name):
             bed.write(f"{chr_name}\t{int_s - 1}\t{int_e}\n")
 
 
-def write_smcpp_file(path, output, pop_name, num_sampled_genomes=2, mask_intervals=None, selection=None):
+def write_smcpp_file(path, output, pop_name, num_sampled_genomes=2, mask_intervals=None):
     """
     Writes a smcpp input file given a treesequence
     """
-    import ipdb;ipdb.set_trace()
     ts = prune_tree_sequence(path, pop_name)
     chr_name = Path(path).stem.split('_')[1]
     output_path = Path(output).parent
-    output_chr_name = Path(output).stem.split("_")[1]
-    assert output_chr_name == chr_name
     outfile = f"{str(output_path)}/sim_{chr_name}.trees"
     vcf_file = f"{str(output_path)}/sim_{chr_name}.trees.vcf"
     mask_outfile = f"{str(output_path)}/sim_{chr_name}.trees.mask.bed"
