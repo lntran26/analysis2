@@ -86,6 +86,7 @@ def run_msmc_estimate(input_files, output_file, msmc_exec_loc, total_samples, nu
         haplotypes = ",".join(map(str, sorted(subset)))
         cmd = (f"{msmc_exec_loc} -r 0.25 -I {haplotypes} -i {iterations} -o {output_file}{nsamps}.trees.multihep.txt -t {ncores} {input_files}")
         results = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+        print("RESULTS RETURN CODE: {results.returncode}")
         msmc_run_count = 0
         while results.returncode > 0:
             results = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
