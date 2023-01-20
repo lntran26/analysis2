@@ -59,8 +59,10 @@ demo_model_array = config["demo_models"]
 demo_model_ids = [x["id"] for x in demo_model_array]
 demo_sample_size_dict = {}
 for x in demo_model_array:
-    # demo_sample_size_dict[x["id"]] = x["num_samples_per_population"]
-    model = species.get_demographic_model(x["id"])
+    if x["id"] == "Constant":
+        model = stdpopsim.PiecewiseConstantSize(species.population_size)
+    else:
+        model = species.get_demographic_model(x["id"])
     demo_sample_size_dict[x["id"]] = {
         f"{model.populations[i].name}": m
         for i, m in enumerate(x["num_samples_per_population"])
