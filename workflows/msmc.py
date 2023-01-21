@@ -80,16 +80,17 @@ def run_msmc_estimate(input_files, output_file, msmc_exec_loc, total_samples, nu
     The final estimates will be written to
     input_file.final.txt
     """
-    # TODO: change here, to num_samples and drop loop, if get wildcards.samps sorted in n_t.smk
-    for nsamps in num_genomes:
-        subset = np.random.choice(range(total_samples*2), nsamps, replace=False)
-        haplotypes = ",".join(map(str, sorted(subset)))
-        cmd = (f"{msmc_exec_loc} -r 0.25 -I {haplotypes} -i {iterations} -o {output_file}{nsamps}.trees.multihep.txt -t {ncores} {input_files}")
-        try:
-            subprocess.run(cmd, shell=True, check=True)
-        except subprocess.CalledProcessError as e:
-            print(e.output)
-            subprocess.run(cmd, shell=True, check=True)
+    # NOTE: is there a less hacky way to get the wilcards.samps?
+    nsamps = int(Path(num_genomes).stem.split(".")[0])
+    assert nsamps < (total_samples * 2)
+    subset = np.random.choice(range(total_samples*2), nsamps, replace=False)
+    haplotypes = ",".join(map(str, sorted(subset)))
+    cmd = (f"{msmc_exec_loc} -r 0.25 -I {haplotypes} -i {iterations} -o {output_file}{nsamps}.trees.multihep.txt -t {ncores} {input_files}")
+    try:
+        subprocess.run(cmd, shell=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(e.output)
+        subprocess.run(cmd, shell=True, check=True)
 
 
 def convert_msmc_output(results_file, outfile, mutation_rate, generation_time):

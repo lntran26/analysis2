@@ -1,7 +1,7 @@
 *.gz
 intervals/
 __pycache__
-results/*
+results*/*
 stairwayplot/*
 ext/*/
 logs_slurm/*
