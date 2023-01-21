@@ -93,20 +93,25 @@ def gather_inference_results(output_dir, demog, output, method, chrm_mask,
                 for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
                     f.write(f'{method},{pop},{size},{dfe},{annot},{row.x},{row.y},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{2}\n')
             elif method == "gone":
-                #q_file = infile_path.parent / "OUTPUT_gone"
-                #phase_i = subprocess.call("grep -n Phase q_file")   # Phase + 2
-                #ld_pairs = pd.read_csv(q_file, sep=" ", skiprows=43, names=["ld_pairs","avg_c", "avg_d2", "gens"])
+                # TODO: implement this G_value
+                q_file = infile_path.parent / "OUTPUT_gone"
+                with open(q_file) as q:
+                    i=1
+                    for lin in q:
+                        if "Phase" in lin:
+                            break
+                        i += 1
+                ld_pairs = pd.read_csv(q_file, sep=" ", skiprows=i+2, names=["ld_pairs","avg_c", "avg_d2", "gens"])
                 nt = pd.read_csv(infile, sep="\t", skiprows=1)
                 nt = nt[nt["Generation"] <= 200]
                 for row in nt.itertuples():
                     generation = row.Generation
                     Ne = row.Geometric_mean
-                #    ld_bin = ld_pairs[ld_pairs["gens"] <= generation]
-                #    while len(ld_bin.index) == 0:
-                #        generation += 1
-                #        ld_bin = ld_pairs[ld_pairs["gens"] <= generation]
-                #    G_val = (size * sqrt(ld_bin.iloc[-1]["ld_pairs"])) / Ne
-                    G_val = 0
+                    ld_bin = ld_pairs[ld_pairs["gens"] <= generation]
+                    while len(ld_bin.index) == 0:
+                        generation += 1
+                        ld_bin = ld_pairs[ld_pairs["gens"] <= generation]
+                    G_val = (size * sqrt(ld_bin.iloc[-1]["ld_pairs"])) / Ne
                     f.write(f'{method},{pop},{size},{dfe},{annot},{row.Generation * gen_time},{Ne},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{G_val}\n')
             else:
                 print("Error: Method not recognized")

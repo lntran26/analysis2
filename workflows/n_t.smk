@@ -126,8 +126,8 @@ localrules:
 
 rule all:
     input:
-        expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.csv",demog=demo_model_ids),
-        expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.pdf",demog=demo_model_ids),
+        expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.csv", demog=demo_model_ids),
+        expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.pdf", demog=demo_model_ids),
         expand(output_dir + "/plots/{demog}/coal_estimated_Ne_t.csv", demog=demo_model_ids),
         expand(output_dir + "/plots/{demog}/{method}/{method}_estimated_Ne_t.csv",
             demog=demo_model_ids, method=methods),
@@ -362,7 +362,7 @@ rule run_msmc:
         total_samples = demo_sample_size_dict[wildcards.demog][wildcards.pops]
         input_file_string = " ".join(inputs)
         # TODO: get wildcards.samps to work so that num_sampled_genomes_msmc are run in parallel
-        output_file_string = output_dir + f"/inference/msmc/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/"#{wildcards.samps}.trees.multihep.txt"
+        output_file_string = output_dir + f"/inference/msmc/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/"
         msmc.run_msmc_estimate(input_file_string, output_file_string, msmc_exec, total_samples, num_sampled_genomes_msmc,
             iterations=num_msmc_iterations, ncores=threads) #wildcards.samps instead of num_sampled_genomes_msmc
 
