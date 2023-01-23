@@ -1,7 +1,7 @@
 """
 Snakefile for running N_t analysis on stdpopsim.
 
-Simply running `snakemake` will run all analysis
+Simply running `snakemake` will run all analysis 
 defined by the arguments above.
 
 Currently, for each rep,
@@ -27,30 +27,63 @@ import masks
 # TODO: add support for running some but not all inference methods
 # NOTE: see other todo specific to rule below
 # ###############################################################################
-# GLOBALS
+# KNOBS - 
 # ###############################################################################
+
+# A seed to replicate results
+# TODO mutation rates
 
 configfile: "workflows/config/snakemake/tiny_config.yaml"
 
-# The number of replicates of each analysis you would like to run
-replicates = config["replicates"]
-
 np.random.seed(config["seed"])
-seed_array = np.random.random_integers(1, 2**31, replicates)
-slim_scaling_factor=config["slim_scaling_factor"]
-
-# Where you would like all output files from analysis to live
 output_dir = os.path.abspath(config["output_dir"])
 # The analysis species
 species = stdpopsim.get_species(config["species"])
 
+# This is the number of samples to simulate for within each population
+# for each replicate
+# TODO double check this is up to date with stdpopsim backend 
+population_id = config["population_id"]
+
+# Here is a list of sample sizes to run msmc on. 
+# Each element counts as its own analysis
+# so there will be "replicates" runs for each size
+num_sampled_genomes_msmc =  config["num_sampled_genomes_msmc"]
+
+# The number of msmc Baumwelch(?) iterations to run,
+# typically 20
+num_msmc_iterations = config["num_msmc_iterations"]
+
+num_sampled_genomes_per_replicate = config["num_sampled_genomes_per_replicate"]
+
+# The number of replicates of each analysis you would like to run
+# For now leaving it a 1 just to get results quickly
+replicates = config["replicates"]
+
+
+# The genetic map you would like to use.
+# if value None is given default_recombination_rates are
+# used with a flat map
+genetic_map_id = config["genetic_map"]
+
+# The DFE id used for selection analyses
+dfe_id = config["dfe_list"][0] # need to generalize to more than one...
+
+
 # The names of all chromosomes to simulate, separated by commas
-# Use "all" to simulate all chromsomes for the genome
+# Use "all" to simulate all chromosomes for the genome
 chrm_list = [chrom.id for chrom in species.genome.chromosomes]
-if "chrY" in chrm_list:  # this is human specific
+if "chrY" in chrm_list:
     chrm_list.remove("chrY")
-if config["chrm_list"] != "all":
+if(config["chrm_list"] != "all"):
     chrm_list = [chr for chr in config["chrm_list"].split(",")]
+
+
+# This grabs the default mr from the first chromosome,
+# Ultimitely This needs to be replaced with the weighted average
+# of all chromosomes: This should be done in stdpopsim. 
+mutation_rate = species.genome.mean_mutation_rate
+
 
 # The specific demographic model you would like to run
 demo_model_array = config["demo_models"]
@@ -63,30 +96,9 @@ for x in demo_model_array:
         model = species.get_demographic_model(x["id"])
     demo_sample_size_dict[x["id"]] = {f"{model.populations[i].name}": m for i, m in enumerate(x["num_samples_per_population"])}
 
-# list of population names or specific id
-# NOTE: currently not implemented
-population_id = config["population_id"]
-
-# Select DFE model from catalog
-dfe_list = config["dfe_list"]
+# Select DFE model from catalog  
+dfe_list = config["dfe_list"]   
 annotation_list = config["annotation_list"]
-
-# The genetic map.if value None is given
-# default_recombination_rates are used with a flat map
-genetic_map_id = config["genetic_map"]
-genetic_map_downloaded_flag = ".genetic_map_downloaded"
-
-# TODO: mutation rate
-# This grabs the default mut rate from the first chromosome,
-# Ultimitely This needs to be replaced with the weighted average
-# of all chromosomes: This should be done in stdpopsim.
-mutation_rate = species.genome.mean_mutation_rate
-
-# checks for mask file
-try:
-    mask_file = config["mask_file"]
-except KeyError:
-    mask_file = None
 
 methods = config["methods"]
 def pop_expand(output_dir, method, filename="temp.txt"):
@@ -98,22 +110,28 @@ def pop_expand(output_dir, method, filename="temp.txt"):
                     for pops in demo_sample_size_dict[demog].keys():
                         infiles.append(output_dir + f"/inference/{method}/{demog}/{dfe}/{annot}/{seeds}/{pops}/{filename}")
     return infiles
-# ###############################################################################
-# GENERAL RULES
-# ###############################################################################
 
+# ###############################################################################
+# GENERAL RULES & GLOBALS
+# ###############################################################################
 
 #module simulation_workflow:
 #    snakefile:
 #        "simulation.snake"
-#    config:
-#        config
-
-
+#    config: config
 #use rule * from simulation_workflow as simulation_*
 
+seed_array = np.random.random_integers(1,2**31,replicates)
+genetic_map_downloaded_flag= ".genetic_map_downloaded"
+msmc_exec = config["msmc_exec"]
+stairwayplot_code = config["stairwayplot_code"]
+gone_code = config["gone_code"]
+try:
+    mask_file = config["mask_file"]
+except KeyError:
+    mask_file = None
 
-localrules:
+localrules:  
     download_genetic_map,
     download_msmc,
     sp_download,
@@ -121,7 +139,7 @@ localrules:
     gone_clone,
     gone_copy,
     gone_params,
-    all_plot,
+    all_plot
 
 
 rule all:
@@ -671,4 +689,3 @@ rule clean_temp:
         gone_temp = pop_expand(output_dir, "gone", "PROGRAMMES") + pop_expand(output_dir, "gone", "TEMPORARY_FILES")
         gone_temp = " ".join(gone_temp)
         shell("rm -rf {gone_temp}")
-
