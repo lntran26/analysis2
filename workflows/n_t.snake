@@ -302,7 +302,7 @@ rule plot_compound_stairway:
     output:
         output_dir + "/plots/{demog}/stairwayplot/stairwayplot_estimated_Ne_t.pdf",
     run:
-        plots.plot_compound_Ne_t(input[0], output[0], "stairwayplot")
+        plots.plot_compound_Ne_t(input[0], output[0])
 
 
 # ###############################################################################
@@ -416,7 +416,7 @@ rule plot_compound_msmc:
     output:
         output_dir + "/plots/{demog}/msmc/msmc_estimated_Ne_t.pdf"
     run:
-        plots.plot_compound_Ne_t(input[0], output[0], "msmc")
+        plots.plot_compound_Ne_t(input[0], output[0])
 
 
 # ###############################################################################
@@ -547,7 +547,7 @@ rule plot_compound_gone:
     output:
         output_dir + "/plots/{demog}/gone/gone_estimated_Ne_t.pdf"
     run:
-        plots.plot_compound_Ne_t(input[0], output[0], "gone")
+        plots.plot_compound_Ne_t(input[0], output[0])
 
 
 # ###############################################################################
@@ -647,7 +647,7 @@ rule plot_compound_smcpp:
     output:
         output_dir + "/plots/{demog}/smcpp/smcpp_estimated_Ne_t.pdf"
     run:
-        plots.plot_compound_Ne_t(input[0], output[0], "smcpp")
+        plots.plot_compound_Ne_t(input[0], output[0])
 
 
 # ###############################################################################

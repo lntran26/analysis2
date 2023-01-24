@@ -93,7 +93,6 @@ def gather_inference_results(output_dir, demog, output, method, chrm_mask,
                 for row in nt.itertuples():  #row[1], getattr(row, "name"), row.name
                     f.write(f'{method},{pop},{size},{dfe},{annot},{row.x},{row.y},{seed},{chrm_mask_i},{annot_mask_i},{slim_scaling_factor},{2}\n')
             elif method == "gone":
-                # TODO: implement this G_value
                 q_file = infile_path.parent / "OUTPUT_gone"
                 with open(q_file) as q:
                     i=1
@@ -162,13 +161,13 @@ def gather_coal_rate(outfile, model, pops_dict, generation_time, steps):
     with open(outfile[0], 'w') as coal:
         coal.write(f"{header}\n")
         for pop_id, pop in enumerate(pops_dict.keys()):
-            coal_rate, P, steps, census_size = popn_coal_rate(model, pop, pops_dict, generation_time, steps)
-            for i in range(len(steps)):
-                coal.write(f"coal,{pop},none,none,{steps[i]},{1/(2*coal_rate[i])}\n")
-                coal.write(f"census,{pop},none,none,{steps[i]},{census_size[i][pop_id]}\n")
+            coal_rate, P, step_rate, census_size = popn_coal_rate(model, pop, pops_dict, generation_time, steps)
+            for i in range(len(step_rate)):
+                coal.write(f"coal,{pop},none,none,{step_rate[i]},{1/(2*coal_rate[i])}\n")
+                coal.write(f"census,{pop},none,none,{step_rate[i]},{census_size[i][pop_id]}\n")
 
 
-def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population", styleby="annotations", log=True):
+def plot_compound_Ne_t(infile, outfile, ref_line="coal", colorby="annotations", log=True):
     """
     figure of N(t) for multiple methods
     set msmc w/ style="n_samp"
@@ -178,14 +177,16 @@ def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population",
     df_ddb = pd.read_csv(Path(infile).parent.parent / "coal_estimated_Ne_t.csv", sep=",")
     df_ddb = df_ddb[df_ddb["method"] == ref_line]
     # plot params
-    pop_order = df[colorby].unique()
-    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(pop_order)}
-    annot_order = df[styleby].unique()
+    pop_order = np.sort(df['population'].unique())
+    annot_order = np.sort(df[colorby].unique())[::-1]
+    pal_dict = {pop:COLOURS[-(i+1)] for i, pop in enumerate(annot_order)}
+    dfe_order = np.sort(df["DFE"].unique())[::-1]
     g = sns.relplot(data=df, x="year", y="Ne", col="population", row="DFE",
-                    hue="population", hue_order=pop_order, style="annotations", style_order=annot_order,
+                    col_order=list(pop_order), row_order=list(dfe_order),
+                    hue=colorby, hue_order=annot_order,
                     units="seed", kind="line", palette=pal_dict, 
                     height=3, aspect=2, estimator=None, errorbar="se", err_style="band",
-                    facet_kws=dict(sharex=False, sharey=False), drawstyle='steps-pre')
+                    facet_kws=dict(sharex=True, sharey=True), drawstyle='steps-pre')
     # add ref_line to all plots x pop name
     for ax in g.axes.flat:
         pop_ax = ax.title.get_text().split()[-1]
@@ -200,16 +201,18 @@ def plot_compound_Ne_t(infile, outfile, ref_line="census", colorby="population",
     plt.savefig(f"{outfile}", bbox_inches='tight')
 
 
-def plot_all_ne_estimates(infile, outfile, ref_line="census", colorby="method", styleby="annotations", log=True):
+def plot_all_ne_estimates(infile, outfile, ref_line="coal", colorby="method", styleby="annotations", log=True):
     df = pd.read_csv(infile, sep=",")
     df_ddb = pd.read_csv(Path(infile).parent / "coal_estimated_Ne_t.csv", sep=",")
     df_ddb = df_ddb[df_ddb["method"] == ref_line]
-    pop_order = df[colorby].unique()
-    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(pop_order)} 
-    pal_dict[ref_line] = "black"   
-    annot_order = df[styleby].unique()
-    g = sns.relplot(data=df, x="year", y="Ne", row="DFE", col="population", 
-                    hue=colorby, hue_order=pop_order, style=styleby, style_order=annot_order,
+    pop_order = np.sort(df["population"].unique())
+    method_order = np.sort(df[colorby].unique())
+    pal_dict = {pop:COLOURS[i] for i, pop in enumerate(method_order)}
+    annot_order = np.sort(df[styleby].unique())[::-1]
+    dfe_order = np.sort(df["DFE"].unique())[::-1]
+    g = sns.relplot(data=df, x="year", y="Ne", row="DFE", col="population",
+                    col_order=list(pop_order), row_order=list(dfe_order),
+                    hue=colorby, hue_order=method_order, style=styleby, style_order=annot_order,
                     kind="line", drawstyle='steps-pre',
                     palette=pal_dict, errorbar="se", err_style="band", 
                     height=3, aspect=2, facet_kws=dict(sharex=True, sharey=True))
