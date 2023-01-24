@@ -121,6 +121,7 @@ def pop_expand(output_dir, method, filename="temp.txt"):
 #    config: config
 #use rule * from simulation_workflow as simulation_*
 
+slim_scaling_factor = config["slim_scaling_factor"]
 seed_array = np.random.random_integers(1,2**31,replicates)
 genetic_map_downloaded_flag= ".genetic_map_downloaded"
 msmc_exec = config["msmc_exec"]
