@@ -140,11 +140,11 @@ localrules:
     gone_clone,
     gone_copy,
     gone_params,
-    all_plot
 
 
 rule all:
     input:
+        #rules.simulation_all.output,
         expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.csv", demog=demo_model_ids),
         expand(output_dir + "/plots/{demog}/estimated_Ne_t_final.pdf", demog=demo_model_ids),
         expand(output_dir + "/plots/{demog}/coal_estimated_Ne_t.csv", demog=demo_model_ids),
@@ -152,7 +152,6 @@ rule all:
             demog=demo_model_ids, method=methods),
         expand(output_dir + "/plots/{demog}/{method}/{method}_estimated_Ne_t.pdf",
             demog=demo_model_ids, method=methods),
-        #rules.simulation_all.output,
 
 
 rule download_genetic_map:
@@ -233,8 +232,9 @@ rule sp_download:
 
 rule run_stairwayplot:
     input:
-        rules.sp_download.output
-
+        rules.sp_download.output,
+        expand(output_dir + "/simulated_data/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/sim_{chrms}.trees",
+            chrms=chrm_list)
     output:
         output_dir + "/inference/stairwayplot/{demog}/{dfes}/{annots}/{seeds}/{pops}/stairwayplot_estimated_Ne.txt"
 
@@ -242,7 +242,6 @@ rule run_stairwayplot:
     resources:
         mem_mb=120000,
     run:
-        #gwildcards = glob_wildcards(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees")
         inputs = expand(
             output_dir
             + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
@@ -274,8 +273,7 @@ rule run_stairwayplot:
                 chrom_annotation=wildcards.annots,
             )
 
-        runner.ts_to_stairway(
-            inputs, wildcards.pops, mask_intervals=mask_intervals, num_bootstraps=200)
+        runner.ts_to_stairway(inputs, wildcards.pops, mask_intervals=mask_intervals, num_bootstraps=200)
         runner.run_theta_estimation(max_workers=threads, show_progress=True)
         runner.run_summary(
             output,
@@ -360,11 +358,9 @@ rule ts_to_multihep:
 
 rule run_msmc:
     input:
-        #rules.ts_to_multihep.output,
+        expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{chrms}.trees.multihep.txt",
+                chrms=chrm_list),
         rules.download_msmc.output,
-        inputs = expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{chrms}.trees.multihep.txt",
-                    chrms=chrm_list,
-                        )
     output:
         expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{samps}.trees.multihep.txt.final.txt",
             samps=num_sampled_genomes_msmc)
@@ -460,7 +456,6 @@ rule gone_copy:
     input:
         rules.gone_params.output,
         rules.gone_clone.output,
-
     output:
         output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/.scripts_copied"
     message:
@@ -474,12 +469,14 @@ rule gone_copy:
 
 rule gone_prep_inputs:
     input:
+        rules.gone_copy.output,
+        expand(output_dir + "/simulated_data/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/sim_{chrms}.trees",
+            chrms=chrm_list)
     output:
         output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.ped",
         output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.map",
     threads: 1
     run:
-        #gwildcards = glob_wildcards(output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees")
         inputs = expand(
             output_dir
             + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
@@ -603,7 +600,6 @@ rule run_smcpp:
         expand(output_dir+ "/inference/smcpp/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/sim_{chrms}.trees.smc.gz",
             chrms=chrm_list),
         rules.clone_smcpp.output,
-        #rules.ts_to_smc.output
     output:
         output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/model.final.json"
     threads: 20
