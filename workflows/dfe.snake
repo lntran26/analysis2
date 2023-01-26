@@ -63,8 +63,15 @@ for x in demo_model_array:
     demo_sample_size_dict[x["id"]] = x["num_samples_per_population"]
 
 # Select DFE model from catalog  
-dfe_list = config["dfe_list"]   
-annotation_list = config["annotation_list"]
+#dfe_list = config["dfe_list"]   
+#annotation_list = config["annotation_list"]
+dfe_dict = dict.fromkeys(config["dfe_list"])
+del dfe_dict["none"]
+dfe_list = list(dfe_dict)
+annotation_dict = dict.fromkeys(config["annotation_list"])
+del annotation_dict["none"]
+annotation_list = list(annotation_dict)
+
 
 rule all:
     input: 
