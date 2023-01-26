@@ -141,14 +141,16 @@ rule dadi_generate_cache:
         output_dir + "/inference/{demog}/dadi/{dfes}/{annots}/{seeds}/{chrms}/pop{ids}/pop{ids}.two_epoch.spectra.bpkl"
     params:
         demog = 'two_epoch_sel',
-        sample_size = 10,
         grid_size = '800 1000 1200',
         gamma_pts = 2000
     threads: 8
-    shell:
+    run:
+        sample_size = int(demo_sample_size_dict[wildcards.demog][int(wildcards.ids)]) * 2 # haploid sample size
+        shell(        
         """
-        dadi-cli GenerateCache --model {params.demog} --demo-popt {input} --sample-size {params.sample_size} --output {output} --grids {params.grid_size} --gamma-pts {params.gamma_pts} --cpus {threads}
+        dadi-cli GenerateCache --model {params.demog} --demo-popt {input} --sample-size {sample_size} --output {output} --grids {params.grid_size} --gamma-pts {params.gamma_pts} --cpus {threads}
         """
+        )
 
 rule dadi_infer_dfe:
     input:
