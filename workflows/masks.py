@@ -21,6 +21,20 @@ def get_mask_from_file(mask_file, chromID):
     return mask
 
 
+def get_mask_from_file_dfe(mask_file, chromID):
+    """
+    Get the mask for a specific chromosome from the specified file.
+    :mask_file: path to the mask file
+    :chromID: chromosome ID
+    """
+    mask_table = pd.read_csv(mask_file, sep="\t", header=None)
+    # get the mask for the specified chromosome
+    mask = mask_table[mask_table[0] == chromID]
+    # turn into a numpy array
+    mask = np.array(mask.values[:, 1:3])
+    return mask
+
+
 def get_mask_from_chrom_annotation(speciesID, chrom_annotation, chromID):
     """
     Get annotation intervals from the specified species/chrom/annotation.
