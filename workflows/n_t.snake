@@ -108,7 +108,7 @@ def pop_expand(output_dir, method, filename="temp.txt"):
             for seeds in seed_array:
                 for chrms in chrm_list:
                     for pops in demo_sample_size_dict[demog].keys():
-                        infiles.append(output_dir + f"/inference/{method}/{demog}/{dfe}/{annot}/{seeds}/{pops}/{filename}")
+                        infiles.append(output_dir + f"/inference/{demog}/{method}/{dfe}/{annot}/{seeds}/{pops}/{filename}")
     return infiles
 
 # ###############################################################################
@@ -236,7 +236,7 @@ rule run_stairwayplot:
         expand(output_dir + "/simulated_data/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/sim_{chrms}.trees",
             chrms=chrm_list)
     output:
-        output_dir + "/inference/stairwayplot/{demog}/{dfes}/{annots}/{seeds}/{pops}/stairwayplot_estimated_Ne.txt"
+        output_dir + "/inference/{demog}/stairwayplot/{dfes}/{annots}/{seeds}/{pops}/stairwayplot_estimated_Ne.txt"
 
     threads: 20
     resources:
@@ -254,7 +254,7 @@ rule run_stairwayplot:
 
         runner = stairway.StairwayPlotRunner(
             workdir=output_dir
-            + f"/inference/stairwayplot/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/",
+            + f"/inference/{wildcards.demog}/stairwayplot/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/",
             stairway_dir=pathlib.Path.cwd() / "ext/stairwayplot",
         )
 
@@ -336,7 +336,7 @@ rule ts_to_multihep:
     input:
         output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees"
     output:
-        output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{pops}/{chrms}.trees.multihep.txt"
+        output_dir + "/inference/{demog}/msmc/{dfes}/{annots}/{seeds}/{pops}/{chrms}.trees.multihep.txt"
 
     run:
         print(input[0], num_sampled_genomes_msmc, mask_file)
@@ -358,15 +358,15 @@ rule ts_to_multihep:
 
 rule run_msmc:
     input:
-        expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{chrms}.trees.multihep.txt",
+        expand(output_dir + "/inference/{{demog}}/msmc/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{chrms}.trees.multihep.txt",
                 chrms=chrm_list),
         rules.download_msmc.output,
     output:
-        expand(output_dir + "/inference/msmc/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{samps}.trees.multihep.txt.final.txt",
+        expand(output_dir + "/inference/{{demog}}/msmc/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/{samps}.trees.multihep.txt.final.txt",
             samps=num_sampled_genomes_msmc)
     threads: 8
     run:
-        inputs = expand(output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{pops}/{chrms}.trees.multihep.txt",
+        inputs = expand(output_dir + "/inference/{demog}/msmc/{dfes}/{annots}/{seeds}/{pops}/{chrms}.trees.multihep.txt",
                     demog=wildcards.demog,
                     dfes=wildcards.dfes,
                     annots=wildcards.annots,
@@ -377,7 +377,7 @@ rule run_msmc:
         total_samples = demo_sample_size_dict[wildcards.demog][wildcards.pops]
         input_file_string = " ".join(inputs)
         # TODO: get wildcards.samps to work so that num_sampled_genomes_msmc are run in parallel
-        output_file_string = output_dir + f"/inference/msmc/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/"
+        output_file_string = output_dir + f"/inference/{wildcards.demog}/msmc/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}/"
         msmc.run_msmc_estimate(input_file_string, output_file_string, msmc_exec, total_samples, num_sampled_genomes_msmc,
             iterations=num_msmc_iterations, ncores=threads)
 
@@ -386,7 +386,7 @@ rule convert_msmc:
     input:
         rules.run_msmc.output
     output:
-        output_dir + "/inference/msmc/{demog}/{dfes}/{annots}/{seeds}/{pops}/msmc_estimated_Ne.txt"
+        output_dir + "/inference/{demog}/msmc/{dfes}/{annots}/{seeds}/{pops}/msmc_estimated_Ne.txt"
     run:
         msmc.convert_msmc_output(input[0], output[0],
             mutation_rate=mutation_rate,
@@ -457,7 +457,7 @@ rule gone_copy:
         rules.gone_params.output,
         rules.gone_clone.output,
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/.scripts_copied"
+        output_dir + "/inference/{demog}/gone/{dfes}/{annots}/{seeds}/{pops}/.scripts_copied"
     message:
         "copying GONE scripts into individual working directories"
     threads: 1
@@ -473,8 +473,8 @@ rule gone_prep_inputs:
         expand(output_dir + "/simulated_data/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/sim_{chrms}.trees",
             chrms=chrm_list)
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.ped",
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone.map",
+        output_dir + "/inference/{demog}/gone/{dfes}/{annots}/{seeds}/{pops}/gone.ped",
+        output_dir + "/inference/{demog}/gone/{dfes}/{annots}/{seeds}/{pops}/gone.map",
     threads: 1
     run:
         inputs = expand(
@@ -514,13 +514,13 @@ rule gone_run:
         rules.gone_copy.output,
         rules.gone_prep_inputs.output,
     output:
-        output_dir + "/inference/gone/{demog}/{dfes}/{annots}/{seeds}/{pops}/gone_estimated_Ne.txt",
+        output_dir + "/inference/{demog}/gone/{dfes}/{annots}/{seeds}/{pops}/gone_estimated_Ne.txt",
     threads: 8
     resources: time=180
     shell:
         """
         cwd=$PWD
-        cd {output_dir}/inference/gone/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}
+        cd {output_dir}/inference/{wildcards.demog}/gone/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}
         bash script_GONE.sh gone
         cd $cwd
         """
@@ -576,7 +576,7 @@ rule ts_to_smc:
         output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees",
         rules.clone_smcpp.output
     output:
-        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/sim_{chrms}.trees.smc.gz"
+        output_dir + "/inference/{demog}/smcpp/{dfes}/{annots}/{seeds}/{pops}/sim_{chrms}.trees.smc.gz"
     run:
         # handle no annotation case
         if wildcards.annots == "none" or smcpp_mask == "none":
@@ -597,16 +597,16 @@ rule ts_to_smc:
 
 rule run_smcpp:
     input:
-        expand(output_dir+ "/inference/smcpp/{{demog}}/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/sim_{chrms}.trees.smc.gz",
+        expand(output_dir+ "/inference/{{demog}}/smcpp/{{dfes}}/{{annots}}/{{seeds}}/{{pops}}/sim_{chrms}.trees.smc.gz",
             chrms=chrm_list),
         rules.clone_smcpp.output,
     output:
-        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/model.final.json"
+        output_dir + "/inference/{demog}/smcpp/{dfes}/{annots}/{seeds}/{pops}/model.final.json"
     threads: 20
     run:
         # need to cd into subdir because smc++ crashes otherwise
         cur = os.getcwd()
-        os.chdir(f"{output_dir}/inference/smcpp/{wildcards.demog}/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}")
+        os.chdir(f"{output_dir}/inference/{wildcards.demog}/smcpp/{wildcards.dfes}/{wildcards.annots}/{wildcards.seeds}/{wildcards.pops}")
         base = f"trees.smc.gz"
         mutation_rate = species.genome.mean_mutation_rate
         smc.run_smcpp_estimate(base, mutation_rate=mutation_rate, ncores=threads)
@@ -618,7 +618,7 @@ rule smcpp_plot:
     input:
         rules.run_smcpp.output
     output:
-        output_dir + "/inference/smcpp/{demog}/{dfes}/{annots}/{seeds}/{pops}/smcpp_estimated_Ne.csv"
+        output_dir + "/inference/{demog}/smcpp/{dfes}/{annots}/{seeds}/{pops}/smcpp_estimated_Ne.csv"
     run:
         gen_time = generation_time_helper(wildcards.demog, species)
         smc.run_smcpp_plot(input[0], output[0], generation_time=gen_time)

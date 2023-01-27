@@ -51,7 +51,7 @@ def plot_sfs(s, outfile):
 
 def gather_inference_results(output_dir, demog, output, method, chrm_mask, 
                              annot_mask, pops_size_dict, slim_scaling_factor, gen_time):
-    infiles = glob.glob(f"{output_dir}/inference/{method}/{demog}/**/{method}_estimated_Ne.*", recursive=True)
+    infiles = glob.glob(f"{output_dir}/inference/{demog}/{method}/**/{method}_estimated_Ne.*", recursive=True)
     header = "method,population,nsamp,DFE,annotations,year,Ne,seed,chrm_mask,annot_mask,slim_scaling_factor"
     if method == "stairwayplot":
         header += ",Ne_02_5,Ne_97_5"
