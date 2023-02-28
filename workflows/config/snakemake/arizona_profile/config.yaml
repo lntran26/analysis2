@@ -10,9 +10,9 @@ cluster:
                 --output=logs_slurm/{rule}/{rule}-{wildcards}-%j
 
 default-resources:
-        - time=60
+        - time=300
         - mem_mb=5000
-        - threads=1
+        - threads=2
 latency-wait: 180
 restart-times: 3
 max-jobs-per-second: 10

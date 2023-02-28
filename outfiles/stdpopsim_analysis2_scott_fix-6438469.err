@@ -1,0 +1,576 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"gcc"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore-cache load "gcc"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+localrules directive specifies rules that are not present in the Snakefile:
+	sp_download
+	download_genetic_map
+	clone_smcpp
+	download_msmc
+	gone_params
+	gone_clone
+	gone_copy
+
+CRITICAL:snakemake.logging:localrules directive specifies rules that are not present in the Snakefile:
+	sp_download
+	download_genetic_map
+	clone_smcpp
+	download_msmc
+	gone_params
+	gone_clone
+	gone_copy
+
+Unlocking working directory.
+WARNING:snakemake.logging:Unlocking working directory.
+localrules directive specifies rules that are not present in the Snakefile:
+	download_msmc
+	gone_params
+	sp_download
+	gone_copy
+	download_genetic_map
+	gone_clone
+	clone_smcpp
+
+CRITICAL:snakemake.logging:localrules directive specifies rules that are not present in the Snakefile:
+	download_msmc
+	gone_params
+	sp_download
+	gone_copy
+	download_genetic_map
+	gone_clone
+	clone_smcpp
+
+Building DAG of jobs...
+WARNING:snakemake.logging:Building DAG of jobs...
+Using shell: /usr/bin/bash
+WARNING:snakemake.logging:Using shell: /usr/bin/bash
+Provided cluster nodes: 500
+WARNING:snakemake.logging:Provided cluster nodes: 500
+Job stats:
+job                           count    min threads    max threads
+--------------------------  -------  -------------  -------------
+all                               1              1              1
+dfe_download_dfe_alpha            1              1              1
+dfe_generate_dfe_alpha_fs        18              1              1
+dfe_get_dfe_alpha_bestfits       18              1              1
+dfe_plot_results                  3              1              1
+dfe_run_dfe_alpha                18              1              1
+n_t_all_plot                      1              1              1
+n_t_plot_compound_gone            1              1              1
+n_t_plot_compound_msmc            1              1              1
+n_t_plot_compound_smcpp           1              1              1
+n_t_plot_compound_stairway        1              1              1
+total                            64              1              1
+
+WARNING:snakemake.logging:Job stats:
+job                           count    min threads    max threads
+--------------------------  -------  -------------  -------------
+all                               1              1              1
+dfe_download_dfe_alpha            1              1              1
+dfe_generate_dfe_alpha_fs        18              1              1
+dfe_get_dfe_alpha_bestfits       18              1              1
+dfe_plot_results                  3              1              1
+dfe_run_dfe_alpha                18              1              1
+n_t_all_plot                      1              1              1
+n_t_plot_compound_gone            1              1              1
+n_t_plot_compound_msmc            1              1              1
+n_t_plot_compound_smcpp           1              1              1
+n_t_plot_compound_stairway        1              1              1
+total                            64              1              1
+
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:38:51 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:38:51 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6438487'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6438487'.
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:38:53 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:38:53 2023]
+rule n_t_all_plot:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/estimated_Ne_t_final.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/estimated_Ne_t_final.pdf
+    jobid: 449
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/estimated_Ne_t_final.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+INFO:snakemake.logging:rule n_t_all_plot:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/estimated_Ne_t_final.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/estimated_Ne_t_final.pdf
+    jobid: 449
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/estimated_Ne_t_final.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+
+INFO:snakemake.logging:
+Submitted job 449 with external jobid 'Submitted batch job 6438488'.
+WARNING:snakemake.logging:Submitted job 449 with external jobid 'Submitted batch job 6438488'.
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:38:53 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:38:53 2023]
+rule n_t_plot_compound_stairway:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/stairwayplot/stairwayplot_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/stairwayplot/stairwayplot_estimated_Ne_t.pdf
+    jobid: 451
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/stairwayplot/stairwayplot_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+INFO:snakemake.logging:rule n_t_plot_compound_stairway:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/stairwayplot/stairwayplot_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/stairwayplot/stairwayplot_estimated_Ne_t.pdf
+    jobid: 451
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/stairwayplot/stairwayplot_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+
+INFO:snakemake.logging:
+Submitted job 451 with external jobid 'Submitted batch job 6438489'.
+WARNING:snakemake.logging:Submitted job 451 with external jobid 'Submitted batch job 6438489'.
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:38:53 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:38:53 2023]
+rule n_t_plot_compound_smcpp:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/smcpp/smcpp_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/smcpp/smcpp_estimated_Ne_t.pdf
+    jobid: 453
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/smcpp/smcpp_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+INFO:snakemake.logging:rule n_t_plot_compound_smcpp:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/smcpp/smcpp_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/smcpp/smcpp_estimated_Ne_t.pdf
+    jobid: 453
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/smcpp/smcpp_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+
+INFO:snakemake.logging:
+Submitted job 453 with external jobid 'Submitted batch job 6438490'.
+WARNING:snakemake.logging:Submitted job 453 with external jobid 'Submitted batch job 6438490'.
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:38:53 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:38:53 2023]
+rule n_t_plot_compound_gone:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/gone/gone_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/gone/gone_estimated_Ne_t.pdf
+    jobid: 452
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/gone/gone_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+INFO:snakemake.logging:rule n_t_plot_compound_gone:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/gone/gone_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/gone/gone_estimated_Ne_t.pdf
+    jobid: 452
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/gone/gone_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+
+INFO:snakemake.logging:
+Submitted job 452 with external jobid 'Submitted batch job 6438491'.
+WARNING:snakemake.logging:Submitted job 452 with external jobid 'Submitted batch job 6438491'.
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:38:53 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:38:53 2023]
+rule n_t_plot_compound_msmc:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/msmc/msmc_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/msmc/msmc_estimated_Ne_t.pdf
+    jobid: 454
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/msmc/msmc_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+INFO:snakemake.logging:rule n_t_plot_compound_msmc:
+    input: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/msmc/msmc_estimated_Ne_t.csv
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/msmc/msmc_estimated_Ne_t.pdf
+    jobid: 454
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/msmc/msmc_estimated_Ne_t.pdf
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=300, threads=2
+
+INFO:snakemake.logging:
+Submitted job 454 with external jobid 'Submitted batch job 6438492'.
+WARNING:snakemake.logging:Submitted job 454 with external jobid 'Submitted batch job 6438492'.
+[Wed Feb  1 10:44:06 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:44:06 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438487
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438487
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438487, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438487, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 162.
+WARNING:snakemake.logging:Trying to restart job 162.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:44:06 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:44:06 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6438506'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6438506'.
+[Wed Feb  1 10:44:24 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:44:24 2023]
+Finished job 451.
+INFO:snakemake.logging:Finished job 451.
+1 of 64 steps (2%) done
+INFO:snakemake.logging:1 of 64 steps (2%) done
+[Wed Feb  1 10:44:25 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:44:25 2023]
+Finished job 453.
+INFO:snakemake.logging:Finished job 453.
+2 of 64 steps (3%) done
+INFO:snakemake.logging:2 of 64 steps (3%) done
+[Wed Feb  1 10:44:26 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:44:26 2023]
+Finished job 452.
+INFO:snakemake.logging:Finished job 452.
+3 of 64 steps (5%) done
+INFO:snakemake.logging:3 of 64 steps (5%) done
+[Wed Feb  1 10:44:27 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:44:27 2023]
+Finished job 454.
+INFO:snakemake.logging:Finished job 454.
+4 of 64 steps (6%) done
+INFO:snakemake.logging:4 of 64 steps (6%) done
+Waiting at most 180 seconds for missing files.
+WARNING:snakemake.logging:Waiting at most 180 seconds for missing files.
+[Wed Feb  1 10:45:24 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:45:24 2023]
+Finished job 449.
+INFO:snakemake.logging:Finished job 449.
+5 of 64 steps (8%) done
+INFO:snakemake.logging:5 of 64 steps (8%) done
+[Wed Feb  1 10:49:27 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:49:27 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438506
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438506
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438506, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438506, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 162.
+WARNING:snakemake.logging:Trying to restart job 162.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:49:27 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:49:27 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6438521'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6438521'.
+[Wed Feb  1 10:55:30 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:55:30 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438521
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438521
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438521, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438521, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 162.
+WARNING:snakemake.logging:Trying to restart job 162.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Wed Feb  1 10:55:30 2023]
+INFO:snakemake.logging:[Wed Feb  1 10:55:30 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6438540'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6438540'.
+[Wed Feb  1 11:00:28 2023]
+INFO:snakemake.logging:[Wed Feb  1 11:00:28 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438540
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6438540
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438540, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6438540, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.t8hwqk3e/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+Exiting because a job execution failed. Look above for error message
+ERROR:snakemake.logging:Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-02-01T103846.053400.snakemake.log
+WARNING:snakemake.logging:Complete log: .snakemake/log/2023-02-01T103846.053400.snakemake.log

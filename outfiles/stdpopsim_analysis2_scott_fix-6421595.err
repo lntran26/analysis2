@@ -1,0 +1,2650 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"gcc"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore-cache load "gcc"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+localrules directive specifies rules that are not present in the Snakefile:
+	gone_copy
+	sp_download
+	download_msmc
+	gone_params
+	gone_clone
+	download_genetic_map
+	clone_smcpp
+
+CRITICAL:snakemake.logging:localrules directive specifies rules that are not present in the Snakefile:
+	gone_copy
+	sp_download
+	download_msmc
+	gone_params
+	gone_clone
+	download_genetic_map
+	clone_smcpp
+
+Unlocking working directory.
+WARNING:snakemake.logging:Unlocking working directory.
+localrules directive specifies rules that are not present in the Snakefile:
+	gone_params
+	sp_download
+	download_msmc
+	gone_clone
+	clone_smcpp
+	download_genetic_map
+	gone_copy
+
+CRITICAL:snakemake.logging:localrules directive specifies rules that are not present in the Snakefile:
+	gone_params
+	sp_download
+	download_msmc
+	gone_clone
+	clone_smcpp
+	download_genetic_map
+	gone_copy
+
+Building DAG of jobs...
+WARNING:snakemake.logging:Building DAG of jobs...
+Using shell: /usr/bin/bash
+WARNING:snakemake.logging:Using shell: /usr/bin/bash
+Provided cluster nodes: 500
+WARNING:snakemake.logging:Provided cluster nodes: 500
+Job stats:
+job                           count    min threads    max threads
+--------------------------  -------  -------------  -------------
+all                               1              1              1
+dfe_dadi_generate_cache          18              8              8
+dfe_dadi_infer_dfe               18              8              8
+dfe_dadi_infer_dm                18              8              8
+dfe_download_dfe_alpha            1              1              1
+dfe_download_grapes               1              1              1
+dfe_download_polydfe              1              1              1
+dfe_generate_dadi_fs             18              1              1
+dfe_generate_dfe_alpha_fs        18              1              1
+dfe_generate_grapes_fs           18              1              1
+dfe_generate_polydfe_fs          18              1              1
+dfe_get_dadi_dfe_bestfits        18              1              1
+dfe_get_dfe_alpha_bestfits       18              1              1
+dfe_get_grapes_bestfits          18              1              1
+dfe_get_polydfe_bestfit          18              1              1
+dfe_plot_results                  3              1              1
+dfe_run_dfe_alpha                18              1              1
+dfe_run_grapes                   18              1              1
+dfe_run_polydfe                  18              1              1
+n_t_all_plot                      1              1              1
+n_t_clone_smcpp                   1              1              1
+n_t_compound_gone                 1              1              1
+n_t_compound_msmc                 1              1              1
+n_t_compound_smcpp                1              1              1
+n_t_compound_stairwayplot         1              1              1
+n_t_convert_msmc                 12              1              1
+n_t_download_msmc                 1              1              1
+n_t_gather_inference              1              1              1
+n_t_gone_copy                    12              1              1
+n_t_gone_prep_inputs             12              1              1
+n_t_gone_run                     12              8              8
+n_t_plot_compound_gone            1              1              1
+n_t_plot_compound_msmc            1              1              1
+n_t_plot_compound_smcpp           1              1              1
+n_t_plot_compound_stairway        1              1              1
+n_t_run_msmc                     12              8              8
+n_t_run_smcpp                    12             20             20
+n_t_run_stairwayplot             12             20             20
+n_t_smcpp_plot                   12              1              1
+n_t_ts_to_multihep               36              1              1
+n_t_ts_to_smc                    36              1              1
+n_t_write_bdd                     1              1              1
+simulation_simulation            12              1              1
+total                           452              1             20
+
+WARNING:snakemake.logging:Job stats:
+job                           count    min threads    max threads
+--------------------------  -------  -------------  -------------
+all                               1              1              1
+dfe_dadi_generate_cache          18              8              8
+dfe_dadi_infer_dfe               18              8              8
+dfe_dadi_infer_dm                18              8              8
+dfe_download_dfe_alpha            1              1              1
+dfe_download_grapes               1              1              1
+dfe_download_polydfe              1              1              1
+dfe_generate_dadi_fs             18              1              1
+dfe_generate_dfe_alpha_fs        18              1              1
+dfe_generate_grapes_fs           18              1              1
+dfe_generate_polydfe_fs          18              1              1
+dfe_get_dadi_dfe_bestfits        18              1              1
+dfe_get_dfe_alpha_bestfits       18              1              1
+dfe_get_grapes_bestfits          18              1              1
+dfe_get_polydfe_bestfit          18              1              1
+dfe_plot_results                  3              1              1
+dfe_run_dfe_alpha                18              1              1
+dfe_run_grapes                   18              1              1
+dfe_run_polydfe                  18              1              1
+n_t_all_plot                      1              1              1
+n_t_clone_smcpp                   1              1              1
+n_t_compound_gone                 1              1              1
+n_t_compound_msmc                 1              1              1
+n_t_compound_smcpp                1              1              1
+n_t_compound_stairwayplot         1              1              1
+n_t_convert_msmc                 12              1              1
+n_t_download_msmc                 1              1              1
+n_t_gather_inference              1              1              1
+n_t_gone_copy                    12              1              1
+n_t_gone_prep_inputs             12              1              1
+n_t_gone_run                     12              8              8
+n_t_plot_compound_gone            1              1              1
+n_t_plot_compound_msmc            1              1              1
+n_t_plot_compound_smcpp           1              1              1
+n_t_plot_compound_stairway        1              1              1
+n_t_run_msmc                     12              8              8
+n_t_run_smcpp                    12             20             20
+n_t_run_stairwayplot             12             20             20
+n_t_smcpp_plot                   12              1              1
+n_t_ts_to_multihep               36              1              1
+n_t_ts_to_smc                    36              1              1
+n_t_write_bdd                     1              1              1
+simulation_simulation            12              1              1
+total                           452              1             20
+
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:39 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:39 2023]
+Job 107: Download polyDFE
+INFO:snakemake.logging:Job 107: Download polyDFE
+Reason: Missing output files: ext/polyDFE/polyDFE-2.0-linux-64-bit
+INFO:snakemake.logging:Reason: Missing output files: ext/polyDFE/polyDFE-2.0-linux-64-bit
+
+INFO:snakemake.logging:
+
+        cd ext
+        git clone https://github.com/paula-tataru/polyDFE.git
+        cd polyDFE
+        chmod a+x polyDFE-2.0-linux-64-bit
+        cd ..
+        
+WARNING:snakemake.logging:
+        cd ext
+        git clone https://github.com/paula-tataru/polyDFE.git
+        cd polyDFE
+        chmod a+x polyDFE-2.0-linux-64-bit
+        cd ..
+        
+Submitted job 107 with external jobid 'Submitted batch job 6421611'.
+WARNING:snakemake.logging:Submitted job 107 with external jobid 'Submitted batch job 6421611'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:40 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:40 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 2 with external jobid 'Submitted batch job 6421612'.
+WARNING:snakemake.logging:Submitted job 2 with external jobid 'Submitted batch job 6421612'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:40 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:40 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 10 with external jobid 'Submitted batch job 6421613'.
+WARNING:snakemake.logging:Submitted job 10 with external jobid 'Submitted batch job 6421613'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 438: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 438: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/CHB/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/CHB/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 438 with external jobid 'Submitted batch job 6421614'.
+WARNING:snakemake.logging:Submitted job 438 with external jobid 'Submitted batch job 6421614'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 3 with external jobid 'Submitted batch job 6421615'.
+WARNING:snakemake.logging:Submitted job 3 with external jobid 'Submitted batch job 6421615'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 423: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 423: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/YRI/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/YRI/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 423 with external jobid 'Submitted batch job 6421616'.
+WARNING:snakemake.logging:Submitted job 423 with external jobid 'Submitted batch job 6421616'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 11 with external jobid 'Submitted batch job 6421617'.
+WARNING:snakemake.logging:Submitted job 11 with external jobid 'Submitted batch job 6421617'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 4 with external jobid 'Submitted batch job 6421618'.
+WARNING:snakemake.logging:Submitted job 4 with external jobid 'Submitted batch job 6421618'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 417: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 417: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/CEU/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/CEU/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 417 with external jobid 'Submitted batch job 6421619'.
+WARNING:snakemake.logging:Submitted job 417 with external jobid 'Submitted batch job 6421619'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6421620'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6421620'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 447: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 447: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/CHB/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/CHB/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 447 with external jobid 'Submitted batch job 6421621'.
+WARNING:snakemake.logging:Submitted job 447 with external jobid 'Submitted batch job 6421621'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 12 with external jobid 'Submitted batch job 6421622'.
+WARNING:snakemake.logging:Submitted job 12 with external jobid 'Submitted batch job 6421622'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 432: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 432: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/YRI/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/YRI/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 432 with external jobid 'Submitted batch job 6421623'.
+WARNING:snakemake.logging:Submitted job 432 with external jobid 'Submitted batch job 6421623'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 5 with external jobid 'Submitted batch job 6421624'.
+WARNING:snakemake.logging:Submitted job 5 with external jobid 'Submitted batch job 6421624'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 441: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 441: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/YRI/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/YRI/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 441 with external jobid 'Submitted batch job 6421625'.
+WARNING:snakemake.logging:Submitted job 441 with external jobid 'Submitted batch job 6421625'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 6 with external jobid 'Submitted batch job 6421626'.
+WARNING:snakemake.logging:Submitted job 6 with external jobid 'Submitted batch job 6421626'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 426: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 426: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/CEU/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/CEU/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 426 with external jobid 'Submitted batch job 6421627'.
+WARNING:snakemake.logging:Submitted job 426 with external jobid 'Submitted batch job 6421627'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 429: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 429: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/CHB/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/CHB/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 429 with external jobid 'Submitted batch job 6421628'.
+WARNING:snakemake.logging:Submitted job 429 with external jobid 'Submitted batch job 6421628'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 352: Cloning SMC++
+INFO:snakemake.logging:Job 352: Cloning SMC++
+Reason: Missing output files: ext/smcpp/pyproject.toml
+INFO:snakemake.logging:Reason: Missing output files: ext/smcpp/pyproject.toml
+
+INFO:snakemake.logging:
+
+        cd ext/
+        git clone https://github.com/popgenmethods/smcpp.git
+        cat smc_setup_stdpopsim_patch > smcpp/setup.py
+        cat smc_pyproject_stdpopsim_patch > smcpp/pyproject.toml
+        cd smcpp/
+        pip install .
+        cd ..
+        
+WARNING:snakemake.logging:
+        cd ext/
+        git clone https://github.com/popgenmethods/smcpp.git
+        cat smc_setup_stdpopsim_patch > smcpp/setup.py
+        cat smc_pyproject_stdpopsim_patch > smcpp/pyproject.toml
+        cd smcpp/
+        pip install .
+        cd ..
+        
+Submitted job 352 with external jobid 'Submitted batch job 6421629'.
+WARNING:snakemake.logging:Submitted job 352 with external jobid 'Submitted batch job 6421629'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 412: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 412: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/YRI/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/YRI/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 412 with external jobid 'Submitted batch job 6421630'.
+WARNING:snakemake.logging:Submitted job 412 with external jobid 'Submitted batch job 6421630'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 217: Downloading grapes
+INFO:snakemake.logging:Job 217: Downloading grapes
+Reason: Missing output files: ext/grapes/multi_grapes
+INFO:snakemake.logging:Reason: Missing output files: ext/grapes/multi_grapes
+
+INFO:snakemake.logging:
+
+        cd ext/
+        wget -c https://github.com/BioPP/grapes/releases/download/v1.1.0/grapes-x86_64-bin-static-1.1.0-1.tar.gz
+        tar -xvf grapes-x86_64-bin-static-1.1.0-1.tar.gz 
+        rm -f grapes-x86_64-bin-static-1.1.0-1.tar.gz
+        cd ..       
+        
+WARNING:snakemake.logging:
+        cd ext/
+        wget -c https://github.com/BioPP/grapes/releases/download/v1.1.0/grapes-x86_64-bin-static-1.1.0-1.tar.gz
+        tar -xvf grapes-x86_64-bin-static-1.1.0-1.tar.gz 
+        rm -f grapes-x86_64-bin-static-1.1.0-1.tar.gz
+        cd ..       
+        
+Submitted job 217 with external jobid 'Submitted batch job 6421631'.
+WARNING:snakemake.logging:Submitted job 217 with external jobid 'Submitted batch job 6421631'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 7 with external jobid 'Submitted batch job 6421632'.
+WARNING:snakemake.logging:Submitted job 7 with external jobid 'Submitted batch job 6421632'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 292: downloading msmc
+INFO:snakemake.logging:Job 292: downloading msmc
+Reason: Code has changed since last execution
+INFO:snakemake.logging:Reason: Code has changed since last execution
+
+INFO:snakemake.logging:
+
+        cd ext
+	    git clone https://github.com/stschiff/msmc2.git
+	    cat msmc2_makefile_stdpopsim_patch > msmc2/Makefile
+	    cd msmc2
+	    make
+        cd ../../
+        
+WARNING:snakemake.logging:
+        cd ext
+	    git clone https://github.com/stschiff/msmc2.git
+	    cat msmc2_makefile_stdpopsim_patch > msmc2/Makefile
+	    cd msmc2
+	    make
+        cd ../../
+        
+Submitted job 292 with external jobid 'Submitted batch job 6421633'.
+WARNING:snakemake.logging:Submitted job 292 with external jobid 'Submitted batch job 6421633'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 420: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 420: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/CHB/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/CHB/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 420 with external jobid 'Submitted batch job 6421634'.
+WARNING:snakemake.logging:Submitted job 420 with external jobid 'Submitted batch job 6421634'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+rule n_t_write_bdd:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    jobid: 450
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=60, threads=1
+INFO:snakemake.logging:rule n_t_write_bdd:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    jobid: 450
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    wildcards: demog=OutOfAfrica_3G09
+    resources: mem_mb=5000, disk_mb=1000, tmpdir=/tmp, time=60, threads=1
+
+INFO:snakemake.logging:
+Submitted job 450 with external jobid 'Submitted batch job 6421635'.
+WARNING:snakemake.logging:Submitted job 450 with external jobid 'Submitted batch job 6421635'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:41 2023]
+Job 435: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 435: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/CEU/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/CEU/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 435 with external jobid 'Submitted batch job 6421636'.
+WARNING:snakemake.logging:Submitted job 435 with external jobid 'Submitted batch job 6421636'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:42 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:42 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 8 with external jobid 'Submitted batch job 6421637'.
+WARNING:snakemake.logging:Submitted job 8 with external jobid 'Submitted batch job 6421637'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:42 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:42 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 1 with external jobid 'Submitted batch job 6421638'.
+WARNING:snakemake.logging:Submitted job 1 with external jobid 'Submitted batch job 6421638'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:42 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:42 2023]
+Job 444: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 444: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/CEU/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/CEU/.scripts_copied
+
+INFO:snakemake.logging:
+Submitted job 444 with external jobid 'Submitted batch job 6421639'.
+WARNING:snakemake.logging:Submitted job 444 with external jobid 'Submitted batch job 6421639'.
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:08:42 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:42 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 9 with external jobid 'Submitted batch job 6421640'.
+WARNING:snakemake.logging:Submitted job 9 with external jobid 'Submitted batch job 6421640'.
+[Mon Jan 30 13:08:49 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:49 2023]
+Finished job 107.
+INFO:snakemake.logging:Finished job 107.
+1 of 452 steps (0.2%) done
+INFO:snakemake.logging:1 of 452 steps (0.2%) done
+[Mon Jan 30 13:08:52 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:52 2023]
+Finished job 438.
+INFO:snakemake.logging:Finished job 438.
+2 of 452 steps (0.4%) done
+INFO:snakemake.logging:2 of 452 steps (0.4%) done
+[Mon Jan 30 13:08:54 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:08:54 2023]
+Finished job 423.
+INFO:snakemake.logging:Finished job 423.
+3 of 452 steps (1%) done
+INFO:snakemake.logging:3 of 452 steps (1%) done
+[Mon Jan 30 13:09:29 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:29 2023]
+Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421612
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421612
+
+Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421612, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421612, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 2.
+WARNING:snakemake.logging:Trying to restart job 2.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:29 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:29 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 2 with external jobid 'Submitted batch job 6421643'.
+WARNING:snakemake.logging:Submitted job 2 with external jobid 'Submitted batch job 6421643'.
+[Mon Jan 30 13:09:30 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:30 2023]
+Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421613
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421613
+
+Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421613, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421613, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 10.
+WARNING:snakemake.logging:Trying to restart job 10.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:30 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:30 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 10 with external jobid 'Submitted batch job 6421644'.
+WARNING:snakemake.logging:Submitted job 10 with external jobid 'Submitted batch job 6421644'.
+[Mon Jan 30 13:09:31 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:31 2023]
+Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421615
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421615
+
+Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421615, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421615, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 3.
+WARNING:snakemake.logging:Trying to restart job 3.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:31 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:31 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 3 with external jobid 'Submitted batch job 6421645'.
+WARNING:snakemake.logging:Submitted job 3 with external jobid 'Submitted batch job 6421645'.
+[Mon Jan 30 13:09:32 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:32 2023]
+Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421617
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421617
+
+Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421617, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421617, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 11.
+WARNING:snakemake.logging:Trying to restart job 11.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:32 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:32 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 11 with external jobid 'Submitted batch job 6421646'.
+WARNING:snakemake.logging:Submitted job 11 with external jobid 'Submitted batch job 6421646'.
+[Mon Jan 30 13:09:33 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:33 2023]
+Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421618
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421618
+
+Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421618, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421618, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 4.
+WARNING:snakemake.logging:Trying to restart job 4.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:33 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:33 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 4 with external jobid 'Submitted batch job 6421647'.
+WARNING:snakemake.logging:Submitted job 4 with external jobid 'Submitted batch job 6421647'.
+[Mon Jan 30 13:09:34 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:34 2023]
+Finished job 417.
+INFO:snakemake.logging:Finished job 417.
+4 of 452 steps (1%) done
+INFO:snakemake.logging:4 of 452 steps (1%) done
+[Mon Jan 30 13:09:35 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:35 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421620
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421620
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421620, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421620, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 162.
+WARNING:snakemake.logging:Trying to restart job 162.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:35 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:35 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6421648'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6421648'.
+[Mon Jan 30 13:09:36 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:36 2023]
+Finished job 447.
+INFO:snakemake.logging:Finished job 447.
+5 of 452 steps (1%) done
+INFO:snakemake.logging:5 of 452 steps (1%) done
+[Mon Jan 30 13:09:37 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:37 2023]
+Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421622
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421622
+
+Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421622, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421622, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 12.
+WARNING:snakemake.logging:Trying to restart job 12.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:37 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:37 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 12 with external jobid 'Submitted batch job 6421650'.
+WARNING:snakemake.logging:Submitted job 12 with external jobid 'Submitted batch job 6421650'.
+[Mon Jan 30 13:09:38 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:38 2023]
+Finished job 432.
+INFO:snakemake.logging:Finished job 432.
+6 of 452 steps (1%) done
+INFO:snakemake.logging:6 of 452 steps (1%) done
+[Mon Jan 30 13:09:39 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:39 2023]
+Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421624
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421624
+
+Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421624, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421624, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 5.
+WARNING:snakemake.logging:Trying to restart job 5.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:39 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:39 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 5 with external jobid 'Submitted batch job 6421651'.
+WARNING:snakemake.logging:Submitted job 5 with external jobid 'Submitted batch job 6421651'.
+[Mon Jan 30 13:09:40 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:40 2023]
+Finished job 441.
+INFO:snakemake.logging:Finished job 441.
+7 of 452 steps (2%) done
+INFO:snakemake.logging:7 of 452 steps (2%) done
+[Mon Jan 30 13:09:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:41 2023]
+Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421626
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421626
+
+Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421626, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421626, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 6.
+WARNING:snakemake.logging:Trying to restart job 6.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 6 with external jobid 'Submitted batch job 6421652'.
+WARNING:snakemake.logging:Submitted job 6 with external jobid 'Submitted batch job 6421652'.
+[Mon Jan 30 13:09:42 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:42 2023]
+Finished job 426.
+INFO:snakemake.logging:Finished job 426.
+8 of 452 steps (2%) done
+INFO:snakemake.logging:8 of 452 steps (2%) done
+[Mon Jan 30 13:09:43 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:43 2023]
+Finished job 429.
+INFO:snakemake.logging:Finished job 429.
+9 of 452 steps (2%) done
+INFO:snakemake.logging:9 of 452 steps (2%) done
+[Mon Jan 30 13:09:45 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:45 2023]
+Finished job 412.
+INFO:snakemake.logging:Finished job 412.
+10 of 452 steps (2%) done
+INFO:snakemake.logging:10 of 452 steps (2%) done
+[Mon Jan 30 13:09:46 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:46 2023]
+Finished job 217.
+INFO:snakemake.logging:Finished job 217.
+11 of 452 steps (2%) done
+INFO:snakemake.logging:11 of 452 steps (2%) done
+[Mon Jan 30 13:09:47 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:47 2023]
+Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421632
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421632
+
+Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421632, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421632, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 7.
+WARNING:snakemake.logging:Trying to restart job 7.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:47 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:47 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 7 with external jobid 'Submitted batch job 6421654'.
+WARNING:snakemake.logging:Submitted job 7 with external jobid 'Submitted batch job 6421654'.
+[Mon Jan 30 13:09:48 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:48 2023]
+Finished job 292.
+INFO:snakemake.logging:Finished job 292.
+12 of 452 steps (3%) done
+INFO:snakemake.logging:12 of 452 steps (3%) done
+[Mon Jan 30 13:09:49 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:49 2023]
+Finished job 420.
+INFO:snakemake.logging:Finished job 420.
+13 of 452 steps (3%) done
+INFO:snakemake.logging:13 of 452 steps (3%) done
+[Mon Jan 30 13:09:50 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:50 2023]
+Finished job 450.
+INFO:snakemake.logging:Finished job 450.
+14 of 452 steps (3%) done
+INFO:snakemake.logging:14 of 452 steps (3%) done
+[Mon Jan 30 13:09:51 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:51 2023]
+Finished job 435.
+INFO:snakemake.logging:Finished job 435.
+15 of 452 steps (3%) done
+INFO:snakemake.logging:15 of 452 steps (3%) done
+[Mon Jan 30 13:09:52 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:52 2023]
+Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421637
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421637
+
+Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421637, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421637, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 8.
+WARNING:snakemake.logging:Trying to restart job 8.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:52 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:52 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 8 with external jobid 'Submitted batch job 6421655'.
+WARNING:snakemake.logging:Submitted job 8 with external jobid 'Submitted batch job 6421655'.
+[Mon Jan 30 13:09:53 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:53 2023]
+Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421638
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421638
+
+Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421638, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421638, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 1.
+WARNING:snakemake.logging:Trying to restart job 1.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:53 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:53 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 1 with external jobid 'Submitted batch job 6421656'.
+WARNING:snakemake.logging:Submitted job 1 with external jobid 'Submitted batch job 6421656'.
+[Mon Jan 30 13:09:54 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:54 2023]
+Finished job 444.
+INFO:snakemake.logging:Finished job 444.
+16 of 452 steps (4%) done
+INFO:snakemake.logging:16 of 452 steps (4%) done
+[Mon Jan 30 13:09:55 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:55 2023]
+Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421640
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421640
+
+Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421640, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421640, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 9.
+WARNING:snakemake.logging:Trying to restart job 9.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:09:55 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:09:55 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 9 with external jobid 'Submitted batch job 6421658'.
+WARNING:snakemake.logging:Submitted job 9 with external jobid 'Submitted batch job 6421658'.
+[Mon Jan 30 13:10:06 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:06 2023]
+Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421643
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421643
+
+Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421643, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421643, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 2.
+WARNING:snakemake.logging:Trying to restart job 2.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:06 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:06 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 2 with external jobid 'Submitted batch job 6421659'.
+WARNING:snakemake.logging:Submitted job 2 with external jobid 'Submitted batch job 6421659'.
+[Mon Jan 30 13:10:07 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:07 2023]
+Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421644
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421644
+
+Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421644, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421644, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 10.
+WARNING:snakemake.logging:Trying to restart job 10.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:07 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:07 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 10 with external jobid 'Submitted batch job 6421660'.
+WARNING:snakemake.logging:Submitted job 10 with external jobid 'Submitted batch job 6421660'.
+[Mon Jan 30 13:10:08 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:08 2023]
+Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421645
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421645
+
+Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421645, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421645, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 3.
+WARNING:snakemake.logging:Trying to restart job 3.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:08 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:08 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 3 with external jobid 'Submitted batch job 6421661'.
+WARNING:snakemake.logging:Submitted job 3 with external jobid 'Submitted batch job 6421661'.
+[Mon Jan 30 13:10:09 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:09 2023]
+Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421646
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421646
+
+Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421646, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421646, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 11.
+WARNING:snakemake.logging:Trying to restart job 11.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:09 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:09 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 11 with external jobid 'Submitted batch job 6421662'.
+WARNING:snakemake.logging:Submitted job 11 with external jobid 'Submitted batch job 6421662'.
+[Mon Jan 30 13:10:10 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:10 2023]
+Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421647
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421647
+
+Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421647, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421647, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 4.
+WARNING:snakemake.logging:Trying to restart job 4.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:10 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:10 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 4 with external jobid 'Submitted batch job 6421663'.
+WARNING:snakemake.logging:Submitted job 4 with external jobid 'Submitted batch job 6421663'.
+[Mon Jan 30 13:10:11 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:11 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421648
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421648
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421648, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421648, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 162.
+WARNING:snakemake.logging:Trying to restart job 162.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:11 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:11 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6421664'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6421664'.
+[Mon Jan 30 13:10:12 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:12 2023]
+Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421650
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421650
+
+Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421650, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421650, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 12.
+WARNING:snakemake.logging:Trying to restart job 12.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:12 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:12 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 12 with external jobid 'Submitted batch job 6421665'.
+WARNING:snakemake.logging:Submitted job 12 with external jobid 'Submitted batch job 6421665'.
+[Mon Jan 30 13:10:37 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:37 2023]
+Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421651
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421651
+
+Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421651, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421651, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 5.
+WARNING:snakemake.logging:Trying to restart job 5.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:37 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:37 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 5 with external jobid 'Submitted batch job 6421666'.
+WARNING:snakemake.logging:Submitted job 5 with external jobid 'Submitted batch job 6421666'.
+[Mon Jan 30 13:10:38 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:38 2023]
+Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421652
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421652
+
+Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421652, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421652, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 6.
+WARNING:snakemake.logging:Trying to restart job 6.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:38 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:38 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 6 with external jobid 'Submitted batch job 6421667'.
+WARNING:snakemake.logging:Submitted job 6 with external jobid 'Submitted batch job 6421667'.
+[Mon Jan 30 13:10:39 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:39 2023]
+Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421654
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421654
+
+Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421654, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421654, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 7.
+WARNING:snakemake.logging:Trying to restart job 7.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:39 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:39 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 7 with external jobid 'Submitted batch job 6421668'.
+WARNING:snakemake.logging:Submitted job 7 with external jobid 'Submitted batch job 6421668'.
+[Mon Jan 30 13:10:40 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:40 2023]
+Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421655
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421655
+
+Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421655, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421655, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 8.
+WARNING:snakemake.logging:Trying to restart job 8.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:40 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:40 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 8 with external jobid 'Submitted batch job 6421669'.
+WARNING:snakemake.logging:Submitted job 8 with external jobid 'Submitted batch job 6421669'.
+[Mon Jan 30 13:10:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:41 2023]
+Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421656
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421656
+
+Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421656, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421656, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 1.
+WARNING:snakemake.logging:Trying to restart job 1.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:41 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:41 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 1 with external jobid 'Submitted batch job 6421670'.
+WARNING:snakemake.logging:Submitted job 1 with external jobid 'Submitted batch job 6421670'.
+[Mon Jan 30 13:10:43 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:43 2023]
+Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421658
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421658
+
+Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421658, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421658, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 9.
+WARNING:snakemake.logging:Trying to restart job 9.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:43 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:43 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 9 with external jobid 'Submitted batch job 6421671'.
+WARNING:snakemake.logging:Submitted job 9 with external jobid 'Submitted batch job 6421671'.
+[Mon Jan 30 13:10:59 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:59 2023]
+Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421659
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421659
+
+Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421659, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421659, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 2.
+WARNING:snakemake.logging:Trying to restart job 2.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:10:59 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:10:59 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 2 with external jobid 'Submitted batch job 6421673'.
+WARNING:snakemake.logging:Submitted job 2 with external jobid 'Submitted batch job 6421673'.
+[Mon Jan 30 13:11:00 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:00 2023]
+Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421660
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421660
+
+Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421660, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421660, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 10.
+WARNING:snakemake.logging:Trying to restart job 10.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:00 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:00 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    jobid: 10
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 10 with external jobid 'Submitted batch job 6421674'.
+WARNING:snakemake.logging:Submitted job 10 with external jobid 'Submitted batch job 6421674'.
+[Mon Jan 30 13:11:01 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:01 2023]
+Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421661
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421661
+
+Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421661, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421661, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 3.
+WARNING:snakemake.logging:Trying to restart job 3.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:01 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:01 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 3 with external jobid 'Submitted batch job 6421675'.
+WARNING:snakemake.logging:Submitted job 3 with external jobid 'Submitted batch job 6421675'.
+[Mon Jan 30 13:11:02 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:02 2023]
+Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421662
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421662
+
+Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421662, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421662, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 11.
+WARNING:snakemake.logging:Trying to restart job 11.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:02 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:02 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 11 with external jobid 'Submitted batch job 6421676'.
+WARNING:snakemake.logging:Submitted job 11 with external jobid 'Submitted batch job 6421676'.
+[Mon Jan 30 13:11:03 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:03 2023]
+Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421663
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421663
+
+Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421663, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421663, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 4.
+WARNING:snakemake.logging:Trying to restart job 4.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:03 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:03 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 4 with external jobid 'Submitted batch job 6421677'.
+WARNING:snakemake.logging:Submitted job 4 with external jobid 'Submitted batch job 6421677'.
+[Mon Jan 30 13:11:04 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:04 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421664
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421664
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421664, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421664, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 162.
+WARNING:snakemake.logging:Trying to restart job 162.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:04 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:04 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat, ext/dfe-alpha-release-2.16/est_dfe
+
+INFO:snakemake.logging:
+
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+WARNING:snakemake.logging:
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+Submitted job 162 with external jobid 'Submitted batch job 6421678'.
+WARNING:snakemake.logging:Submitted job 162 with external jobid 'Submitted batch job 6421678'.
+[Mon Jan 30 13:11:05 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:05 2023]
+Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421665
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421665
+
+Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421665, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421665, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 12.
+WARNING:snakemake.logging:Trying to restart job 12.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:05 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:05 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    jobid: 12
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 12 with external jobid 'Submitted batch job 6421679'.
+WARNING:snakemake.logging:Submitted job 12 with external jobid 'Submitted batch job 6421679'.
+[Mon Jan 30 13:11:18 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:18 2023]
+Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421673
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 2
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421673
+
+Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421673, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 2, external: Submitted batch job 6421673, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.2.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:25 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:25 2023]
+Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421666
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421666
+
+Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421666, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421666, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 5.
+WARNING:snakemake.logging:Trying to restart job 5.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:25 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:25 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 5 with external jobid 'Submitted batch job 6421680'.
+WARNING:snakemake.logging:Submitted job 5 with external jobid 'Submitted batch job 6421680'.
+[Mon Jan 30 13:11:26 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:26 2023]
+Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421667
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421667
+
+Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421667, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421667, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 6.
+WARNING:snakemake.logging:Trying to restart job 6.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:26 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:26 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 6 with external jobid 'Submitted batch job 6421681'.
+WARNING:snakemake.logging:Submitted job 6 with external jobid 'Submitted batch job 6421681'.
+[Mon Jan 30 13:11:27 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:27 2023]
+Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421668
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421668
+
+Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421668, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421668, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 7.
+WARNING:snakemake.logging:Trying to restart job 7.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:27 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:27 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 7 with external jobid 'Submitted batch job 6421682'.
+WARNING:snakemake.logging:Submitted job 7 with external jobid 'Submitted batch job 6421682'.
+[Mon Jan 30 13:11:28 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:28 2023]
+Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421669
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421669
+
+Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421669, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421669, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 8.
+WARNING:snakemake.logging:Trying to restart job 8.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:28 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:28 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 8 with external jobid 'Submitted batch job 6421683'.
+WARNING:snakemake.logging:Submitted job 8 with external jobid 'Submitted batch job 6421683'.
+[Mon Jan 30 13:11:29 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:29 2023]
+Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421670
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421670
+
+Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421670, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421670, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 1.
+WARNING:snakemake.logging:Trying to restart job 1.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:30 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:30 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 1 with external jobid 'Submitted batch job 6421684'.
+WARNING:snakemake.logging:Submitted job 1 with external jobid 'Submitted batch job 6421684'.
+[Mon Jan 30 13:11:31 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:31 2023]
+Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421671
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421671
+
+Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421671, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421671, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+Trying to restart job 9.
+WARNING:snakemake.logging:Trying to restart job 9.
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Mon Jan 30 13:11:31 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:31 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees; Code has changed since last execution
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: mem_mb=10000, disk_mb=1000, tmpdir=/tmp, time=3000, threads=1
+
+INFO:snakemake.logging:
+Submitted job 9 with external jobid 'Submitted batch job 6421685'.
+WARNING:snakemake.logging:Submitted job 9 with external jobid 'Submitted batch job 6421685'.
+[Mon Jan 30 13:11:42 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:42 2023]
+Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421680
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 5
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421680
+
+Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421680, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 5, external: Submitted batch job 6421680, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.5.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:43 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:43 2023]
+Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421681
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 6
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421681
+
+Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421681, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 6, external: Submitted batch job 6421681, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.6.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:47 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:47 2023]
+Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421674
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 10
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421674
+
+Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421674, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 10, external: Submitted batch job 6421674, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.10.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:48 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:48 2023]
+Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421675
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 3
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421675
+
+Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421675, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 3, external: Submitted batch job 6421675, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.3.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:49 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:49 2023]
+Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421676
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 11
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421676
+
+Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421676, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 11, external: Submitted batch job 6421676, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.11.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:50 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:50 2023]
+Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421677
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 4
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421677
+
+Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421677, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 4, external: Submitted batch job 6421677, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.4.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:51 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:51 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421678
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    cluster_jobid: Submitted batch job 6421678
+
+Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421678, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule dfe_download_dfe_alpha on cluster (jobid: 162, external: Submitted batch job 6421678, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.dfe_download_dfe_alpha.162.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:52 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:52 2023]
+Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421679
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 12
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421679
+
+Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421679, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 12, external: Submitted batch job 6421679, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.12.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:11:54 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:11:54 2023]
+Finished job 352.
+INFO:snakemake.logging:Finished job 352.
+17 of 452 steps (4%) done
+INFO:snakemake.logging:17 of 452 steps (4%) done
+[Mon Jan 30 13:12:06 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:12:06 2023]
+Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421682
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 7
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421682
+
+Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421682, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 7, external: Submitted batch job 6421682, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.7.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:12:07 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:12:07 2023]
+Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421683
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 8
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    cluster_jobid: Submitted batch job 6421683
+
+Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421683, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 8, external: Submitted batch job 6421683, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.8.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:12:08 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:12:08 2023]
+Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421684
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 1
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    cluster_jobid: Submitted batch job 6421684
+
+Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421684, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 1, external: Submitted batch job 6421684, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.1.sh). For error details see the cluster log and the log files of the involved rule(s).
+[Mon Jan 30 13:12:09 2023]
+INFO:snakemake.logging:[Mon Jan 30 13:12:09 2023]
+Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421685
+
+ERROR:snakemake.logging:Error in rule simulation_simulation:
+    jobid: 9
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    cluster_jobid: Submitted batch job 6421685
+
+Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421685, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+ERROR:snakemake.logging:Error executing rule simulation_simulation on cluster (jobid: 9, external: Submitted batch job 6421685, jobscript: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/.snakemake/tmp.w_9mibsd/snakejob.simulation_simulation.9.sh). For error details see the cluster log and the log files of the involved rule(s).
+Exiting because a job execution failed. Look above for error message
+ERROR:snakemake.logging:Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-01-30T130835.600479.snakemake.log
+WARNING:snakemake.logging:Complete log: .snakemake/log/2023-01-30T130835.600479.snakemake.log

@@ -1,0 +1,36 @@
+Tue Jan 31 08:29:22 MST 2023
+dfe-alpha-release-2.16/
+dfe-alpha-release-2.16/vec_sizes.hd
+dfe-alpha-release-2.16/routine_library.c
+dfe-alpha-release-2.16/bctmat01.hd
+dfe-alpha-release-2.16/Makefile
+dfe-alpha-release-2.16/nrhdr.h
+dfe-alpha-release-2.16/seqlib.c
+dfe-alpha-release-2.16/est_dfe.c
+dfe-alpha-release-2.16/prop_muts_in_s_ranges.c
+dfe-alpha-release-2.16/routine_library.h
+dfe-alpha-release-2.16/bctmat01.c
+dfe-alpha-release-2.16/tmatrix_routines.c
+dfe-alpha-release-2.16/nrutil.h
+dfe-alpha-release-2.16/est_dfe.h
+dfe-alpha-release-2.16/example-config-file-for-est_dfe-site_class-1.txt
+dfe-alpha-release-2.16/seqdefs.h
+dfe-alpha-release-2.16/genlib.c
+dfe-alpha-release-2.16/nrlib.c
+dfe-alpha-release-2.16/example-config-file-for-est_alpha_omega.txt
+dfe-alpha-release-2.16/tmatrix_routines.hd
+dfe-alpha-release-2.16/dfe-alpha-documention.pdf
+dfe-alpha-release-2.16/README
+dfe-alpha-release-2.16/example-config-file-for-est_dfe-site_class-0.txt
+dfe-alpha-release-2.16/seqlib.h
+dfe-alpha-release-2.16/libhdr
+dfe-alpha-release-2.16/est_alpha_omega.c
+dfe-alpha-release-2.16/nrutil.c
+dfe-alpha-release-2.16/defs.h
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/bin/gcc -o est_dfe est_dfe.c routine_library.o bctmat01.c genlib.o nrlib.o nrutil.o tmatrix_routines.o -lm -lgsl -lgslcblas -O4 -fcommon -I/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/include -L/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib 
+/groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/CEU/.scripts_copied
+/groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/CEU/.scripts_copied
+/groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/CHB/.scripts_copied
+/groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/YRI/.scripts_copied
+Tue Jan 31 08:29:55 MST 2023
+Detailed performance metrics for this job will be available at https://metrics.hpc.arizona.edu/#job_viewer?action=show&realm=SUPREMM&resource_id=73&local_job_id=6434712 by 8am on 2023/02/01.

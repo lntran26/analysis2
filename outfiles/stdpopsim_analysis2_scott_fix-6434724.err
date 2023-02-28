@@ -1,0 +1,142 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"gcc"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore-cache load "gcc"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 10
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count    min threads    max threads
+----------  -------  -------------  -------------
+all               1              1              1
+simulation       12              1              1
+total            13              1              1
+
+Select jobs to execute...
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    jobid: 5
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr10
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    jobid: 7
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr3
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    jobid: 1
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr3
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    jobid: 6
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr21.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr21
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    jobid: 8
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr10
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    jobid: 2
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr10
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+[Tue Jan 31 08:39:46 2023]
+rule simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/genetic_maps.py:125: UserWarning: Recombination map has length 135503693.0, which is longer than chromosome length 133797422. The former will be used.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/genetic_maps.py:125: UserWarning: Recombination map has length 135503693.0, which is longer than chromosome length 133797422. The former will be used.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/genetic_maps.py:125: UserWarning: Recombination map has length 48100155.0, which is longer than chromosome length 46709983. The former will be used.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/genetic_maps.py:125: UserWarning: Recombination map has length 135503693.0, which is longer than chromosome length 133797422. The former will be used.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/genetic_maps.py:125: UserWarning: Recombination map has length 135503693.0, which is longer than chromosome length 133797422. The former will be used.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/genetic_maps.py:125: UserWarning: Recombination map has length 48100155.0, which is longer than chromosome length 46709983. The former will be used.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/genetic_maps.py:125: UserWarning: Recombination map has length 48100155.0, which is longer than chromosome length 46709983. The former will be used.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/lib/python3.10/site-packages/stdpopsim/slim_engine.py:1455: SLiMScalingFactorWarning: You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.
+  warnings.warn(
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-01-31T083942.787476.snakemake.log

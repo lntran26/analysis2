@@ -1,0 +1,712 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"gcc"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore-cache load "gcc"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+localrules directive specifies rules that are not present in the Snakefile:
+	gone_clone
+	sp_download
+	gone_params
+	clone_smcpp
+	gone_copy
+	download_msmc
+	download_genetic_map
+
+CRITICAL:snakemake.logging:localrules directive specifies rules that are not present in the Snakefile:
+	gone_clone
+	sp_download
+	gone_params
+	clone_smcpp
+	gone_copy
+	download_msmc
+	download_genetic_map
+
+Building DAG of jobs...
+WARNING:snakemake.logging:Building DAG of jobs...
+Using shell: /usr/bin/bash
+WARNING:snakemake.logging:Using shell: /usr/bin/bash
+Provided cores: 10
+WARNING:snakemake.logging:Provided cores: 10
+Rules claiming more threads will be scaled down.
+WARNING:snakemake.logging:Rules claiming more threads will be scaled down.
+Job stats:
+job                           count    min threads    max threads
+--------------------------  -------  -------------  -------------
+all                               1              1              1
+dfe_dadi_generate_cache          18              8              8
+dfe_dadi_infer_dfe               18              8              8
+dfe_dadi_infer_dm                18              8              8
+dfe_download_dfe_alpha            1              1              1
+dfe_generate_dadi_fs             18              1              1
+dfe_generate_dfe_alpha_fs        18              1              1
+dfe_generate_grapes_fs           18              1              1
+dfe_generate_polydfe_fs          18              1              1
+dfe_get_dadi_dfe_bestfits        18              1              1
+dfe_get_dfe_alpha_bestfits       18              1              1
+dfe_get_grapes_bestfits          18              1              1
+dfe_get_polydfe_bestfit          18              1              1
+dfe_plot_results                  3              1              1
+dfe_run_dfe_alpha                18              1              1
+dfe_run_grapes                   18              1              1
+dfe_run_polydfe                  18              1              1
+n_t_all_plot                      1              1              1
+n_t_compound_gone                 1              1              1
+n_t_compound_msmc                 1              1              1
+n_t_compound_smcpp                1              1              1
+n_t_compound_stairwayplot         1              1              1
+n_t_convert_msmc                 12              1              1
+n_t_gather_inference              1              1              1
+n_t_gone_copy                    12              1              1
+n_t_gone_prep_inputs             12              1              1
+n_t_gone_run                     12              8              8
+n_t_plot_compound_gone            1              1              1
+n_t_plot_compound_msmc            1              1              1
+n_t_plot_compound_smcpp           1              1              1
+n_t_plot_compound_stairway        1              1              1
+n_t_run_msmc                     12              8              8
+n_t_run_smcpp                    12             10             10
+n_t_run_stairwayplot             12             10             10
+n_t_smcpp_plot                   12              1              1
+n_t_ts_to_multihep               36              1              1
+n_t_ts_to_smc                    36              1              1
+n_t_write_bdd                     1              1              1
+simulation_simulation            12              1              1
+total                           448              1             10
+
+WARNING:snakemake.logging:Job stats:
+job                           count    min threads    max threads
+--------------------------  -------  -------------  -------------
+all                               1              1              1
+dfe_dadi_generate_cache          18              8              8
+dfe_dadi_infer_dfe               18              8              8
+dfe_dadi_infer_dm                18              8              8
+dfe_download_dfe_alpha            1              1              1
+dfe_generate_dadi_fs             18              1              1
+dfe_generate_dfe_alpha_fs        18              1              1
+dfe_generate_grapes_fs           18              1              1
+dfe_generate_polydfe_fs          18              1              1
+dfe_get_dadi_dfe_bestfits        18              1              1
+dfe_get_dfe_alpha_bestfits       18              1              1
+dfe_get_grapes_bestfits          18              1              1
+dfe_get_polydfe_bestfit          18              1              1
+dfe_plot_results                  3              1              1
+dfe_run_dfe_alpha                18              1              1
+dfe_run_grapes                   18              1              1
+dfe_run_polydfe                  18              1              1
+n_t_all_plot                      1              1              1
+n_t_compound_gone                 1              1              1
+n_t_compound_msmc                 1              1              1
+n_t_compound_smcpp                1              1              1
+n_t_compound_stairwayplot         1              1              1
+n_t_convert_msmc                 12              1              1
+n_t_gather_inference              1              1              1
+n_t_gone_copy                    12              1              1
+n_t_gone_prep_inputs             12              1              1
+n_t_gone_run                     12              8              8
+n_t_plot_compound_gone            1              1              1
+n_t_plot_compound_msmc            1              1              1
+n_t_plot_compound_smcpp           1              1              1
+n_t_plot_compound_stairway        1              1              1
+n_t_run_msmc                     12              8              8
+n_t_run_smcpp                    12             10             10
+n_t_run_stairwayplot             12             10             10
+n_t_smcpp_plot                   12              1              1
+n_t_ts_to_multihep               36              1              1
+n_t_ts_to_smc                    36              1              1
+n_t_write_bdd                     1              1              1
+simulation_simulation            12              1              1
+total                           448              1             10
+
+Select jobs to execute...
+WARNING:snakemake.logging:Select jobs to execute...
+
+INFO:snakemake.logging:
+[Tue Jan 31 08:29:35 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:35 2023]
+rule n_t_write_bdd:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    jobid: 450
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    wildcards: demog=OutOfAfrica_3G09
+    resources: tmpdir=/tmp
+INFO:snakemake.logging:rule n_t_write_bdd:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    jobid: 450
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/plots/OutOfAfrica_3G09/coal_estimated_Ne_t.csv
+    wildcards: demog=OutOfAfrica_3G09
+    resources: tmpdir=/tmp
+
+INFO:snakemake.logging:
+[Tue Jan 31 08:29:35 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:35 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    jobid: 4
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1675701734/sim_chr3.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1675701734, chrms=chr3
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+INFO:snakemake.logging:
+[Tue Jan 31 08:29:35 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:35 2023]
+Job 417: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 417: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/CEU/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1845187043/CEU/.scripts_copied
+
+INFO:snakemake.logging:
+[Tue Jan 31 08:29:35 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:35 2023]
+Job 162: Downloaded DFE-alpha
+INFO:snakemake.logging:Job 162: Downloaded DFE-alpha
+Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+INFO:snakemake.logging:Reason: Missing output files: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+
+INFO:snakemake.logging:
+
+INFO:snakemake.logging:
+[Tue Jan 31 08:29:36 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:36 2023]
+Job 438: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 438: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/CHB/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1845187043/CHB/.scripts_copied
+
+INFO:snakemake.logging:
+[Tue Jan 31 08:29:36 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:36 2023]
+Job 423: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 423: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/YRI/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/none/none/1675701734/YRI/.scripts_copied
+
+INFO:snakemake.logging:
+[Tue Jan 31 08:29:36 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:36 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    jobid: 3
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/none/none/1845187043/sim_chr21.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=none, annots=none, seeds=1845187043, chrms=chr21
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+INFO:snakemake.logging:
+--2023-01-31 08:29:36--  https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+[Tue Jan 31 08:29:36 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:36 2023]
+Job 444: copying GONE scripts into individual working directories
+INFO:snakemake.logging:Job 444: copying GONE scripts into individual working directories
+Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/CEU/.scripts_copied
+INFO:snakemake.logging:Reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/inference/OutOfAfrica_3G09/gone/Gamma_H17/ensembl_havana_104_exons/1675701734/CEU/.scripts_copied
+
+INFO:snakemake.logging:
+Resolving sourceforge.net (sourceforge.net)... 104.18.11.128, 104.18.10.128, 2606:4700::6812:b80, ...
+Connecting to sourceforge.net (sourceforge.net)|104.18.11.128|:443... connected.
+[Tue Jan 31 08:29:36 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:36 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    jobid: 9
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1845187043/sim_chr21.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1845187043, chrms=chr21
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+INFO:snakemake.logging:
+HTTP request sent, awaiting response... [Tue Jan 31 08:29:36 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:36 2023]
+rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+INFO:snakemake.logging:rule simulation_simulation:
+    output: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    jobid: 11
+    reason: Missing output files: /groups/rgutenk/lnt/projects/stdpopsim/analysis2/results/simulated_data/OutOfAfrica_3G09/Gamma_H17/ensembl_havana_104_exons/1675701734/sim_chr10.trees
+    wildcards: demog=OutOfAfrica_3G09, dfes=Gamma_H17, annots=ensembl_havana_104_exons, seeds=1675701734, chrms=chr10
+    resources: tmpdir=/tmp, time=3000, mem_mb=10000
+
+INFO:snakemake.logging:
+302 Found
+Location: https://downloads.sourceforge.net/project/dfe-alpha-k-e-w/dfe-alpha-release-2.16.tar.gz?ts=gAAAAABj2TPgXJigRNDHJ2xWAY8zWG0qkFM2m0Q4GUCcc9U0bPJVciv5D7Ol2dEziPTn6OqNU3DgmSsoc6i6B6IrAIudB7WyNg%3D%3D&use_mirror=pilotfiber&r= [following]
+--2023-01-31 08:29:36--  https://downloads.sourceforge.net/project/dfe-alpha-k-e-w/dfe-alpha-release-2.16.tar.gz?ts=gAAAAABj2TPgXJigRNDHJ2xWAY8zWG0qkFM2m0Q4GUCcc9U0bPJVciv5D7Ol2dEziPTn6OqNU3DgmSsoc6i6B6IrAIudB7WyNg%3D%3D&use_mirror=pilotfiber&r=
+Resolving downloads.sourceforge.net (downloads.sourceforge.net)... 204.68.111.105
+Connecting to downloads.sourceforge.net (downloads.sourceforge.net)|204.68.111.105|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://pilotfiber.dl.sourceforge.net/project/dfe-alpha-k-e-w/dfe-alpha-release-2.16.tar.gz [following]
+--2023-01-31 08:29:36--  https://pilotfiber.dl.sourceforge.net/project/dfe-alpha-k-e-w/dfe-alpha-release-2.16.tar.gz
+Resolving pilotfiber.dl.sourceforge.net (pilotfiber.dl.sourceforge.net)... 69.12.26.12
+Connecting to pilotfiber.dl.sourceforge.net (pilotfiber.dl.sourceforge.net)|69.12.26.12|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 243658 (238K) [application/x-gzip]
+Saving to: ‘download’
+
+     0K .......... .......... .......... .......... .......... 21%  272K 1s
+    50K .......... .......... .......... .......... .......... 42%  803K 0s
+   100K .......... .......... .......... .......... .......... 63%  808K 0s
+   150K .......... .......... .......... .......... .......... 84% 58.4M 0s
+   200K .......... .......... .......... .......              100%  617K=0.4s
+
+2023-01-31 08:29:36 (642 KB/s) - ‘download’ saved [243658/243658]
+
+In file included from est_dfe.c:11:
+bctmat01.hd:24:8: warning: type defaults to 'int' in declaration of 'mutq' [-Wimplicit-int]
+   24 | extern mutq(double a[maxnd+1][maxnd+1], int n1, int n2, int t,
+      |        ^~~~
+bctmat01.hd:29:8: warning: type defaults to 'int' in declaration of 'dumpmatrix' [-Wimplicit-int]
+   29 | extern dumpmatrix(double m[maxnd+1][maxnd+1], int s1, int rows, int s2,
+      |        ^~~~~~~~~~
+bctmat01.hd:32:8: warning: type defaults to 'int' in declaration of 'dumpvector' [-Wimplicit-int]
+   32 | extern dumpvector(double *v, int min, int max, char *s);
+      |        ^~~~~~~~~~
+bctmat01.hd:34:8: warning: type defaults to 'int' in declaration of 'computecumulant' [-Wimplicit-int]
+   34 | extern computecumulant(double *vec, double *results, int t);
+      |        ^~~~~~~~~~~~~~~
+bctmat01.hd:36:8: warning: type defaults to 'int' in declaration of 'matrix_compute_steady_state_allele_frequency_vector' [-Wimplicit-int]
+   36 | extern matrix_compute_steady_state_allele_frequency_vector(int nd,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bctmat01.hd:41:8: warning: type defaults to 'int' in declaration of 'setupmatrix' [-Wimplicit-int]
+   41 | extern setupmatrix(double a[maxnd+1][maxnd+1], int n1, int n2, double s, double h);
+      |        ^~~~~~~~~~~
+In file included from est_dfe.c:13:
+routine_library.h:5:8: warning: type defaults to 'int' in declaration of 'get_s_evaluated_vec' [-Wimplicit-int]
+    5 | extern get_s_evaluated_vec(double *s_evaluated_vec, int *n_s_evaluated,
+      |        ^~~~~~~~~~~~~~~~~~~
+routine_library.h:11:8: warning: type defaults to 'int' in declaration of 'get_s_ranges' [-Wimplicit-int]
+   11 | extern get_s_ranges(char *s_range_file, int *nranges, int maximum_s_ranges, struct rangestruct *s_ranges);
+      |        ^~~~~~~~~~~~
+routine_library.h:13:8: warning: type defaults to 'int' in declaration of 'get_data_path' [-Wimplicit-int]
+   13 | extern get_data_path(char *data_path);
+      |        ^~~~~~~~~~~~~
+routine_library.h:15:8: warning: type defaults to 'int' in declaration of 'set_up_file_name' [-Wimplicit-int]
+   15 | extern set_up_file_name(int n1, char *froot, char *file_name, char *data_path, int adv_muts);
+      |        ^~~~~~~~~~~~~~~~
+routine_library.h:22:8: warning: type defaults to 'int' in declaration of 'assign_int_from_read_buff' [-Wimplicit-int]
+   22 | extern assign_int_from_read_buff(int *res, char *buffer, int start);
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~
+routine_library.h:32:8: warning: type defaults to 'int' in declaration of 'read_const_pop_file_into_buffer' [-Wimplicit-int]
+   32 | extern read_const_pop_file_into_buffer(int n1, char *buffer, int file_size_bytes, char *const_pop_dir, char *const_pop_file);
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+routine_library.h:36:8: warning: type defaults to 'int' in declaration of 'interpret_command_line' [-Wimplicit-int]
+   36 | extern interpret_command_line(int argc, char *argv[], int *verbose_mode,
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+In file included from tmatrix_routines.hd:1,
+                 from est_dfe.c:14:
+bctmat01.hd:24:8: warning: type defaults to 'int' in declaration of 'mutq' [-Wimplicit-int]
+   24 | extern mutq(double a[maxnd+1][maxnd+1], int n1, int n2, int t,
+      |        ^~~~
+bctmat01.hd:29:8: warning: type defaults to 'int' in declaration of 'dumpmatrix' [-Wimplicit-int]
+   29 | extern dumpmatrix(double m[maxnd+1][maxnd+1], int s1, int rows, int s2,
+      |        ^~~~~~~~~~
+bctmat01.hd:32:8: warning: type defaults to 'int' in declaration of 'dumpvector' [-Wimplicit-int]
+   32 | extern dumpvector(double *v, int min, int max, char *s);
+      |        ^~~~~~~~~~
+bctmat01.hd:34:8: warning: type defaults to 'int' in declaration of 'computecumulant' [-Wimplicit-int]
+   34 | extern computecumulant(double *vec, double *results, int t);
+      |        ^~~~~~~~~~~~~~~
+bctmat01.hd:36:8: warning: type defaults to 'int' in declaration of 'matrix_compute_steady_state_allele_frequency_vector' [-Wimplicit-int]
+   36 | extern matrix_compute_steady_state_allele_frequency_vector(int nd,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bctmat01.hd:41:8: warning: type defaults to 'int' in declaration of 'setupmatrix' [-Wimplicit-int]
+   41 | extern setupmatrix(double a[maxnd+1][maxnd+1], int n1, int n2, double s, double h);
+      |        ^~~~~~~~~~~
+tmatrix_routines.hd:4:8: warning: type defaults to 'int' in declaration of 'tmiterate_special' [-Wimplicit-int]
+    4 | extern tmiterate_special(double a[maxnd+1][maxnd+1], double s, double h, double *mut1,
+      |        ^~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:8:8: warning: type defaults to 'int' in declaration of 'output_startingfreq_special' [-Wimplicit-int]
+    8 | extern output_startingfreq_special (int n1, int n2, double selcoeff, double *startingfreq, int t2,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:11:8: warning: type defaults to 'int' in declaration of 'output_steadystatefreq_special' [-Wimplicit-int]
+   11 | extern output_steadystatefreq_special(int n2, int n3, double selcoeff,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:15:8: warning: type defaults to 'int' in declaration of 'read_steadystatefreq_vectors' [-Wimplicit-int]
+   15 | extern read_steadystatefreq_vectors(int n2, char *fname,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:18:8: warning: type defaults to 'int' in declaration of 'assign_steadystatefreq_vector' [-Wimplicit-int]
+   18 | extern assign_steadystatefreq_vector(int n2, double steadystatefreq_vectors[nt2vals_max][nd_max],
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:21:8: warning: type defaults to 'int' in declaration of 'dump_t2_vec' [-Wimplicit-int]
+   21 | extern dump_t2_vec(int *t2_vec, int ntvals);
+      |        ^~~~~~~~~~~
+tmatrix_routines.hd:23:8: warning: type defaults to 'int' in declaration of 'read_in_t2_vec' [-Wimplicit-int]
+   23 | extern read_in_t2_vec(char *t2_file_name, int *t2_vec, int *n);
+      |        ^~~~~~~~~~~~~~
+tmatrix_routines.hd:25:8: warning: type defaults to 'int' in declaration of 'generate_n1_n2_t2_n3_t2_vectors' [-Wimplicit-int]
+   25 | extern generate_n1_n2_t2_n3_t2_vectors(int n2, int n3, char *t2_file_name, char *file_name,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:28:8: warning: type defaults to 'int' in declaration of 'output_binary_int' [-Wimplicit-int]
+   28 | extern output_binary_int(FILE *outf, int int_input);
+      |        ^~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:30:8: warning: type defaults to 'int' in declaration of 'output_binary_float' [-Wimplicit-int]
+   30 | extern output_binary_float(FILE *outf, float f);
+      |        ^~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:32:8: warning: type defaults to 'int' in declaration of 'generate_n2_t2_n3_t3_vectors' [-Wimplicit-int]
+   32 | extern generate_n2_t2_n3_t3_vectors(int n2, int n3, char *t2_file_name, char *t3_file_name,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:35:8: warning: type defaults to 'int' in declaration of 'generate_n3_t3_vectors' [-Wimplicit-int]
+   35 | extern generate_n3_t3_vectors(int n3, char *t3_file_name, char *outfile, double selcoeff);
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+tmatrix_routines.hd:37:8: warning: type defaults to 'int' in declaration of 'read_in_t2_vec' [-Wimplicit-int]
+   37 | extern read_in_t2_vec(char *t2_file_name, int *t2_vec, int *n);
+      |        ^~~~~~~~~~~~~~
+est_dfe.c:162:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  162 | set_up_fname(char *froot, char *file_name, char *data_dir, int str_len)
+      | ^~~~~~~~~~~~
+est_dfe.c:179:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  179 | print_stars(int n)
+      | ^~~~~~~~~~~
+est_dfe.c:188:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  188 | fold_distrib_sub(double sfs_vec[max_sample_size][max_sfs+1], int sfs_ind, int *sample_size,
+      | ^~~~~~~~~~~~~~~~
+est_dfe.c:211:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  211 | get_sfs(double sfs_vec[max_sample_size][max_sfs+1], int sfs_ind, int fold_distrib,
+      | ^~~~~~~
+est_dfe.c:244:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  244 | getdata_sfs_format(int *n_sfs, int *sample_size, double sel_sfs_vec[max_sample_size][max_sfs+1],
+      | ^~~~~~~~~~~~~~~~~~
+est_dfe.c:272:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  272 | getparameter_adaptive_muts(char *s, int ind, double param[2][max_s_adaptive])
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:288:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  288 | getparameter(char *s, double *param)
+      | ^~~~~~~~~~~~
+est_dfe.c:304:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  304 | getparameter_fixed(char *s, double *param)
+      | ^~~~~~~~~~~~~~~~~~
+est_dfe.c:314:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  314 | get_inputs(int *fold_distrib, int *reflected_distribution, int *n1, int *n2, int *n3,
+      | ^~~~~~~~~~
+est_dfe.c:511:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  511 | print_parameters(int output_egf_mode, int fold_distrib, int n_epochs, int n1, int n2, int n3,
+      | ^~~~~~~~~~~~~~~~
+est_dfe.c:558:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  558 | print_stats_file(char *str, int ival)
+      | ^~~~~~~~~~~~~~~~
+est_dfe.c:614:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  614 | get_int_evaluated_vec(int *int_evaluated_vec, int *n_int_evaluated,
+      | ^~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:654:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  654 | scale_f0_f2n(double *egf_vec, int n2d, double f0, double f2n)
+      | ^~~~~~~~~~~~
+est_dfe.c:671:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  671 | scale_vector(double *vec, int n2, double total_density_s0)
+      | ^~~~~~~~~~~~
+est_dfe.c:687:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  687 | fill_in_binomial_matrix(int n2d, int sfs_ind)
+      | ^~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:726:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  726 | fold_vector(double *vec, int n2d)
+      | ^~~~~~~~~~~
+est_dfe.c:793:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  793 | get_upper_lower_int(double parm, int *lower, int *upper, int n_int_evaluated,
+      | ^~~~~~~~~~~~~~~~~~~
+est_dfe.c: In function 'get_upper_lower_int':
+est_dfe.c:807:10: warning: 'return' with no value, in function returning non-void
+  807 |          return;
+      |          ^~~~~~
+est_dfe.c:793:1: note: declared here
+  793 | get_upper_lower_int(double parm, int *lower, int *upper, int n_int_evaluated,
+      | ^~~~~~~~~~~~~~~~~~~
+est_dfe.c: At top level:
+est_dfe.c:813:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  813 | compute_weighted_average_egf_vec(double t2_real, int t2_lower, int t2_upper,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c: In function 'get_binary_egf_vec_3_epoch':
+est_dfe.c:975:11: warning: assignment to 'char *' from incompatible pointer type 'float *' [-Wincompatible-pointer-types]
+  975 |       ptr = &freq_read;
+      |           ^
+est_dfe.c: At top level:
+est_dfe.c:1017:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1017 | compute_4_way_weighted_average_egf_vec(double t2_real, int t2_lower, int t2_upper,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1158:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1158 | read_phase1_phase2_file_into_buffer(int phase, int n2, int t2, char *buffer,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1207:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1207 | read_phase1_phase2_phase3_file_into_buffer(int phase, int n2, int t2, int n3, int t3, char *buffer,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1292:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1292 | calculate_expected_allele_freqs(double *egf_vec, int loop_limit, int sample_size_limit,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1350:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1350 | print_exp_obs_allele_freqs(int sample_size_limit, double *expected_allele_freqs_vec,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1440:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1440 | read_p1_p2_files_into_buffers(int n2, int t2_lower, int t2_upper,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1455:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1455 | read_all_phase_files_into_buffers(int n2, int t2, int n3, int t3, char *buffer_p1,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1468:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1468 | read_p1_p2_p3_files_into_buffers(int n2, int t2_lower, int t2_upper, int n3,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1646:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1646 | generate_file_name(char *res_str, int n1, int n2, int n3, int t2, int t3, int phase,
+      | ^~~~~~~~~~~~~~~~~~
+est_dfe.c:1706:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1706 | separate_output_file_convert_to_binary(char *fname_in, char *out_dir, int phase, int n1,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1754:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1754 | generate_t_file(int *tvec, char *t_file)
+      | ^~~~~~~~~~~~~~~
+est_dfe.c:1815:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1815 | output_steadystatefreq_n1_spec(int n, double selcoeff, double steadystatefreq[4][maxnd+1],
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:1857:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1857 | generate_egf_tables(int n1, double t2_real, int n2, double t3_real, int n3, char *data_path,
+      | ^~~~~~~~~~~~~~~~~~~
+est_dfe.c: In function 'generate_egf_tables':
+est_dfe.c:1883:7: warning: 'return' with no value, in function returning non-void
+ 1883 |       return;
+      |       ^~~~~~
+est_dfe.c:1857:1: note: declared here
+ 1857 | generate_egf_tables(int n1, double t2_real, int n2, double t3_real, int n3, char *data_path,
+      | ^~~~~~~~~~~~~~~~~~~
+est_dfe.c: At top level:
+est_dfe.c:1925:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1925 | scale_nonsegregating_elements_by_neutral_pi(double *egf_vec, int nd, double neutral_pi)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:2496:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2496 | print_results_string(FILE *outfile, double log_p,  int override, int output_eval,
+      | ^~~~~~~~~~~~~~~~~~~~
+est_dfe.c:2565:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2565 | unloadparam_special(double paramvec[2][max_s_adaptive], int ind, int *curpos, double x[])
+      | ^~~~~~~~~~~~~~~~~~~
+est_dfe.c:2653:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2653 | get_lower_upper_adv_reflected(int ind, double *s_evaluated_vec, int n_s_evaluated,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:2949:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2949 | computevariableparamnum(int *n)
+      | ^~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:2979:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2979 | loadparam_special(double paramvec[2][max_s_adaptive], int ind, int *curpos, double **p)
+      | ^~~~~~~~~~~~~~~~~
+est_dfe.c:3076:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3076 | init_binomial_prob_matrix(double binomial_prob_matrix[max_sample_size+1][max_n2d+1][max_sfs+1],
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:3087:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3087 | calculate_f0_f2n_starting_vals(double *f0, double *f2n, int n_sfs,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:3361:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3361 | assign_saved_mles(int n2, double *t2_real, double *mean_s, double *beta, double *f0, double *f2n,
+      | ^~~~~~~~~~~~~~~~~
+est_dfe.c:3381:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3381 | recover_saved_mles(int n2, double *t2_real, double *mean_s, double *beta, double *f0, double *f2n,
+      | ^~~~~~~~~~~~~~~~~~
+est_dfe.c:3589:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3589 | output_egf_vec(char *fname, int mode, double *egf_vec, int n)
+      | ^~~~~~~~~~~~~~
+est_dfe.c:3603:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3603 | compute_prop_adaptive_subs(int n_s_adaptive, double prop_adaptive_muts[2][max_s_adaptive],
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:3687:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3687 | dump_s_evaluated_vec(char *str, double *s_evaluated_vec, int n_s_evaluated)
+      | ^~~~~~~~~~~~~~~~~~~~
+est_dfe.c:3701:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3701 | get_s_evaluated_vec_spec(double *s_evaluated_vec, int *n_s_evaluated,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:3740:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3740 | read_n1_s_vec_files(char *s_evf_const, char *s_evaluated_vec_file, char *data_dir,
+      | ^~~~~~~~~~~~~~~~~~~
+est_dfe.c:3777:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3777 | store_input_parameter_values(double *mean_s_input, double mean_s, double *beta_input, double beta,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:4112:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4112 | get_data_path_3_epoch(char *data_path)
+      | ^~~~~~~~~~~~~~~~~~~~~
+est_dfe.c: In function 'get_data_path_3_epoch':
+est_dfe.c:4121:8: warning: implicit declaration of function 'mkdir' [-Wimplicit-function-declaration]
+ 4121 |    if (mkdir(data_path, 0777)==0)
+      |        ^~~~~
+est_dfe.c: At top level:
+est_dfe.c:4133:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4133 | attempt_to_create_directory(char *dir)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:4146:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4146 | generate_dir_string_attempt_to_create_directory(char *dir, char *str)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:4162:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4162 | generate_n2_n3_file(char *outf_str)
+      | ^~~~~~~~~~~~~~~~~~~
+est_dfe.c:4172:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4172 | generate_s_range_s_evaluated_files(char *dir, int mutants_type)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c: In function 'generate_s_range_s_evaluated_files':
+est_dfe.c:4241:7: warning: 'return' with no value, in function returning non-void
+ 4241 |       return;
+      |       ^~~~~~
+est_dfe.c:4172:1: note: declared here
+ 4172 | generate_s_range_s_evaluated_files(char *dir, int mutants_type)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c: At top level:
+est_dfe.c:4296:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4296 | generate_data_directories(char *data_directory, char *data_directory_adv, char *data_path, int n1,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:4389:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4389 | dump_command_names_vals(int n_input, struct command_names_vals_struct *command_names_vals)
+      | ^~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:4450:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4450 | assign_parameters_from_est_dfe_output_file(char *est_dfe_results_file, int n_epochs,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c: In function 'assign_parameters_from_est_dfe_output_file':
+est_dfe.c:4457:10: warning: implicit declaration of function 'get_val_from_key_val_pair_in_file' [-Wimplicit-function-declaration]
+ 4457 |    res = get_val_from_key_val_pair_in_file(est_dfe_results_file, &(f0[1]), "f0",
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c: At top level:
+est_dfe.c:4499:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4499 | get_params_from_config_file(char *config_file, int *fold_distrib, int *n_epochs,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+est_dfe.c:4703:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 4703 | main(int argc, char *argv[])
+      | ^~~~
+In file included from bctmat01.c:19:
+bctmat01.hd:24:8: warning: type defaults to 'int' in declaration of 'mutq' [-Wimplicit-int]
+   24 | extern mutq(double a[maxnd+1][maxnd+1], int n1, int n2, int t,
+      |        ^~~~
+bctmat01.hd:29:8: warning: type defaults to 'int' in declaration of 'dumpmatrix' [-Wimplicit-int]
+   29 | extern dumpmatrix(double m[maxnd+1][maxnd+1], int s1, int rows, int s2,
+      |        ^~~~~~~~~~
+bctmat01.hd:32:8: warning: type defaults to 'int' in declaration of 'dumpvector' [-Wimplicit-int]
+   32 | extern dumpvector(double *v, int min, int max, char *s);
+      |        ^~~~~~~~~~
+bctmat01.hd:34:8: warning: type defaults to 'int' in declaration of 'computecumulant' [-Wimplicit-int]
+   34 | extern computecumulant(double *vec, double *results, int t);
+      |        ^~~~~~~~~~~~~~~
+bctmat01.hd:36:8: warning: type defaults to 'int' in declaration of 'matrix_compute_steady_state_allele_frequency_vector' [-Wimplicit-int]
+   36 | extern matrix_compute_steady_state_allele_frequency_vector(int nd,
+      |        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bctmat01.hd:41:8: warning: type defaults to 'int' in declaration of 'setupmatrix' [-Wimplicit-int]
+   41 | extern setupmatrix(double a[maxnd+1][maxnd+1], int n1, int n2, double s, double h);
+      |        ^~~~~~~~~~~
+bctmat01.c:23:1: warning: return type defaults to 'int' [-Wimplicit-int]
+   23 | dumpmatrix(double m[maxnd+1][maxnd+1], int s1, int rows, int s2, int cols, char *s)
+      | ^~~~~~~~~~
+bctmat01.c:39:1: warning: return type defaults to 'int' [-Wimplicit-int]
+   39 | dumpvector(double *v, int min, int max, char *s)
+      | ^~~~~~~~~~
+bctmat01.c:111:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  111 | setuprow(double a[maxnd+1][maxnd+1], double p, int row, int n)
+      | ^~~~~~~~
+bctmat01.c:160:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  160 | setupmatrix(double a[maxnd+1][maxnd+1], int n1, int n2, double s, double h)
+      | ^~~~~~~~~~~
+bctmat01.c:211:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  211 | tmiterate(double a[maxnd+1][maxnd+1], double s, double h, double *mut1,
+      | ^~~~~~~~~
+bctmat01.c:317:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  317 | mutq(double a[maxnd+1][maxnd+1], int n1, int n2, int t,
+      | ^~~~
+bctmat01.c:354:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  354 | computecumulant(double *vec, double *results, int t)
+      | ^~~~~~~~~~~~~~~
+bctmat01.c:365:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  365 | matrix_compute_steady_state_allele_frequency_vector(int nd,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/bin/../lib/gcc/x86_64-conda-linux-gnu/12.1.0/../../../../x86_64-conda-linux-gnu/bin/ld: warning: libz.so.1, needed by /opt/ohpc/pub/compiler/gcc/8.3.0/lib64/libgfortran.so.5, not found (try using -rpath or -rpath-link)
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/bin/../lib/gcc/x86_64-conda-linux-gnu/12.1.0/../../../../x86_64-conda-linux-gnu/bin/ld: /opt/ohpc/pub/compiler/gcc/8.3.0/lib64/libgfortran.so.5: undefined reference to `memcpy@GLIBC_2.14'
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/bin/../lib/gcc/x86_64-conda-linux-gnu/12.1.0/../../../../x86_64-conda-linux-gnu/bin/ld: /opt/ohpc/pub/compiler/gcc/8.3.0/lib64/libgfortran.so.5: undefined reference to `secure_getenv@GLIBC_2.17'
+/groups/rgutenk/lnt/software/anaconda3/envs/analysis2/bin/../lib/gcc/x86_64-conda-linux-gnu/12.1.0/../../../../x86_64-conda-linux-gnu/bin/ld: /opt/ohpc/pub/compiler/gcc/8.3.0/lib64/libgfortran.so.5: undefined reference to `clock_gettime@GLIBC_2.17'
+collect2: error: ld returned 1 exit status
+make: *** [est_dfe] Error 1
+[Tue Jan 31 08:29:44 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:44 2023]
+Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+ERROR:snakemake.logging:Error in rule dfe_download_dfe_alpha:
+    jobid: 162
+    output: ext/dfe-alpha-release-2.16/est_dfe, ext/dfe-alpha-release-2.16/data/n1_100/s_evaluated.dat
+    shell:
+        
+        cd ext
+        wget -c https://sourceforge.net/projects/dfe-alpha-k-e-w/files/dfe-alpha-release-2.16.tar.gz/download
+        mv download dfe-alpha-release-2.16.tar.gz
+        tar -xvf dfe-alpha-release-2.16.tar.gz
+        cat dfe_alpha_makefile_stdpopsim_patch > dfe-alpha-release-2.16/Makefile && cd dfe-alpha-release-2.16 && make
+        wget http://sesame.uoregon.edu/~adkern/stdpopsim/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
+        # old location of above
+        #  https://datashare.ed.ac.uk/bitstream/handle/10283/2730/data.tar.gz?sequence=1&isAllowed=y
+        cd ../
+        rm dfe-alpha-release-2.16.tar.gz
+        cd ../
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Recombination map has length 48100155.0, which is longer than chromosome length 46709983. The former will be used.You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.[Tue Jan 31 08:29:51 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:51 2023]
+Finished job 444.
+INFO:snakemake.logging:Finished job 444.
+1 of 448 steps (0.2%) done
+INFO:snakemake.logging:1 of 448 steps (0.2%) done
+Recombination map has length 48100155.0, which is longer than chromosome length 46709983. The former will be used.You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.[Tue Jan 31 08:29:52 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:52 2023]
+Finished job 417.
+INFO:snakemake.logging:Finished job 417.
+2 of 448 steps (0.4%) done
+INFO:snakemake.logging:2 of 448 steps (0.4%) done
+[Tue Jan 31 08:29:52 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:52 2023]
+Finished job 438.
+INFO:snakemake.logging:Finished job 438.
+3 of 448 steps (1%) done
+INFO:snakemake.logging:3 of 448 steps (1%) done
+[Tue Jan 31 08:29:52 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:52 2023]
+Finished job 423.
+INFO:snakemake.logging:Finished job 423.
+4 of 448 steps (1%) done
+INFO:snakemake.logging:4 of 448 steps (1%) done
+[Tue Jan 31 08:29:52 2023]
+INFO:snakemake.logging:[Tue Jan 31 08:29:52 2023]
+Finished job 450.
+INFO:snakemake.logging:Finished job 450.
+5 of 448 steps (1%) done
+INFO:snakemake.logging:5 of 448 steps (1%) done
+Recombination map has length 135503693.0, which is longer than chromosome length 133797422. The former will be used.You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.You're using a scaling factor (15). This should give similar results for many situations, but is not equivalent, especially in the presence of selection. When using rescaling, you should be careful---do checks and compare results across different values of the scaling factor.Shutting down, this might take some time.
+WARNING:snakemake.logging:Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+ERROR:snakemake.logging:Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-01-31T082925.051773.snakemake.log
+WARNING:snakemake.logging:Complete log: .snakemake/log/2023-01-31T082925.051773.snakemake.log

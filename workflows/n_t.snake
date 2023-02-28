@@ -337,7 +337,7 @@ rule ts_to_multihep:
         output_dir + "/simulated_data/{demog}/{dfes}/{annots}/{seeds}/sim_{chrms}.trees"
     output:
         output_dir + "/inference/{demog}/msmc/{dfes}/{annots}/{seeds}/{pops}/{chrms}.trees.multihep.txt"
-
+    threads: 8
     run:
         print(input[0], num_sampled_genomes_msmc, mask_file)
         if wildcards.annots == "none" or msmc_mask == "none":

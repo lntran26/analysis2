@@ -1,4 +1,5 @@
-name: analysis2
+# name: analysis2
+name: test
 channels:
   - conda-forge
   - bioconda
